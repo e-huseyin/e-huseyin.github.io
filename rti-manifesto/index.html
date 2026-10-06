@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hüseyin Erdoğan — A Dome for a Face</title>
+<meta name="description" content="Reflectance Transformation Imaging with a hand-built 460 mm dome, turned from rock surfaces onto a human face." />
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   A DOME FOR A FACE — manifesto page
+   Left  : identity block + manifesto
+   Right : the faces001 RTI viewer, embedded unchanged at 1356 x 2048
+   Everything is set in Monaco, on white.
+═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --stage-w: 1356px;
+  --stage-h: 2048px;
+  --ink: #0a0a0a;
+  --ink-soft: #555555;
+  --rule: rgba(0, 0, 0, 0.14);
+  --mono: Monaco, "Monaco", "Menlo", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;              /* the page is exactly one screen */
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+body, body * { font-family: var(--mono); }
+
+/* ── Two-column shell, one viewport tall ────────────────────── */
+.sheet {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;       /* both columns centred as one block */
+  gap: 56px;
+  max-width: 2020px;
+  height: 100vh;
+  height: 100dvh;                /* honours mobile browser chrome */
+  margin: 0 auto;
+  padding: 44px 48px;
+}
+
+/* ── Column 1 — identity + manifesto ────────────────────────── */
+.column-left {
+  flex: 0 1 520px;               /* fixed measure, shrinks only when forced */
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;       /* centred against the tall viewer */
+  overflow-y: auto;              /* only if the text outgrows a short screen */
+  scrollbar-width: none;
+}
+.column-left::-webkit-scrollbar { display: none; }
+
+.name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+}
+
+.links {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  font-size: 13px;
+  letter-spacing: 1.6px;
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.18s ease;
+}
+.link:hover { border-bottom-color: var(--ink); }
+.link svg { width: 18px; height: 18px; flex-shrink: 0; display: block; }
+.link .id { color: var(--ink-soft); letter-spacing: 0.5px; }
+
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 34px 0 28px;
+}
+
+.manifesto p {
+  font-size: 13px;
+  line-height: 2;
+  margin-bottom: 20px;
+  text-align: justify;
+  hyphens: auto;
+}
+.manifesto p:last-child { margin-bottom: 0; }
+.manifesto em { font-style: normal; border-bottom: 1px solid var(--rule); }
+
+.colophon {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 10.5px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* ── Column 2 — the viewer stage ────────────────────────────── */
+.column-right {
+  /* Largest portrait box that fits: bounded by the leftover screen
+     height, by the width left beside the text column, and by the
+     model's own 2048 px — whichever runs out first.               */
+  --fit: min(
+    calc(100vh - 116px),                       /* padding + caption + border */
+    calc((100vw - 672px) * 2048 / 1800),       /* space beside the text column */
+    var(--stage-h)                             /* never upscale past native   */
+  );
+
+  flex: 0 0 auto;
+  /* Frame is 1800 units wide against the model's 1356, so the RTI
+     sits centred with breathing space to left and right.          */
+  width: calc(var(--fit) * 1800 / 2048);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Native size 1356 x 2048. The height is whatever the screen leaves
+   over; the 1356:2048 ratio then derives the width, so the portrait
+   format is preserved and the embedded viewer re-fits itself. */
+.stage {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  height: var(--fit);
+  background: #000000;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.stage iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ── Dataset switcher, top-right inside the frame ───────────── */
+.switch {
+  position: absolute;
+  top: 52px;                     /* clears the viewer's own mode bar */
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.switch button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px 7px 8px;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  color: rgba(255, 255, 255, 0.62);
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.switch button:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.switch button.active {
+  color: #0a0a0a;
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+/* The light-direction ball — the RTI metaphor, in miniature */
+.switch svg { width: 15px; height: 15px; flex-shrink: 0; display: block; }
+
+.stage-caption {
+  flex: 0 0 auto;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  font-size: 10.5px;
+  letter-spacing: 0.4px;
+  color: var(--ink-soft);
+}
+
+/* ── Narrow screens: stack and allow the page to scroll ─────── */
+@media (max-width: 900px) {
+  html, body { height: auto; overflow: auto; }
+  .sheet {
+    flex-direction: column;
+    height: auto;
+    gap: 40px;
+    padding: 40px 24px 56px;
+  }
+  .column-left { flex: 0 0 auto; min-width: 0; overflow: visible; }
+  .column-right { height: auto; width: 100%; }
+  .stage { height: auto; width: 100%; aspect-ratio: 1356 / 2048; }
+}
+</style>
+</head>
+
+<body>
+<div class="sheet">
+
+  <!-- ═══════════════ LEFT COLUMN ═══════════════ -->
+  <div class="column-left">
+
+    <h1 class="name">Hüseyin Erdoğan</h1>
+
+    <div class="links">
+      <!-- ORCID -->
+      <a class="link" href="https://orcid.org/0000-0002-2965-0918" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 256 256" aria-hidden="true" focusable="false">
+          <path fill="#A6CE39" d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z"/>
+          <path fill="#FFFFFF" d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7 0-21.5-13.7-39.7-43.7-39.7h-23.7v79.4zM88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z"/>
+        </svg>
+        <span>ORCID</span>
+        <span class="id">0000-0002-2965-0918</span>
+      </a>
+
+      <!-- GitHub -->
+      <a class="link" href="https://github.com/e-huseyin" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        <span>GITHUB</span>
+        <span class="id">e-huseyin</span>
+      </a>
+    </div>
+
+    <hr class="rule" />
+
+    <div class="manifesto">
+      <p>
+        As light travels across the surface, the face is no longer confined to
+        the fixity of a portrait. In cultural heritage imaging, Reflectance
+        Transformation Imaging is valued for its ability to reveal subtle
+        surface details and traces that conventional photography may leave
+        unseen. Yet its significance extends beyond documentation and analysis:
+        RTI also possesses a striking artistic potential, transforming the act
+        of looking into an encounter with light, surface and perception.
+      </p>
+      <p>
+        Lit from different angles, the same face can appear to shift, fragment
+        and re-emerge. Textures, fractures and traces come forward and recede
+        with every movement of the light, while the image itself becomes fluid
+        rather than fixed. The portrait thus moves beyond the representation of
+        a face; it becomes an evolving visual experience in which surface, light
+        and memory continuously reshape one another. What is revealed is not
+        only what the face contains, but what the changing light makes possible
+        to see, perceive and imagine.
+      </p>
+    </div>
+
+    <div class="colophon">
+      Ø 460 mm hand-built RTI dome · 48 LEDs · 6 elevation rings<br />
+      RBF / MRGB reflectance model, 27 planes · rendered with OpenLIME<br />
+      Use the mouse hold for move the light!
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ RIGHT COLUMN ═══════════════ -->
+  <div class="column-right">
+
+    <div class="stage">
+      <!-- The dataset viewers, embedded exactly as produced -->
+      <iframe id="viewer-frame"
+              src="dataset/faces001/index.html?v=3"
+              title="faces001 — RTI viewer"
+              loading="eager"
+              allowfullscreen></iframe>
+
+      <div class="switch" id="switch">
+        <button class="active" data-id="faces001" data-type="RBF / MRGB">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="8.8" cy="8.8" r="2.8" fill="currentColor"/>
+          </svg>
+          FACES001
+        </button>
+        <button data-id="faces002" data-type="BLN / MRGB">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="15.2" cy="9.6" r="2.8" fill="currentColor"/>
+          </svg>
+          FACES002
+        </button>
+      </div>
+    </div>
+
+    <div class="stage-caption">
+      <span id="caption-id">FACES001 · SELF / RTI · Ø 460 MM DOME</span>
+      <span>1356 × 2048</span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   Dataset switcher — swaps the embedded viewer. Each dataset is a
+   self-contained OpenLIME page under dataset/<id>/, so switching is
+   simply a reload of the iframe.
+═══════════════════════════════════════════════════════════════ */
+(function () {
+  const VERSION = '3';                 /* keep in step with the ?v= on the viewers */
+  const frame   = document.getElementById('viewer-frame');
+  const caption = document.getElementById('caption-id');
+
+  document.getElementById('switch').addEventListener('click', function (event) {
+    const button = event.target.closest('button');
+    if (!button || button.classList.contains('active')) return;
+
+    const id = button.dataset.id;
+    frame.src   = 'dataset/' + id + '/index.html?v=' + VERSION;
+    frame.title = id + ' — RTI viewer';
+    caption.textContent = id.toUpperCase() + ' · SELF / RTI · Ø 460 MM DOME';
+
+    this.querySelectorAll('button').forEach(function (other) {
+      other.classList.toggle('active', other === button);
+    });
+  });
+})();
+</script>
+</body>
+</html>

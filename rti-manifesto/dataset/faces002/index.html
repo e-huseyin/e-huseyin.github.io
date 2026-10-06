@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RTI Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+
+    <link id="skinCssLink" rel="stylesheet" href="" />
+    <link rel="stylesheet" href="viewer.css" />
+</head>
+
+<body>
+    <div id="demo" class="openlime"></div>
+
+    <!-- ?v= busts the browser cache whenever viewer.js changes -->
+    <script src="viewer.js?v=3"></script>
+    <script>
+        initViewer({
+            stylesheetUrl: 'skin.css',
+            openlimeUrl:   'openlime.min.js',
+            skinUrl:       'skin.svg',
+            rtiUrl:        'info.json',
+            vectorUrl:     'vector.png',
+            lightActive:   true
+        });
+    </script>
+</body>
+
+</html>
