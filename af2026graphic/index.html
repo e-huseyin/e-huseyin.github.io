@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="it" data-palette="bianco">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ArcheoFOSS 2026: proposta di identità visiva basata su stratigrafia, dati aperti e dodici panel.">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>ArcheoFOSS 2026 — Data Strata / Open Network — Grafite</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="assets/theme.css?v=programme-graphic">
+</head>
+<body>
+  <nav class="toolbar" aria-label="Strumenti della presentazione">
+    <div class="toolbar-brand"><a class="home" href="#/cover" aria-label="Torna alla copertina">AF<span>20</span></a></div>
+    <div class="toolbar-palette" role="group" aria-label="Palette per la presentazione e i manifesti"><span class="palette-toolbar-label">Palette</span><button type="button" data-palette-choice="bianco" aria-pressed="true" aria-label="Opzione 1: Bianco, Grafite, Pesca">1 · Bianco</button><button type="button" data-palette-choice="carta" aria-pressed="false" aria-label="Opzione 2: Carta, Grafite, Ossido">2 · Carta</button></div>
+    <div class="toolbar-actions"><button id="overview" type="button" title="Panoramica delle slide (O)">Indice</button><button id="fullscreen" type="button" title="Schermo intero (F)">Schermo intero</button><a id="pdf-link" href="?print-pdf&amp;palette=bianco&amp;fold=bifold" target="_blank" rel="noopener">PDF</a><button id="help" type="button" aria-haspopup="dialog">?</button></div>
+  </nav>
+  <div class="reveal"><div class="slides">
+
+  <section id="cover" class="cover" aria-label="Copertina">
+    <div class="eyebrow">ARCHEOFOSS 2026 / PROPOSTA DI IDENTITÀ VISIVA</div>
+    <div class="hero-text"><h1>Data Strata.<br>Open Network.</h1><p class="hero-sub">Dalle tracce archeologiche<br>alla conoscenza aperta.</p></div>
+    <img class="hero-art" src="assets/strata.svg" alt="Composizione simbolica di venti linee stratificate e dodici nodi numerati">
+    <div class="cover-bottom"><div><strong>20ª edizione</strong><br>Bologna + online<br>30 novembre / 1 dicembre 2026</div><div class="align-right">Concept per il comitato organizzativo</div></div>
+    <aside class="notes">IT: Questa è una proposta di direzione grafica, da discutere insieme al comitato. Il titolo è un nome di lavoro del concept, non il titolo ufficiale del convegno. TR: Bu sunum grafik yön önerisidir. Data Strata / Open Network konferansın resmî teması veya sloganı değil, tasarım konseptinin çalışma adıdır.</aside>
+  </section>
+
+  <section id="brief">
+    <div class="eyebrow">01 / IL BRIEF</div><h2>Un’identità che cambia formato.</h2>
+    <p class="lead narrow">Una grammatica comune per promuovere il convegno e orientare il pubblico nel programma.</p>
+    <div class="format-row">
+      <div class="format-item"><div class="sheet-outline a4-outline">A4</div><h3>Volantino principale</h3><p>Nome, date, luogo e immagine guida.</p><span class="mono">210 × 297 MM</span></div>
+      <div class="format-item"><div class="sheet-outline a5-outline">A5</div><h3>Versione compatta</h3><p>Stessa identità, gerarchia ricalibrata.</p><span class="mono">148 × 210 MM</span></div>
+      <div class="format-item"><div class="fold-outline"><span></span><span></span></div><h3>Programma pieghevole</h3><p>Panel, orari, sedi e indicazioni pratiche.</p><span class="mono">FOLIAZIONE DA DEFINIRE</span></div>
+    </div>
+    <p class="bottom-note">Primo passaggio: condividere il concept e verificarlo su un prototipo A4.</p>
+    <aside class="notes">IT: La richiesta della mail riguarda innanzitutto un concept flessibile. Il pieghevole richiede il programma finale prima di stabilire formato e numero di pagine. TR: Hocanın ilk talebi esnek bir grafik konsept. A4/A5 uyarlamaları ve program broşürü aynı sistemden türeyecek.</aside>
+  </section>
+
+  <section id="idea" class="dark-slide" data-background-color="#252B29">
+    <div class="eyebrow">02 / L’IDEA</div><h2 class="big-statement">La conoscenza<br>si costruisce<br><em>per relazioni.</em></h2>
+    <div class="statement-aside"><p>L’archeologia conserva tracce.<br>I metodi digitali le strutturano.<br>L’apertura consente di interrogarle e riutilizzarle.</p><span class="mono">UNA METAFORA VISIVA<br>ISPIRATA ALLA RICERCA</span></div>
+    <p class="bottom-note">Le linee richiamano la stratigrafia. I nodi identificano i panel. Lo spazio aperto lascia emergere le relazioni.</p>
+    <aside class="notes">IT: Il riferimento alla visualizzazione scientifica riguarda il linguaggio e il metodo di costruzione. Non presentiamo questa composizione come un risultato di analisi. TR: Bilimsel görselleştirmeden esinlenen bir grafik metafor kuruyoruz. Eğriler ölçülmüş arkeolojik veriler değil.</aside>
+  </section>
+
+  <section id="grammar">
+    <div class="eyebrow">03 / GRAMMATICA VISIVA</div><h2>Ogni segno ha una funzione.</h2>
+    <div class="grammar-layout"><div class="grammar-controls">
+      <button type="button" data-layer="layers" aria-pressed="true"><span class="control-number">01</span><strong>Strati</strong><small>Continuità del record archeologico</small></button>
+      <button type="button" data-layer="nodes" aria-pressed="true"><span class="control-number">02</span><strong>Nodi</strong><small>Dodici panel nello stesso campo</small></button>
+      <button type="button" data-layer="grid" aria-pressed="true"><span class="control-number">03</span><strong>Riferimenti</strong><small>Ordine, allineamento e scala grafica</small></button>
+      <p class="tiny">Tocca i livelli per isolare gli elementi.</p>
+    </div><div class="grammar-art"><svg id="grammar-svg" viewBox="0 0 900 660" role="img" aria-label="Livelli della composizione generativa"></svg><p class="tiny">Composizione simbolica. Le curve e le distanze non codificano misure.</p></div></div>
+    <aside class="notes">IT: Mostrare i livelli singolarmente. La griglia organizza la composizione e non simula coordinate di scavo. TR: Düğmelere basarak katmanları açıp kapatabilirsin. Izgara yerleşim için, sahte kazı koordinatları için değil.</aside>
+  </section>
+
+  <section id="panels">
+    <div class="eyebrow">04 / IL SISTEMA DEI PANEL</div><h2>Dodici temi, un campo comune.</h2>
+    <div class="panels-layout"><div id="panel-selector" class="panel-selector" role="group" aria-label="Seleziona un panel"></div>
+    <div class="panel-detail" aria-live="polite" aria-atomic="true"><div class="panel-detail-top"><span id="panel-id" class="panel-id">02</span><span id="panel-family" class="mono">Struttura e verifica</span></div><h3 id="panel-title"></h3><p id="panel-summary"></p><img id="panel-art" src="assets/panel-field-02.svg" alt="Nodo del panel selezionato evidenziato nel campo comune"></div></div>
+    <p class="bottom-note">Le quattro famiglie sono una proposta editoriale. Numerazione provvisoria dalla Call for papers, non ordine del programma.</p>
+    <aside class="notes">IT: I dodici titoli vengono dalla Call for papers. Acquisizione, struttura e verifica, analisi e interpretazione, comunicazione e pratica sono categorie proposte per il design. I temi si sovrappongono. Non attribuiamo alla conferenza una tassonomia ufficiale. TR: 12 panel gerçek listedeki paneller. Dört aile bizim editoryal yorumumuz; resmî kategori veya program sırası değil. Seçilen panelin tam başlığı sağda gösterilir.</aside>
+  </section>
+
+  <section id="twenty">
+    <div class="eyebrow">05 / LA VENTESIMA EDIZIONE</div><div class="twenty-layout"><div><h2>Il 20 diventa<br>parte del segno.</h2><p class="lead">Venti linee attraversano il campo.<br>Dodici nodi lo rendono abitabile.</p><p class="body-copy">Il numero dell’edizione resta leggibile nella tipografia. La struttura grafica aggiunge un secondo livello di lettura.</p><p class="tiny">Conteggi reali dell’identità.<br>Geometria generativa proposta.</p></div><div class="twenty-art"><span class="huge-number">20</span><img src="assets/strata-plain.svg" alt="Venti linee e dodici nodi su un grande numero venti"><div class="mono art-caption">20 LINEE / 12 NODI / 1 SISTEMA</div></div></div>
+    <aside class="notes">IT: Il 20 è tipografico e visibile. Evitiamo di promettere una forma in negativo che il segno non realizza. TR: 20 sayısı açık, büyük bir tipografik öğe. Yirmi çizgi ve on iki düğüm ikinci anlam katmanını kurar.</aside>
+  </section>
+
+  <section id="palette">
+    <div class="eyebrow">06 / COLORE</div><h2>Una base calma. Un accento preciso.</h2>
+    <div class="palette-layout"><div><div class="swatch paper-swatch"><span data-palette-name="paper">Bianco</span><code data-palette-code="paper">#FFFFFF</code></div><div class="swatch ink-swatch"><span data-palette-name="ink">Grafite</span><code data-palette-code="ink">#252B29</code></div><div class="swatch oxide-swatch"><span data-palette-name="accent">Pesca</span><code data-palette-code="accent">#D89277</code></div></div><div class="palette-description"><h3>Due combinazioni, lo stesso concept.</h3><p class="palette-intro">Seleziona una palette: cambiano le slide, i manifesti A4/A5 e le varianti dei panel.</p>
+    <div class="palette-options" role="group" aria-label="Scegli la combinazione cromatica">
+      <button type="button" class="palette-option" data-palette-choice="bianco" aria-pressed="true"><span class="palette-mini-swatches" aria-hidden="true"><i style="background:#FFFFFF"></i><i style="background:#252B29"></i><i style="background:#D89277"></i></span><span><strong>1 · Bianco / Grafite / Pesca</strong><small>Fondo bianco. Accento da “per relazioni”.</small></span></button>
+      <button type="button" class="palette-option" data-palette-choice="carta" aria-pressed="false"><span class="palette-mini-swatches" aria-hidden="true"><i style="background:#F4F1E8"></i><i style="background:#252B29"></i><i style="background:#AC4B35"></i></span><span><strong>2 · Carta / Grafite / Ossido</strong><small>La combinazione della proposta originale.</small></span></button>
+    </div><p id="palette-status" class="tiny" aria-live="polite">Palette attiva: 1 · Bianco / Grafite / Pesca.</p><p class="tiny">I codici sono RGB per lo schermo. La resa di stampa richiede una prova sul supporto scelto.</p></div></div>
+    <aside class="notes">IT: La prima opzione usa Bianco #FFFFFF, Grafite #252B29 e Pesca #D89277, il colore di “per relazioni” nella slide 03/19 originale. La seconda conserva Carta #F4F1E8, Grafite #252B29 e Ossido #AC4B35. I pulsanti nella barra e in questa slide applicano la scelta a tutta la presentazione e agli SVG scaricabili. TR: İlk seçenek beyaz, grafite ve orijinal 03/19’daki “per relazioni”nin şeftali tonu. İkinci seçenek orijinal Carta/Grafite/Ossido. Üst çubuktaki veya bu slayttaki düğmeler sunumun tamamını ve indirilebilir SVG’leri birlikte değiştirir.</aside>
+  </section>
+
+  <section id="type">
+    <div class="eyebrow">07 / TIPOGRAFIA</div><div class="type-layout"><div><div class="type-specimen">Aa</div><h2>Inter</h2><p class="lead">Una voce chiara per titolo e informazioni.</p><p class="tiny">Regular / Medium / Semibold / Bold<br>Font libero, incluso nel pacchetto.</p></div><div class="type-example"><p class="mono accent">IBM PLEX MONO / ETICHETTE E CODICI</p><h3 class="sample-title">ArcheoFOSS<br>2026</h3><div class="type-rule"></div><p class="sample-date">30 novembre / 1 dicembre</p><p>Bologna + online</p><p class="mono small-mono">PANEL 02 / SEMANTIC KNOWLEDGE</p><p class="tiny">La gerarchia nasce dalla scala e dal peso.<br>Allineamento a sinistra e spazi costanti.</p></div></div>
+    <aside class="notes">IT: Inter è il carattere principale. IBM Plex Mono distingue numeri di panel e annotazioni. Non ridurre il testo lungo per farlo entrare: accorciarlo nei materiali promozionali e mantenere i titoli ufficiali nel programma e nell’appendice. TR: Inter ana yazıtipi, IBM Plex Mono panel numaraları için. Uzun resmî başlıklar programda korunacak, afişte kısa editoryal etiketler kullanılacak.</aside>
+  </section>
+
+  <section id="a4">
+    <div class="eyebrow">08 / PROTOTIPO A4</div><div class="poster-layout"><div><h2>L’immagine attira.<br>I dati orientano.</h2><p class="lead">Un manifesto verticale con quattro livelli di lettura.</p><ol class="number-list"><li><strong>Identità</strong><span>ArcheoFOSS e 20ª edizione</span></li><li><strong>Campo grafico</strong><span>Strati e nodi al centro</span></li><li><strong>Informazioni</strong><span>Date, città e modalità</span></li><li><strong>Riferimenti</strong><span>Sito e loghi istituzionali</span></li></ol><a class="asset-link" href="assets/poster-a4.svg" download>Scarica il prototipo SVG</a><p class="tiny">Bozza di concept. Loghi e sede precisa da confermare.</p></div><div class="poster-stage"><img class="poster a4-poster" src="assets/poster-a4.svg" alt="Prototipo verticale A4 ArcheoFOSS 2026"><span class="mono dimension">A4 / 210 × 297 MM</span></div></div>
+    <aside class="notes">IT: Questo è il prototipo che rende la proposta valutabile. Il testo ArcheoFOSS è una composizione tipografica di lavoro, non una modifica autorizzata del marchio ufficiale. Date, Bologna e modalità ibrida provengono dalle fonti ufficiali. La sede specifica e i loghi richiedono conferma. TR: Bu somut afiş taslağı. Resmî logoyu yeniden tasarlamadık; yazıyla geçici kimlik kullandık. Kesin salon ve kurumsal logolar eklenecek.</aside>
+  </section>
+
+  <section id="a5">
+    <div class="eyebrow">09 / ADATTAMENTO A5</div><div class="a5-layout"><div class="a5-pair"><img class="small-a4" src="assets/poster-a4.svg" alt="Versione A4 del prototipo"><img class="large-a5" src="assets/poster-a5.svg" alt="Versione A5 con blocco istituzionale più breve"><div class="mono pair-label"><span>A4</span><span>A5</span></div></div><div><h2>Compatto,<br>sempre leggibile.</h2><p class="lead">L’A5 conserva il segno e riduce il testo secondario.</p><p class="body-copy">La data e la città restano centrali. Il sito guida alle informazioni complete. Margini, linee e corpi tipografici si verificano alla dimensione reale.</p><a class="asset-link" href="assets/poster-a5.svg" download>Scarica la variante A5</a><p class="tiny">Le anteprime non rappresentano il rapporto fisico fra i due formati.</p></div></div>
+    <aside class="notes">IT: L’A5 è un’ipotesi di adattamento con istituzione abbreviata. È necessario verificare il testo minimo e i tratti sulla stampa reale. TR: A5 versiyonunda ikincil kurum satırını kısalttım. İki maket ekranda tasarımı kıyaslamak için gösteriliyor, gerçek boyut ilişkisi değil.</aside>
+  </section>
+
+  <section id="programme">
+    <div class="eyebrow">10 / PROGRAMMA PIEGHEVOLE</div><h2>Due pieghe, due giornate.</h2>
+    <div class="programme-format-row"><div class="programme-formats" role="group" aria-label="Scegli il formato del programma"><button type="button" data-programme-format="bifold" aria-pressed="true">1 · Bi-fold A3 / A4</button><button type="button" data-programme-format="dl" aria-pressed="false">2 · Tri-fold DL</button></div><button type="button" class="programme-enlarge" id="programme-open" aria-haspopup="dialog">Anteprima completa</button></div>
+    <p class="programme-spec" id="programme-spec" aria-live="polite">A3 aperto 420 × 297 mm → A4 chiuso. Quattro facciate; un giorno per pagina interna.</p>
+    <div class="programme-previews">
+      <figure><figcaption class="mono">ESTERNO / COPERTINA + RETRO</figcaption><img id="programme-outer" data-programme-side="outer" src="assets/programme-bifold-outer.svg" alt="Bi-fold: retro e copertina, esterno completo"><a class="asset-link" data-programme-download="outer" href="assets/programme-bifold-outer.svg" download>Scarica esterno SVG</a></figure>
+      <figure><figcaption class="mono">INTERNO / DUE GIORNATE</figcaption><img id="programme-inner" data-programme-side="inner" src="assets/programme-bifold-inner.svg" alt="Bi-fold: interno completo, una pagina per giorno"><a class="asset-link" data-programme-download="inner" href="assets/programme-bifold-inner.svg" download>Scarica interno SVG</a></figure>
+    </div>
+    <p class="programme-disclaimer">Distribuzione dei panel indicativa. Orari, relatori e sale da inserire nel programma definitivo.</p>
+    <aside class="notes">IT: Due alternative selezionabili, con anteprime complete e SVG scaricabili in entrambe le palette. Il bi-fold è un A3 piegato a metà: esterno con retro e copertina, interno con due pagine A4, una per giorno e tutti i dodici titoli dei panel. Il tri-fold DL è un A4 a fisarmonica: tre pannelli da 99 × 210 mm e sei facciate. L’interno contiene due giornate sintetiche e una mappa tematica editoriale; l’esterno contiene indice, informazioni e copertina. Per tutti gli interventi può servire un programma più esteso. La distribuzione 01–06 / 07–12 mostra soltanto la capacità del layout, non il programma approvato. TR: İki format, iki yüzün tam önizlemesi ve palete uyumlu SVG indirmeleri var. İkili A3/A4 formatının iki iç sayfası birer güne ayrıldı. DL üç panel / altı yüzey içerir; iki gün kısa panel etiketleriyle gösterilir. 01–06 ve 07–12 ayrımı program kararı değil, yerleşim örneğidir. Saatler ve konuşmacılar kesin programdan eklenmeli.</aside>
+  </section>
+
+  <section id="series">
+    <div class="eyebrow">11 / SERIE DEI PANEL</div><h2>Una variazione riconoscibile.</h2>
+    <div class="panel-series"><img src="assets/panel-card-02.svg" alt="Variante del panel sulle tecnologie semantiche"><img src="assets/panel-card-07.svg" alt="Variante del panel su LiDAR e dati aperti"><img src="assets/panel-card-12.svg" alt="Variante del panel su R e analisi critica"></div>
+    <p class="bottom-note">Il campo resta costante. Cambiano il nodo evidenziato, il numero e l’etichetta breve. Titoli completi nell’appendice.</p>
+    <aside class="notes">IT: Tre varianti mostrano la capacità del sistema di sostenere una serie. Le etichette sono abbreviazioni editoriali, non sostituiscono i titoli approvati. I numeri seguono provvisoriamente la Call for papers. TR: Her panel için aynı grafik alanda farklı düğüm öne çıkıyor. Bu kısa başlıklar tasarım etiketi; resmî başlıkların yerine geçmiyor.</aside>
+  </section>
+
+  <section id="digital">
+    <div class="eyebrow">12 / ESTENSIONI DIGITALI</div><h2>Lo stesso campo, altre proporzioni.</h2>
+    <div class="digital-layout"><div class="social-mock"><span class="mono">20ª EDIZIONE</span><h3>ArcheoFOSS<br>2026</h3><img src="assets/strata-plain.svg" alt="Il campo stratificato adattato a un post verticale"><p>30 NOV / 01 DIC<br><strong>Bologna + online</strong></p></div><div class="banner-wrap"><div class="banner-mock"><div><span class="mono">OPEN ARCHAEOLOGICAL RESEARCH</span><h3>ArcheoFOSS 2026</h3><p>30 novembre / 1 dicembre<br>Bologna + online</p></div><img src="assets/strata-plain.svg" alt="Ritaglio del campo grafico per un banner orizzontale"></div><div class="digital-specs"><span><strong>Post verticale</strong><br>1080 × 1350 px</span><span><strong>Banner / slide</strong><br>1920 × 1080 px</span></div><p class="tiny">Il ritaglio riguarda il campo grafico. Le informazioni si ricompongono per ogni formato.</p></div></div>
+    <aside class="notes">IT: Questa slide mostra due applicazioni concettuali. Il testo si ricompone nel layout, non si taglia. Le immagini SVG del pacchetto possono essere riutilizzate per creare i file finali. TR: Dikey paylaşım ve yatay banner örnekleri. Görsel alan kırpılabilir ama yazılar her formatta yeniden yerleştirilmeli.</aside>
+  </section>
+
+  <section id="production">
+    <div class="eyebrow">13 / DALLA BOZZA ALLA STAMPA</div><h2>La qualità passa dai dettagli.</h2>
+    <div class="production-grid"><div><span class="mono accent">01 / LEGGIBILITÀ</span><h3>Gerarchia verificata</h3><p>Data e luogo leggibili a distanza. Testi secondari verificati su A4 e A5 stampati al 100%.</p></div><div><span class="mono accent">02 / SEGNO</span><h3>Linee riproducibili</h3><p>Indicazione iniziale: tratti di almeno 0,3 pt. Prova di stampa con la tipografia prima dell’esecutivo.</p></div><div><span class="mono accent">03 / PRODUZIONE</span><h3>File concordati</h3><p>Abbondanza e profilo colore secondo la tipografia. Riferimento iniziale: 3 mm di abbondanza.</p></div><div><span class="mono accent">04 / IDENTITÀ</span><h3>Materiali ufficiali</h3><p>Loghi vettoriali autorizzati, denominazioni corrette e area di rispetto. URL finale e programma verificati.</p></div></div>
+    <p class="bottom-note">Gli SVG inclusi sono prototipi RGB, senza abbondanza. L’esportazione PDF della presentazione riguarda le slide.</p>
+    <aside class="notes">IT: Questi sono criteri di produzione, non certificazioni dei prototipi. La tipografia stabilisce i requisiti effettivi, compreso il profilo CMYK e PDF/X. I file inclusi non sono esecutivi pronti per la stampa. TR: Paket RGB taslaklar içeriyor. 3 mm taşma ve 0,3 punto çizgi ilk öneri; matbaa doğrulayacak. Sunumu PDF yapmak afişi matbaaya hazır hale getirmez.</aside>
+  </section>
+
+  <section id="decisions">
+    <div class="eyebrow">14 / CONFRONTO CON IL COMITATO</div><h2>Quattro decisioni per procedere.</h2>
+    <div class="decision-list"><div><span>01</span><h3>Direzione visiva</h3><p>Confermare strati, nodi e palette scelta.</p></div><div><span>02</span><h3>Marchi e informazioni</h3><p>Raccogliere loghi, sede precisa e diciture approvate.</p></div><div><span>03</span><h3>Contenuto del programma</h3><p>Definire sintesi, interventi, lingue e numero di pagine.</p></div><div><span>04</span><h3>Prototipo e prova</h3><p>Validare A4 e A5 a dimensione reale, poi produrre la serie.</p></div></div>
+    <aside class="notes">IT: Chiudere la discussione su scelte concrete. Proporre prima la validazione del concept e dell’A4, poi le declinazioni. TR: Toplantıyı bu dört somut karar ile bitirebilirsin. Önce konsept ve A4 teyidi, ardından diğer formatlar.</aside>
+  </section>
+
+  <section id="closing" class="closing">
+    <div class="eyebrow">PROPOSTA / DATA STRATA + OPEN NETWORK</div><h2>Un’identità costruita<br>sulla conoscenza aperta.</h2>
+    <p class="closing-copy">Il concept interpreta il sapere archeologico come un sistema stratificato e connesso. Venti linee richiamano l’edizione, dodici nodi identificano i panel. La stessa grammatica accompagna i materiali promozionali e il programma.</p>
+    <img src="assets/strata-plain.svg" class="closing-art" alt="Campo di linee come sintesi della proposta">
+    <p class="closing-caption mono">ARCHEOFOSS 2026 / BOLOGNA / 20ª EDIZIONE</p>
+    <aside class="notes">IT: Sintesi da usare come testo breve di presentazione del concept. Nessuna proposta di slogan ufficiale è implicita. TR: Bu paragraf konsept açıklaması olarak hocayla paylaşılabilir. Sonraki üç slayt kaynaklar ve gerçek panel başlıklarıdır.</aside>
+  </section>
+
+  <section id="sources" class="appendix">
+    <div class="eyebrow">APPENDICE / FONTI E ATTRIBUZIONI</div><h2>Fonti, limiti e materiali.</h2>
+    <div class="source-layout"><div><h3>Contenuti del convegno</h3><a href="https://www.archeofoss.org/2026/" target="_blank" rel="noopener">ArcheoFOSS 20 / 2026</a><p>Edizione e istituzione ospitante.</p><a href="https://www.archeofoss.org/2026/call-for-papers" target="_blank" rel="noopener">Call for papers 2026</a><p>Date, modalità e dodici titoli. Confronto con il testo fornito.</p><a href="https://www.archeofoss.org/2026/call-for-panels" target="_blank" rel="noopener">Call for panels 2026</a><p>Missione Open Science e contesto.</p><span class="mono">VERIFICA / 11 OTTOBRE 2026</span></div><div><h3>Design e software</h3><p>Composizioni vettoriali generative originali. Posizioni, distanze e famiglie dei panel sono scelte editoriali.</p><p>reveal.js 5.2.1, licenza MIT.<br>Inter e IBM Plex Mono, SIL OFL 1.1.<br>File e licenze inclusi nel pacchetto.</p><p class="tiny">Il sito ArcheoFOSS dichiara una licenza CC BY-SA 4.0. I titoli completi compaiono nelle due slide successive. Il concept non costituisce una grafica ufficialmente approvata.</p><a class="asset-link" href="CREDITS.md" target="_blank" rel="noopener">Attribuzioni complete</a></div></div>
+    <aside class="notes">IT: Il file allegato è la fonte dei testi dei panel. Le informazioni essenziali sono state verificate sul sito. La Call for panels precedente indica un massimo di dieci, mentre la Call for papers corrente contiene dodici panel: per il design usiamo l’elenco corrente. TR: Önceki panel çağrısında 10 panel üst sınırı yazıyor, güncel bildiri çağrısı 12 panel içeriyor. Güncel listeyi kullandık. Resmî sıralama henüz kesin değil.</aside>
+  </section>
+
+  <section id="panel-titles-1" class="appendix panel-appendix">
+    <div class="eyebrow">APPENDICE / TITOLI UFFICIALI 01–06</div><h2>I panel della Call for papers.</h2><div id="official-list-1" class="official-list"></div><p class="bottom-note">Numerazione di lavoro nell’ordine della fonte. Ordine del programma ancora da definire.</p>
+    <aside class="notes">IT: Prima metà dei dodici titoli, riportati integralmente senza traduzione. TR: İlk altı panelin tam İngilizce resmî başlıkları.</aside>
+  </section>
+  <section id="panel-titles-2" class="appendix panel-appendix">
+    <div class="eyebrow">APPENDICE / TITOLI UFFICIALI 07–12</div><h2>I panel della Call for papers.</h2><div id="official-list-2" class="official-list"></div><p class="bottom-note">Titoli dalla Call for papers 2026 e dal testo fornito. archeofoss.org/2026/call-for-papers</p>
+    <aside class="notes">IT: Seconda metà dell’elenco. Tornare alla slide delle decisioni o alla sintesi per terminare la discussione. TR: Son altı panel. Kapanış için kararlar veya konsept özeti slaydına geri dönebilirsin.</aside>
+  </section>
+
+  </div></div>
+  <div id="deck-footer" aria-hidden="true"><span>ARCHEOFOSS 2026 / GRAFITE</span><span id="slide-count"></span></div>
+  <dialog id="help-dialog" aria-labelledby="help-title"><button class="dialog-close" aria-label="Chiudi">×</button><h2 id="help-title">Come navigare</h2><dl><dt>← / →</dt><dd>Slide precedente / successiva</dd><dt>O / Esc</dt><dd>Panoramica delle slide</dd><dt>F</dt><dd>Schermo intero</dd><dt>S</dt><dd>Note del relatore (con server locale o GitHub Pages)</dd><dt>Palette</dt><dd>1 · Bianco / Grafite / Pesca oppure 2 · Carta / Grafite / Ossido; la scelta vale anche per i manifesti</dd><dt>Programma</dt><dd>Scegli Bi-fold o Tri-fold DL, ingrandisci entrambi i lati e scarica gli SVG</dd><dt>PDF</dt><dd>Apri il layout di stampa con la palette selezionata e salva come PDF dal browser</dd></dl><p>Su mobile, scorri verso destra o sinistra. Le note includono una guida in turco.</p><p class="tiny">La presentazione e i suoi asset funzionano anche senza connessione.</p></dialog>
+  <dialog id="programme-dialog" class="programme-dialog" aria-labelledby="programme-dialog-title"><button type="button" class="dialog-close" id="programme-close" aria-label="Chiudi anteprima">×</button><h2 id="programme-dialog-title">Programma · Bi-fold A3 / A4</h2><p id="programme-dialog-spec">A3 aperto 420 × 297 mm → A4 chiuso.</p><div class="programme-full-face"><h3>Esterno completo</h3><img data-programme-side="outer" src="assets/programme-bifold-outer.svg" alt="Esterno completo del programma"><a data-programme-download="outer" href="assets/programme-bifold-outer.svg" download>Scarica esterno SVG</a></div><div class="programme-full-face"><h3>Interno completo</h3><img data-programme-side="inner" src="assets/programme-bifold-inner.svg" alt="Interno completo del programma"><a data-programme-download="inner" href="assets/programme-bifold-inner.svg" download>Scarica interno SVG</a></div><p class="tiny">Giorni e orari da confermare. La prima opzione mostra titoli completi; il DL usa etichette sintetiche.</p></dialog>
+  <noscript><div class="noscript">Per navigare nelle slide, abilita JavaScript nel browser. I prototipi SVG sono disponibili nella cartella assets.</div></noscript>
+  <script src="vendor/reveal/reveal.js"></script><script src="vendor/reveal/notes.js"></script><script src="assets/panels.js"></script><script src="assets/app.js?v=programme-graphic"></script>
+</body>
+</html>
