@@ -1,0 +1,48 @@
+/* Later cases reuse INFINITY's type, colour and common 34 / 49 px margins.
+   Source rasters remain complete. These rules never target the dome. */
+.reveal .case-subtitle{position:absolute;left:var(--page-left);right:var(--page-right);top:89px;font-size:16px;line-height:1.3;opacity:.65}
+.reveal .case-definition{position:absolute;left:var(--page-left);right:var(--page-right);top:var(--content-top);height:min(450px,calc(532px - var(--reference-band,64px)));display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:32px}
+.reveal .case-full-figure{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center}
+.reveal .case-full-figure svg{display:block;width:100%;height:100%;max-width:none;max-height:none;overflow:visible}
+/* White paper becomes transparent to the charcoal using screen compositing;
+   black source pixels become white. The light theme uses the original ink. */
+.reveal .case-source-image{filter:invert(1);mix-blend-mode:screen}
+.reveal .light .case-source-image{filter:none;mix-blend-mode:multiply}
+.reveal .case-anatomy{color:var(--sun);fill:none;stroke:currentColor;stroke-width:2;stroke-dasharray:6 7}
+.reveal .case-anatomy text{fill:var(--sun);stroke:none;font:400 22px var(--font);letter-spacing:.05em}
+.reveal .case-traits{height:100%;border-left:1px solid var(--dim);padding-left:32px;display:flex;flex-direction:column;justify-content:center;gap:34px;box-sizing:border-box}
+.reveal .case-trait{display:grid;grid-template-columns:34px 1fr;column-gap:15px;align-items:start}
+.reveal .case-trait>span{font-size:17px;line-height:32px;color:var(--sun);font-variant-numeric:tabular-nums}
+.reveal .case-trait h3{font-size:30px;line-height:1.1;color:var(--fg)}
+.reveal .case-trait p{grid-column:2;font-size:19px;line-height:1.35;opacity:.65;margin-top:9px}
+.reveal .case-traits .case-query{font-size:24px;line-height:1.3;color:var(--sun)}
+.reveal .rti-slot{border:1px solid var(--dim);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;background:color-mix(in srgb,var(--fg) 2%,var(--bg))}
+.reveal .rti-slot-mark{width:68px;height:68px;fill:none;stroke:var(--sun);stroke-width:1;opacity:.55}
+.reveal .rti-slot .rti-slot-id{font-size:34px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
+.reveal .rti-slot .rti-slot-label{font-size:16px;opacity:.5;letter-spacing:.03em}
+.reveal .rti-case-note{position:absolute;left:var(--page-left);right:var(--page-right);bottom:calc(var(--page-bottom) + var(--reference-band,64px) + 35px);font-size:23px;line-height:1.25;color:var(--sun)}
+.reveal .rti-case-note span{font-size:17px;color:var(--fg);opacity:.65;margin-left:20px}
+.reveal .goat-comparison{position:absolute;left:var(--page-left);right:var(--page-right);top:var(--content-top);height:min(450px,calc(532px - var(--reference-band,80px)));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.reveal .goat-comparison::after{content:'';position:absolute;left:50%;top:0;bottom:0;border-left:1px solid var(--dim)}
+.reveal .goat-comparison figure{display:grid;grid-template-rows:280px auto;align-content:start}
+.reveal .goat-comparison svg{width:100%;height:280px;display:block;max-width:none;max-height:none}
+.reveal .goat-comparison figcaption{text-align:center;margin:14px 0 0;font-size:26px;color:var(--fg)}
+.reveal .goat-comparison figcaption small{display:block;margin-top:7px;font-size:17px;opacity:.65}
+.reveal .goat-comparison figcaption em{display:block;font-size:18px;line-height:1.3;font-style:normal;margin-top:12px;color:var(--sun)}
+.reveal .goat-published-context{position:absolute;left:var(--page-left);right:var(--page-right);top:515px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:20px}
+.reveal .goat-published-context>p{opacity:.7}
+.reveal .goat-published-context .fragment{color:var(--sun);text-align:right;font-size:24px}
+.reveal .goat-published-context small{display:block;font-size:16px;color:var(--fg);opacity:.65;margin-top:4px}
+.reveal .interpretation-steps{position:absolute;left:var(--page-left);right:var(--page-right);top:var(--content-top);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.reveal .interpretation-step{border-top:1px solid var(--dim);padding-top:22px;min-width:0}
+.reveal .interpretation-step>b{display:block;color:var(--sun);font-size:18px;font-weight:400;font-variant-numeric:tabular-nums}
+.reveal .interpretation-step svg{display:block;width:55px;height:55px;margin:27px 0;fill:none;stroke:var(--fg);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.reveal .interpretation-step h3{font-size:29px;line-height:1.1;color:var(--fg)}
+.reveal .interpretation-step p{font-size:18px;line-height:1.4;opacity:.65;margin-top:13px;max-width:245px}
+.reveal .interpretation-close{position:absolute;left:var(--page-left);right:var(--page-right);top:450px;display:flex;justify-content:space-between;align-items:end;gap:40px}
+.reveal .interpretation-close h3{font-size:42px;line-height:1.1;color:var(--sun)}
+.reveal .interpretation-close p{font-size:21px;line-height:1.35;margin-top:13px;opacity:.7}
+.reveal .interpretation-links{display:flex;gap:25px;font-size:17px;white-space:nowrap}
+.reveal .case-skeleton .fragment{transition-duration:.45s}
+@media(prefers-reduced-motion:reduce){.reveal .case-skeleton .fragment{transition-duration:0s}}
+@media print{.reveal .case-skeleton .fragment{opacity:1!important;visibility:visible!important;transform:none!important}}

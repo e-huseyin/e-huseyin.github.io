@@ -1,0 +1,150 @@
+/* Talk-led archaeological atlas, using the original INFINITY canvas and palette.
+   Scoped to .atlas: the collaboratively developed slide-8 dome is untouched. */
+.reveal .atlas .sub{font-size:46px;top:86px;max-width:1182px}
+.reveal .atlas-source{position:absolute;left:49px;right:49px;top:665px;font-size:16px;line-height:1.3;opacity:.7}
+.reveal .atlas figure{margin:0;min-width:0}
+.reveal .atlas-image{height:100%;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden}
+.reveal .atlas-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;max-width:none;max-height:none;margin:0;border:0;box-shadow:none}
+.reveal .atlas figcaption{font-size:18px;margin-top:12px;line-height:1.3;color:var(--fg)}
+.reveal .atlas-message{position:absolute;left:49px;right:49px;top:606px;font-size:30px;color:var(--acc)}
+.reveal .atlas .eyebrow{font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:26px}
+/* Full title in the Infinity cover yellow. */
+.reveal .atlas.l-cover h1{top:220px;left:49px;width:1182px;max-width:1182px;font-size:58px;line-height:1.14;color:var(--sun)}
+.reveal .cover-deck{position:absolute;left:49px;top:412px;width:600px;font-size:23px;line-height:1.4}
+.reveal .cover-image{position:absolute;left:695px;top:170px;width:535px;height:355px}
+.reveal .cover-image figcaption{font-size:15px}
+.reveal .cover-question{position:absolute;left:49px;top:548px;font-size:31px;color:var(--sun)}
+.reveal .cover-byline{position:absolute;left:49px;top:622px;font-size:19px;line-height:1.5}
+.reveal .cover-byline span{color:var(--sun);margin-left:12px}
+/* Cover-to-analysis bridge: the original full raster is shared by both pages. */
+.reveal .cover-brandbar{position:absolute;left:39px;top:64px;height:74px;display:flex;align-items:center;gap:34px}
+.reveal .cover-brandbar .brand-infinity{position:relative;display:block;width:279px;height:66px}
+.reveal .cover-brandbar .brand-infinity .logo{inset:0;width:279px;height:66px}
+.reveal .cover-unibo{display:block;width:74px;height:74px;object-fit:contain;margin:0;border:0;box-shadow:none;max-height:none;max-width:none}
+.reveal .cover-cervids{display:block;position:relative;width:109.5448098px;height:74px;flex-shrink:0}
+.reveal .cervid-source{display:block;width:100%;height:100%;object-fit:contain;max-width:none;max-height:none;margin:0;border:0;box-shadow:none;filter:brightness(0) invert(1)}
+.reveal .light .cervid-source,.reveal .light .cover-unibo{filter:brightness(0)}
+.reveal .cervid-artwork{position:absolute;left:49px;top:172px;width:780px;height:526.9077px}
+.reveal .cervid-reading .sub{color:var(--sun)}
+.reveal .cervid-analysis{position:absolute;inset:0;width:1280px;height:720px;overflow:visible;pointer-events:none}
+.reveal .cervid-tint{opacity:.96}
+.reveal .cervid-label text{font-family:var(--font)}
+.reveal .cervid-label .trait-number{fill:currentColor;font-size:17px;letter-spacing:.12em}
+.reveal .cervid-label .trait-title{fill:var(--fg);font-size:29px;font-weight:400}
+.reveal .cervid-label .trait-detail{fill:var(--fg);font-size:18px;opacity:.66}
+.reveal .cervid-label .trait-rule{fill:none;stroke:currentColor;stroke-width:1;opacity:.55}
+.reveal .cervid-context{position:absolute;left:49px;top:692px;font-size:14px;line-height:1.2;opacity:.6}
+/* Landscape and history: generous image fields, quiet annotation. */
+.reveal .landscape-layout{position:absolute;left:49px;right:49px;top:180px;display:grid;grid-template-columns:830px 1fr;gap:42px}
+.reveal .landscape-layout .atlas-figure{height:422px}
+.reveal .site-metrics{display:flex;flex-direction:column;justify-content:space-between;height:420px}
+.reveal .site-metrics strong{display:block;font-size:59px;font-weight:400;color:var(--acc);line-height:1.05}
+.reveal .site-metrics strong span{font-size:30px;margin-left:8px}
+.reveal .site-metrics small{display:block;font-size:22px;margin-top:10px}
+.reveal .history-line{position:absolute;left:49px;right:49px;top:182px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;border-bottom:1px solid var(--dim);padding-bottom:20px}
+.reveal .history-line div{position:relative}
+.reveal .history-line div::after{content:'';position:absolute;bottom:-25px;left:0;width:8px;height:8px;background:var(--acc);border-radius:50%}
+.reveal .history-line b{font-size:40px;font-weight:400;color:var(--acc);display:block}
+.reveal .history-line span{font-size:22px;display:block;margin-top:8px}
+.reveal .history-images{position:absolute;left:49px;right:49px;top:325px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.reveal .history-images .atlas-figure{height:270px}
+.reveal .representation-pair{position:absolute;left:49px;right:49px;top:180px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+.reveal .representation-pair .atlas-figure{height:340px}
+/* Eleven full source silhouettes, without frames or projected identifiers.
+   Six equal fields above five centred fields keep the survey symmetrical. */
+.reveal .catalog-grid{position:absolute;left:49px;right:49px;top:120px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:54px 18px}
+.reveal .catalog-plate{grid-column:span 2;height:155px;padding:0;border:0}
+.reveal .catalog-plate:nth-child(7){grid-column:2/span 2}
+.reveal .catalog-arrival{width:100%;height:100%}
+.reveal .catalog-silhouette{display:block;width:100%;height:100%;overflow:visible;color:var(--fg);opacity:.26;transform:scale(1);transform-origin:center;transition:color .6s var(--ease-out),opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+/* Arrival uses its own wrapper so it cannot overwrite click focus. Native
+   fragments remain visible at rest; only the inner silhouette changes. */
+.reveal .catalog-selection .catalog-plate.fragment{opacity:1;visibility:visible;transform:none}
+.reveal .catalog-selection.present .catalog-arrival{animation:catalog-arrive .55s var(--ease-out) var(--arrival-delay) both}
+.reveal .catalog-selection .catalog-focus.visible .catalog-silhouette{color:var(--sun);opacity:1;transform:scale(1.1)}
+@keyframes catalog-arrive{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.reveal .catalog-selection .catalog-arrival{animation:none}.reveal .catalog-selection .catalog-silhouette{transition:none}}
+.reveal .survey-counts{position:absolute;left:49px;right:49px;top:565px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.reveal .survey-counts p{font-size:21px;display:flex;align-items:center;gap:18px}
+.reveal .survey-counts b{font-size:50px;line-height:1;font-weight:400;color:var(--sun)}
+/* One sentence and one workflow establish RTI before the interactive dome. */
+.reveal .method-statement{position:absolute;left:140px;top:205px;font-size:64px;line-height:1.1}
+.reveal .method-statement span{color:var(--acc)}
+.reveal .method-flow{position:absolute;left:140px;right:140px;top:435px;display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr;align-items:center;gap:22px}
+.reveal .method-flow div{border-top:1px solid var(--acc);padding-top:24px}
+.reveal .method-flow b{font-size:19px;color:var(--acc);font-weight:400;display:block;margin-bottom:15px}
+.reveal .method-flow span{font-size:29px}
+.reveal .method-flow i{font-style:normal;color:var(--acc);font-size:35px}
+.reveal .method-view{position:absolute;left:49px;right:49px;top:174px;display:grid;grid-template-columns:920px 1fr;gap:48px}
+.reveal .method-view .atlas-figure{height:423px}
+.reveal .method-verbs{display:flex;flex-direction:column;gap:38px;justify-content:center;font-size:38px;color:var(--acc)}
+/* Case study plates share alignment while varying the analytical device. */
+.reveal .context-layout{position:absolute;left:49px;right:49px;top:185px;display:grid;grid-template-columns:425px 1fr 425px;gap:26px;align-items:center}
+.reveal .context-layout .atlas-figure{height:345px}
+.reveal .context-link{text-align:center;color:var(--acc);font-size:22px;line-height:1.3}
+.reveal .context-link div{border-top:1px dashed var(--acc);margin:27px 0}
+.reveal .context-link small{font-size:19px;color:var(--fg);opacity:.7}
+.reveal .case-layout{position:absolute;left:49px;right:49px;top:178px;display:grid;grid-template-columns:650px 1fr;gap:52px}
+.reveal .case-layout .atlas-figure{height:420px}
+.reveal .case-reading{padding-top:10px}
+.reveal .case-reading h3{font-size:36px;line-height:1.2;color:var(--fg)}
+.reveal .reading-point{display:flex;gap:22px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--dim)}
+.reveal .reading-point span{font-size:21px;color:var(--acc)}
+.reveal .reading-point h3{font-size:30px}
+.reveal .dataset-note{margin-top:35px;border-left:2px solid var(--acc);padding-left:20px}
+.reveal .dataset-note b{color:var(--acc);font-weight:400;font-size:23px}
+.reveal .dataset-note p{font-size:22px;margin-top:9px;line-height:1.4}
+.reveal .detail-atlas{position:absolute;left:49px;right:49px;top:175px;display:grid;grid-template-columns:640px 1fr;gap:35px}
+.reveal .detail-atlas>.atlas-figure{height:425px}
+.reveal .detail-regions{display:grid;grid-template-rows:repeat(3,1fr);gap:18px}
+.reveal .detail-region{display:grid;grid-template-columns:155px 1fr;align-items:center;gap:24px}
+.reveal .detail-region svg{width:155px;height:130px;background:#fff;overflow:hidden}
+.reveal .detail-region figcaption{margin:0;font-size:25px}
+.reveal .compact-case .atlas-figure{height:340px}
+.reveal .case-question{font-size:33px;line-height:1.25;margin-top:36px}
+.reveal .case-question span{color:var(--acc)}
+.reveal .qa-strip{position:absolute;left:49px;right:49px;top:580px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.reveal .qa-token{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--dim);padding-top:15px;font-size:21px}
+.reveal .qa-token b{font-weight:400}
+.reveal .qa-token span{font-size:17px;opacity:.65}
+.reveal .qa-token.selected{border-color:var(--acc);color:var(--acc)}
+/* A balanced pair, with the physical dimensions stated rather than implied. */
+.reveal .paired-atlas{position:absolute;left:49px;right:49px;top:170px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+.reveal .paired-atlas .atlas-figure{height:245px}
+.reveal .paired-atlas figcaption{font-size:20px}
+.reveal .pair-table{position:absolute;left:49px;top:466px;width:1182px;border-collapse:collapse;font-size:21px;table-layout:fixed}
+.reveal .pair-table th,.reveal .pair-table td{padding:9px 14px;border-bottom:1px solid var(--dim);text-align:left;font-weight:400}
+.reveal .pair-table thead th{color:var(--acc);font-size:18px;padding-top:0}
+.reveal .pair-table th:first-child{width:26%}
+.reveal .pair-takeaway{position:absolute;left:49px;top:625px;font-size:27px;color:var(--acc)}
+.reveal .rider-count{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+.reveal .rider-count b{font-size:59px;font-weight:400;color:var(--acc);line-height:1}
+.reveal .rider-count span{font-size:21px}
+/* Interpretation grows from observation, without treating inference as data. */
+.reveal .evidence-ladder{position:absolute;left:140px;top:180px;display:flex;flex-direction:column;gap:17px}
+.reveal .evidence-step{width:calc(760px + var(--step)*45px);display:grid;grid-template-columns:70px 240px 1fr;align-items:center;padding:18px 25px;border:1px solid var(--dim)}
+.reveal .evidence-step:first-child{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,transparent)}
+.reveal .evidence-step b{color:var(--acc);font-size:22px;font-weight:400}
+.reveal .evidence-step h3{font-size:29px;color:var(--fg)}
+.reveal .evidence-step p{font-size:20px;opacity:.8}
+/* Local screenshot remains readable if the linked viewer is unavailable. */
+.reveal .open-viewer{position:absolute;left:49px;right:49px;top:178px;display:grid;grid-template-columns:820px 1fr;gap:42px}
+.reveal .open-viewer>.atlas-figure{height:420px}
+.reveal .viewer-access{padding-top:5px}
+.reveal .viewer-access h3{font-size:43px;line-height:1.15;color:var(--acc);margin-bottom:30px}
+.reveal .viewer-access a{font-size:21px;line-height:1.4;overflow-wrap:anywhere}
+.reveal .viewer-access p:last-child{margin-top:22px}
+/* Infinity closing: a simple thank-you and contact. */
+.reveal .atlas.l-closing h1{top:250px;font-size:82px;max-width:1100px;line-height:1.06}
+.reveal .closing-contact{position:absolute;left:49px;top:365px;font-size:28px;line-height:1.5}
+.reveal .closing-contact a{color:inherit;text-decoration:none}
+@media print{.reveal .atlas .fragment{opacity:1!important;visibility:visible!important;transform:none!important}}
+@media print{.reveal .catalog-selection .catalog-arrival{animation:none}.reveal .catalog-selection .catalog-focus .catalog-silhouette{color:var(--sun);opacity:1;transform:scale(1.1)}}
+/* Green identifies acquisition records; pink remains the iconographic chapter accent. */
+.reveal .atlas .dataset-note{border-color:var(--green)}
+.reveal .atlas .dataset-note b{color:var(--green)}
+.reveal .atlas .qa-token.selected{border-color:var(--green);color:var(--green)}
+/* Photographs retain their full frame without bright letterbox bars. */
+.reveal .landscape-layout .atlas-image,.reveal .history-images .atlas-image,.reveal .method-view .atlas-image,.reveal .open-viewer .atlas-image,.reveal .cover-image .atlas-image{background:transparent}
+.reveal .pair-table{top:452px}
+.reveal .pair-table th,.reveal .pair-table td{padding:7px 14px}

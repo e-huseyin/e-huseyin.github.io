@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beyond the Tracing · Rupe Magna</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+
+<!-- Calibri is used when installed; Carlito is its metric-compatible open substitute -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,200,0,0&display=block">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="css/infinity.css">
+<link rel="stylesheet" href="css/rupe.css">
+<link rel="stylesheet" href="css/atlas.css">
+<link rel="stylesheet" href="css/context-map.css">
+<link rel="stylesheet" href="css/chronology.css">
+<link rel="stylesheet" href="css/boar-context.css">
+<link rel="stylesheet" href="css/presentation-layout.css">
+<link rel="stylesheet" href="css/references.css">
+<link rel="stylesheet" href="css/case-studies.css">
+<link rel="stylesheet" href="css/rti-viewer.css?v=890ab1047d16">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section data-markdown="slides.md"
+             data-separator="^\r?\n---\r?\n$"
+             data-separator-vertical="^\r?\n--\r?\n$"
+             data-separator-notes="^Note:"
+             data-charset="utf-8"></section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="js/infinity.js"></script>
+<script src="js/cervid-transition.js"></script>
+<script src="js/context-map.js"></script>
+<script src="js/references.js"></script>
+<script src="js/rti-viewer.js?v=72d217c92b64"></script>
+<script src="js/goat-contours.js"></script>
+<script src="js/dome.js?v=249d2e66be32"></script>
+<script>
+  Reveal.initialize({
+    width: 1280, height: 720, margin: 0,
+    center: false,
+    hash: true,
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    autoAnimateDuration: 0.9,
+    autoAnimateMatcher: CervidTransition.matcher,
+    pdfSeparateFragments: false,
+    autoAnimateEasing: 'cubic-bezier(.2,.7,.2,1)',
+    // RevealInfinity must come after RevealMarkdown: it decorates the generated slides
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealInfinity, RevealDome, RevealContextMap, RevealReferences, RevealRTIViewer]
+  });
+</script>
+</body>
+</html>

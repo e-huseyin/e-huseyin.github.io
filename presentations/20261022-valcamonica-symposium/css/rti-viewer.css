@@ -1,0 +1,22 @@
+/* The original RTI viewer runs in its own document, with its local assets. */
+.reveal .rti-live-subtitle{position:absolute;left:var(--page-left);right:var(--page-right);top:89px;margin:0;font-size:16px;line-height:1.3;opacity:.65}
+.reveal .rti-embed{position:absolute;left:var(--page-left);right:var(--page-right);top:var(--content-top);bottom:calc(var(--page-bottom) + var(--reference-band,64px) + 72px);background:var(--bg)}
+.reveal .rti-embed iframe{display:block;width:100%;height:100%;max-width:none;max-height:none;border:0;margin:0;background:var(--bg)}
+.reveal .rti-live-hint{position:absolute;left:var(--page-left);right:var(--page-right);bottom:calc(var(--page-bottom) + var(--reference-band,64px) + 38px);margin:0;font-size:14px;line-height:18px;opacity:.65}
+/* Exactly the existing photograph/figure rectangle: no second slide, new frame
+   or resize on reveal. Hidden viewers cannot intercept the underlying tracing. */
+.reveal .rti-overlay{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg);pointer-events:none;overflow:hidden}
+.reveal .rti-overlay.visible{pointer-events:auto}
+.reveal .rti-overlay iframe{display:block;width:100%;height:100%;max-width:none;max-height:none;border:0;margin:0;background:var(--bg)}
+.reveal .rti-overlay.fragment{transition:opacity .45s var(--ease-out),visibility .45s var(--ease-out)}
+@media(prefers-reduced-motion:reduce){.reveal .rti-overlay.fragment{transition:none}}
+/* One shared left/right split, based on the approved boar composition. The
+   source and RTI are the same full-size stage, never two flex/grid columns. */
+.reveal .slides section.inline-rti{--rti-frame-height:462px;--rti-frame-width:calc(var(--rti-frame-height) * 5081 / 3637)}
+.reveal .slides section.inline-rti.boar-context{--boar-context-height:var(--rti-frame-height);--boar-image-width:707.6923076923px}
+.reveal .slides section.inline-rti .case-definition{height:var(--rti-frame-height);grid-template-columns:var(--rti-frame-width) minmax(0,1fr);gap:32px}
+.reveal .slides section.inline-rti .case-full-figure{display:block;width:100%;height:100%}
+.reveal .rti-image-stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate}
+.reveal .rti-image-stage>svg{grid-area:1/1;width:100%;height:100%;min-width:0;min-height:0;margin:0}
+.reveal .rti-image-stage>.rti-overlay{position:absolute;inset:0;width:100%;height:100%;margin:0;z-index:2}
+.reveal .rti-image-stage:has(>.rti-overlay.visible)>svg{opacity:0;pointer-events:none}

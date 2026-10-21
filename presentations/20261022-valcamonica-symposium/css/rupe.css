@@ -1,0 +1,88 @@
+/* Research graphics extend the original Infinity layouts and palette. */
+.reveal .chapter-sub{position:absolute;left:49px;top:350px;font-size:26px;color:var(--fg)}
+.reveal .l-cover h1{max-width:800px;font-size:80px;top:220px}
+.reveal .l-cover .meta{top:440px;font-size:23px;line-height:1.5}
+.reveal .l-closing h1{max-width:900px;font-size:68px;top:220px}
+.reveal .l-closing .meta{top:400px;font-size:25px;line-height:1.6}
+.reveal .sub{font-size:44px;max-width:1180px}
+.reveal .ph.card{background:var(--ph);padding:32px;gap:25px}
+.reveal .ph.card h3{font-size:32px;line-height:1.15}
+.reveal .card-copy{font-size:26px;line-height:1.55;color:var(--ink)}
+.reveal .symbol{font-family:'Material Symbols Sharp';font-size:76px;line-height:1.2;color:var(--ink);font-weight:200;font-feature-settings:'liga';font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 48}
+.reveal .diagram{position:absolute;left:60px;top:205px;width:1160px;height:400px;overflow:visible}
+.reveal .diagram text{fill:var(--fg);font-family:var(--font);font-size:30px}
+.reveal .diagram .svg-small{font-size:23px}
+.reveal .diagram .svg-big{font-size:70px;fill:var(--acc)}
+.reveal .diagram .tile-label{font-size:25px;fill:var(--fg)}
+.reveal .diagram .outline{fill:none;stroke:var(--acc);stroke-width:2.5}
+.reveal .large{font-size:26px!important;top:205px!important}
+.reveal .big{font-size:76px;color:var(--acc);font-variant-numeric:tabular-nums}
+.reveal .panel-note{top:637px;font-size:18px;line-height:1.35}
+.reveal .references{position:absolute;left:49px;top:190px;width:1160px;display:grid;gap:25px;font-size:24px;line-height:1.4}
+@media(prefers-reduced-motion:reduce){.reveal *, .reveal *::before,.reveal *::after{animation:none!important;transition:none!important}}
+@media print{.reveal .fragment{opacity:1!important;visibility:visible!important;transform:none!important}}
+.reveal .photo-grid{position:absolute;left:39px;right:39px;top:180px;display:grid;gap:22px}
+.reveal .photo-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.reveal .photo-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.reveal .photo-grid figure{margin:0;min-width:0}
+.reveal .image-stage{height:390px;background:white;display:flex;align-items:center;justify-content:center}
+.reveal .image-stage img{position:static;width:100%;height:100%;object-fit:contain;object-position:center;max-height:none;max-width:none;margin:0}
+.reveal figcaption{font-size:22px;line-height:1.3;margin-top:14px;color:var(--fg)}
+.reveal .viewer-shot{position:absolute;left:260px;top:170px;width:760px;margin:0}
+.reveal .viewer-shot .image-stage{height:380px}
+.reveal .viewer-shot figure{margin:0}
+.reveal .viewer-shot figcaption{font-size:18px;text-align:center}
+.reveal .viewer-labels{position:absolute;top:590px;left:260px;width:760px;text-align:center;font-size:26px}
+.reveal .viewer-labels span{color:var(--acc);padding:0 40px}
+/* Slide 8: interactive perspective acquisition model. */
+.reveal .dome-lab{position:absolute;left:39px;right:39px;top:160px;height:460px;display:grid;grid-template-columns:780px 1fr;gap:24px}
+.reveal .dome-lab svg{width:780px;height:460px;overflow:visible;color:var(--fg)}
+.reveal .dome-lab svg text{font-family:var(--font);fill:var(--fg);font-size:19px}
+.reveal .d-rock{fill:var(--bg);stroke:var(--dim);stroke-width:1.5}
+.reveal .d-stone{color:var(--fg)}
+.reveal .d-groove{fill:none;stroke:var(--fg);stroke-width:5;stroke-dasharray:1 7;stroke-linecap:round;opacity:.5}
+.reveal .d-shell{stroke:var(--fg);stroke-opacity:.35;stroke-width:1.5}
+.reveal .d-ring{fill:none;stroke:var(--acc);stroke-opacity:.35;stroke-width:1}
+.reveal .d-meridian{fill:none;stroke:var(--fg);stroke-opacity:.1;stroke-width:1}
+.reveal .d-led{fill:var(--bg);stroke:var(--fg);stroke-width:1;cursor:pointer}
+.reveal .d-led.captured{fill:var(--acc);stroke:var(--acc)}
+.reveal .d-led.active{fill:#fff4bb;stroke:#e1dc64;stroke-width:2}
+.reveal .d-led:focus{outline:none;stroke:var(--sun);stroke-width:4}
+.reveal .d-ray{stroke:var(--sun);stroke-width:1.5;stroke-dasharray:5 5}
+.reveal .d-axis{fill:none;stroke:var(--fg);stroke-opacity:.2;stroke-dasharray:3 6}
+.reveal .d-camera{fill:var(--bg);stroke:var(--fg);stroke-width:1.5}
+.reveal .d-lens{fill:#626c6f;stroke:var(--fg);stroke-width:1}
+.reveal .d-glass{fill:#19282a;stroke:var(--acc)}
+.reveal .d-sphere{fill:#272a2b;stroke:#929b9c}
+.reveal .d-dimension,.reveal .d-callout{fill:none;stroke:var(--fg);stroke-opacity:.35}
+.reveal .dome-console{padding:8px 0;display:flex;flex-direction:column;gap:16px}
+.reveal .dome-console .d-kicker{font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.reveal .dome-console output{font-size:62px;line-height:1;font-variant-numeric:tabular-nums;color:var(--acc)}
+.reveal .dome-console .d-meta{display:flex;justify-content:space-between;font-size:19px;line-height:1.6}
+.reveal .dome-console .d-meta b{font-weight:400;font-variant-numeric:tabular-nums}
+.reveal .dome-console progress{width:100%;height:5px;accent-color:var(--acc)}
+.reveal .d-controls{display:flex;gap:8px}
+.reveal .dome-console button,.reveal .dome-console select{font:inherit;font-size:18px;border:1px solid var(--dim);background:var(--bg);color:var(--fg);padding:9px 12px;cursor:pointer}
+.reveal .dome-console button:first-child{flex:1;background:var(--acc);color:var(--ink);border-color:var(--acc)}
+.reveal .dome-console button:focus-visible,.reveal .dome-console select:focus-visible,.reveal .dome-console input:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.reveal .dome-console label{font-size:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.reveal .dome-console input{width:180px;accent-color:var(--acc)}
+.reveal .dome-console .d-hint{font-size:17px;opacity:.65;line-height:1.4}
+@media print{.reveal .d-controls,.reveal .dome-console label,.reveal .d-hint{display:none}}
+/* Pointer orbit is confined to the model; the rest of the deck keeps its gestures. */
+.reveal .dome-lab svg{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.reveal .dome-lab svg:active{cursor:grabbing}
+.reveal .dome-console{gap:12px}
+.reveal .dome-console .d-surface-view{font-size:17px;padding:7px 12px;text-align:center}
+.reveal .d-shell{stroke-opacity:.2}
+.reveal .d-ring{stroke-opacity:.22}
+.reveal .d-meridian{stroke-opacity:.06}
+
+/* Let the enlarged dome extend beyond its original model frame. */
+.reveal .dome-lab svg{overflow:visible}
+/* Suppress native blue focus frames on pointer interaction and the SVG viewport. */
+.reveal .dome-lab svg:focus,.reveal .dome-lab svg:focus-visible{outline:none;box-shadow:none}
+.reveal .dome-lab svg *:focus{outline:none}
+.reveal .d-led:focus:not(:focus-visible){stroke-width:1}
+/* Keyboard focus stays identifiable without framing the entire model. */
+.reveal .dome-lab:has(svg:focus-visible) .d-hint{color:var(--acc);opacity:1}

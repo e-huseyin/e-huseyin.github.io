@@ -1,0 +1,58 @@
+/* Shared 1280 × 720 composition. The catalogue's approved 34 px lower margin
+   anchors sources on every content slide. Full source images always contain. */
+:root{--page-top:34px;--page-bottom:34px;--page-left:49px;--page-right:49px;--content-top:120px;--opening-visual-width:715px}
+.reveal .slides section:not(.l-cover):not(.l-closing)>.sub{top:var(--page-top);left:var(--page-left);right:var(--page-right);max-width:none;font-size:46px;line-height:1.05}
+.reveal .chrome{display:none}
+.reveal .page-number{position:absolute;right:30px;bottom:10px;margin:0;padding:0;font:400 12px/16px var(--font);color:var(--fg);opacity:.6;z-index:10;pointer-events:none}
+.reveal .slides section:not(.l-cover)>.atlas-source,.reveal .slides section:not(.l-cover)>.panel-note,.reveal .cervid-context,.reveal .context-bibliography{top:auto;bottom:var(--page-bottom);left:var(--page-left);right:var(--page-right);margin:0}
+.reveal .slides section:not(.l-cover)>.panel-note{font-size:16px;line-height:1.3}
+.reveal .sub>.dome-subtitle{position:static;display:block;margin-top:7px;font-family:var(--font-light);font-size:16px;line-height:1.3;color:var(--fg);opacity:.75}
+/* Opening plates share the same width and almost identical natural heights. */
+.reveal .cervid-artwork{top:var(--content-top);width:var(--opening-visual-width);height:482.9986933797909px}
+.reveal .context-subtitle{top:89px;font-size:18px}
+.reveal .context-map-wrap{top:var(--content-top);width:var(--opening-visual-width);height:473px}
+.reveal .context-map{width:var(--opening-visual-width);height:473px}
+.reveal .context-panels{left:810px;top:var(--content-top);width:421px;height:473px}
+.reveal .map-route-legend{top:603px}
+.reveal .map-attribution{top:628px;right:49px;line-height:1.3}
+/* Content moves into the former header area and its image fields grow in height.
+   object-fit:contain / SVG meet keep the original proportions without cropping. */
+.reveal .catalog-grid{top:var(--content-top)}
+.reveal .survey-counts{top:575px}
+.reveal .history-line{top:var(--content-top)}
+.reveal .history-images{top:264px}
+.reveal .history-images .atlas-figure{height:330px}
+.reveal .representation-pair{top:var(--content-top)}
+.reveal .representation-pair .atlas-figure{height:420px}
+.reveal .method-statement{top:150px;font-size:72px}
+.reveal .method-flow{top:450px}
+.reveal .method-view{top:var(--content-top)}
+.reveal .method-view .atlas-figure{height:470px}
+.reveal .context-layout{top:var(--content-top)}
+.reveal .context-layout .atlas-figure{height:420px}
+.reveal .case-layout{top:var(--content-top)}
+.reveal .case-layout .atlas-figure{height:470px}
+.reveal .compact-case .atlas-figure{height:380px}
+.reveal .detail-atlas{top:var(--content-top)}
+.reveal .detail-atlas>.atlas-figure{height:470px}
+.reveal .detail-region{grid-template-columns:170px 1fr}
+.reveal .detail-region svg{width:170px;height:142.5806451613px}
+.reveal .paired-atlas{top:var(--content-top)}
+.reveal .paired-atlas .atlas-figure{height:270px}
+.reveal .pair-table{top:448px}
+.reveal .pair-takeaway{top:618px}
+.reveal .evidence-ladder{top:var(--content-top);gap:20px}
+.reveal .evidence-step{padding:26px 25px}
+.reveal .open-viewer{top:var(--content-top)}
+.reveal .open-viewer>.atlas-figure{height:470px}
+/* The dome's scene, camera, lights and interactions are unchanged. A taller
+   SVG viewport enlarges its drawing uniformly within the existing viewBox. */
+.reveal .dome-lab{top:114px;height:520px}
+.reveal .dome-lab>svg{height:520px}
+.reveal .dome-console{gap:7px;padding:4px 0}
+.reveal .dome-console .d-kicker{font-size:16px}
+.reveal .dome-console output{font-size:54px}
+.reveal .dome-console .d-meta{font-size:17px;line-height:1.45}
+.reveal .dome-console button,.reveal .dome-console select{font-size:17px;padding:7px 10px}
+.reveal .dome-console label{font-size:17px}
+.reveal .dome-console .d-hint{font-size:14px;line-height:1.35}

@@ -1,0 +1,40 @@
+/* IEEE bibliography belongs to each cited slide; numbers are global to the deck. */
+.reveal .slide-references{position:absolute;left:var(--page-left);right:var(--page-right);bottom:var(--page-bottom);margin:0;font-family:var(--font-light);font-size:12.5px;line-height:1.2;color:var(--fg);opacity:.75;z-index:3}
+.reveal .slide-references ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.reveal .slide-references li{position:relative;margin:0;padding-left:30px;break-inside:avoid;overflow-wrap:anywhere}
+.reveal .slide-references .reference-number{position:absolute;left:0;top:0;font-variant-numeric:tabular-nums}
+.reveal .slide-references a{text-decoration:none}
+.reveal .slide-references a:hover,.reveal .slide-references a:focus-visible{text-decoration:underline}
+.reveal .slide-references.reference-columns ol{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
+.reveal [data-cite]{font-size:12px;line-height:1.3;letter-spacing:0;text-transform:none;white-space:normal}
+.reveal .reference-marker{white-space:nowrap;text-decoration:none;font-variant-numeric:tabular-nums}
+.reveal .reference-marker:hover,.reveal .reference-marker:focus-visible{text-decoration:underline}
+.reveal .slides section:has(>.slide-references){--reference-band:64px}
+.reveal .slides section:has(>.slide-references.reference-columns){--reference-band:80px}
+.reveal .slides section:has(>.slide-references)>.atlas-source,.reveal .slides section:has(>.slide-references)>.panel-note{bottom:calc(var(--page-bottom) + var(--reference-band) + 8px);font-size:12px;line-height:1.25}
+/* The three cover images keep their approved transition coordinates. */
+.reveal .cover-project{position:absolute;left:49px;right:49px;top:525px;font-size:20px;line-height:1.3;color:var(--fg)}
+.reveal .l-cover:has(>.slide-references) .cover-byline{top:580px}
+.reveal .cervid-reading:has(>.slide-references)>.cervid-context{left:49px;right:49px;top:89px;bottom:auto;font-size:12px;line-height:1.25}
+/* Reserve the new bibliography band without cropping source pictures. */
+.reveal .slides section:has(>.slide-references) .case-layout:not(.compact-case) .atlas-figure,.reveal .slides section:has(>.slide-references) .detail-atlas>.atlas-figure{height:min(420px,calc(488px - var(--reference-band)))}
+.reveal .slides section:has(>.slide-references) .method-view .atlas-figure,.reveal .slides section:has(>.slide-references) .open-viewer>.atlas-figure{height:min(420px,calc(488px - var(--reference-band)))}
+.reveal .slides section:has(>.slide-references) .history-images .atlas-figure{height:250px}
+.reveal .slides section:has(>.slide-references) .survey-counts{top:550px}
+/* Three sources accompany the dome's raking-light explanation. Reserve their
+   band while scaling the SVG uniformly; orbit and zoom remain unrestricted. */
+.reveal .slides section:has(>.slide-references.reference-columns) .dome-lab{height:462px}
+.reveal .slides section:has(>.slide-references.reference-columns) .dome-lab>svg{height:462px}
+.reveal .slides section:has(>.slide-references) .qa-strip{top:550px}
+.reveal .slides section:has(>.slide-references) .paired-atlas .atlas-figure{height:235px}
+.reveal .slides section:has(>.slide-references) .pair-table{top:410px;font-size:18px}
+.reveal .slides section:has(>.slide-references) .pair-table th,.reveal .slides section:has(>.slide-references) .pair-table td{padding:5px 14px}
+.reveal .slides section:has(>.slide-references) .pair-takeaway{top:550px;font-size:24px}
+.reveal .slides section:has(>.slide-references) .atlas-message{top:555px;font-size:26px}
+/* Map and divider share one height; the map is slightly smaller than before. */
+.reveal .rupe-context:has(>.slide-references){--reference-band:34px;--context-map-height:min(462px,calc(542px - var(--reference-band)))}
+.reveal .rupe-context .context-map-wrap,.reveal .rupe-context .context-map{width:725px;height:var(--context-map-height)}
+.reveal .rupe-context .context-panels{height:var(--context-map-height)}
+.reveal .rupe-context .map-route-legend{left:69px;top:calc(var(--content-top) + var(--context-map-height) - 48px)}
+.reveal .rupe-context .map-attribution{top:calc(var(--content-top) + var(--context-map-height) + 4px);font-size:10px;line-height:1.2}
+@media print{.reveal .slide-references{opacity:1}}
