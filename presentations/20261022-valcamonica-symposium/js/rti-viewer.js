@@ -26,8 +26,7 @@ window.RevealRTIViewer = {
     };
     frames.forEach(frame => {
       frame.addEventListener('load', () => {
-        // Remote viewers retain their own controls and language. Browser origin
-        // rules prevent the local deck from installing handlers inside them.
+        // Cross-origin viewers keep their own controls; DOM access is optional.
         let viewerDocument;
         try {
           viewerDocument = frame.contentDocument;

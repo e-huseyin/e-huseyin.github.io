@@ -12,8 +12,8 @@
 @media(prefers-reduced-motion:reduce){.reveal .rti-overlay.fragment{transition:none}}
 /* One shared left/right split, based on the approved boar composition. The
    source and RTI are the same full-size stage, never two flex/grid columns. */
-.reveal .slides section.inline-rti{--rti-frame-height:462px;--rti-frame-width:calc(var(--rti-frame-height) * 5081 / 3637)}
-.reveal .slides section.inline-rti.boar-context{--boar-context-height:var(--rti-frame-height);--boar-image-width:707.6923076923px}
+.reveal .slides section.inline-rti{--rti-frame-height:462px;--rti-frame-width:calc(var(--rti-frame-height) * 1518 / 1093)}
+.reveal .slides section.inline-rti.boar-context{--boar-context-height:var(--rti-frame-height);--boar-image-width:var(--rti-frame-width)}
 .reveal .slides section.inline-rti .case-definition{height:var(--rti-frame-height);grid-template-columns:var(--rti-frame-width) minmax(0,1fr);gap:32px}
 .reveal .slides section.inline-rti .case-full-figure{display:block;width:100%;height:100%}
 .reveal .rti-image-stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate}

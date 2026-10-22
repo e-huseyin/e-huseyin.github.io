@@ -1,0 +1,28 @@
+/* The image and divider use the same frame as slides 8, 9, 10 and 12. */
+.reveal .contact-layout{position:absolute;left:var(--page-left);right:var(--page-right);top:var(--content-top);height:462px;display:grid;grid-template-columns:calc(462px * 1518 / 1093) minmax(0,1fr);gap:32px}
+.reveal .contact-visual{height:462px;min-width:0;margin:0}
+.reveal .contact-scene{display:block;width:100%;height:462px;max-width:none;max-height:none;overflow:hidden}
+.reveal .contact-facts{height:462px;border-left:1px solid var(--dim);padding-left:32px;box-sizing:border-box;display:flex;align-items:center}
+.reveal .contact-data{width:100%;display:flex;flex-direction:column;gap:15px}
+.reveal .contact-period p{font-size:14px;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.reveal .contact-period h3{margin-top:4px;font-size:24px;line-height:1.1;color:var(--fg);opacity:.8}
+.reveal .contact-primary-stat strong{display:block;font-size:68px;line-height:1;font-weight:400;color:var(--sun);font-variant-numeric:tabular-nums}
+.reveal .contact-primary-stat small{font-size:35px}
+.reveal .contact-primary-stat>span{display:block;margin-top:5px;font-size:18px;line-height:1.3;color:var(--fg);opacity:.8}
+.reveal .contact-secondary-comparison{margin-top:1px;padding-top:12px;border-top:1px solid var(--dim)}
+.reveal .contact-dimensions{font-size:19px;line-height:1.25;color:var(--fg);font-variant-numeric:tabular-nums;opacity:.75}
+.reveal .contact-reference-label{margin-top:3px;font-size:12px;line-height:1.3;opacity:.5}
+.reveal .contact-area-bar{height:7px;width:100%;margin-top:9px;background:rgba(235,235,235,.12);border:1px solid var(--dim);box-sizing:border-box;overflow:hidden}
+.reveal .contact-area-fill{display:block;height:100%;background:var(--sun)}
+.reveal .contact-secondary-percentage{display:flex;align-items:baseline;gap:12px;margin-top:7px}
+.reveal .contact-secondary-percentage strong{font-size:22px;line-height:1.2;font-weight:400;color:var(--fg);font-variant-numeric:tabular-nums;opacity:.8}
+.reveal .contact-secondary-percentage>span{font-size:12px;line-height:1.3;opacity:.55}
+.reveal .contact-illustration-note{font-size:12px;line-height:1.3;opacity:.5}
+/* First click: sheets and figures appear together; later clicks add full-frame images. */
+.reveal .contact-sheet-step .contact-sheet{opacity:0;transform-box:fill-box;transform-origin:center}
+.reveal .contact-sheet-step.visible .contact-sheet{animation:contact-sheet-settle 1.05s var(--ease-out) var(--sheet-delay,0ms) both}
+@keyframes contact-sheet-settle{0%{opacity:0;transform:translateY(-42px) rotate(var(--sheet-turn,0deg))}80%{opacity:.9;transform:translateY(-2px) rotate(.2deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}
+/* Let the contact tracing dissolve slowly into the matching surface photograph. */
+.reveal .contact-image-step[data-contact-image="F07-fotografia.jpg"].fragment{transition:opacity 1.6s ease-in-out,visibility 1.6s ease-in-out}
+@media(prefers-reduced-motion:reduce){.reveal .contact-sheet-step.visible .contact-sheet{animation:none;opacity:1;transform:none}.reveal .contact-image-step[data-contact-image="F07-fotografia.jpg"].fragment{transition:none}}
+@media print{.reveal .contact-image-step{opacity:1;visibility:visible}}

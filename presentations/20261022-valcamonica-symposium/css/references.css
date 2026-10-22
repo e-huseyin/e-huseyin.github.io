@@ -13,8 +13,8 @@
 .reveal .slides section:has(>.slide-references.reference-columns){--reference-band:80px}
 .reveal .slides section:has(>.slide-references)>.atlas-source,.reveal .slides section:has(>.slide-references)>.panel-note{bottom:calc(var(--page-bottom) + var(--reference-band) + 8px);font-size:12px;line-height:1.25}
 /* The three cover images keep their approved transition coordinates. */
-.reveal .cover-project{position:absolute;left:49px;right:49px;top:525px;font-size:20px;line-height:1.3;color:var(--fg)}
-.reveal .l-cover:has(>.slide-references) .cover-byline{top:580px}
+.reveal .cover-project{position:absolute;left:49px;right:49px;top:490px;font-size:20px;line-height:1.3;color:var(--fg)}
+.reveal .l-cover:has(>.slide-references) .cover-byline{top:542px}
 .reveal .cervid-reading:has(>.slide-references)>.cervid-context{left:49px;right:49px;top:89px;bottom:auto;font-size:12px;line-height:1.25}
 /* Reserve the new bibliography band without cropping source pictures. */
 .reveal .slides section:has(>.slide-references) .case-layout:not(.compact-case) .atlas-figure,.reveal .slides section:has(>.slide-references) .detail-atlas>.atlas-figure{height:min(420px,calc(488px - var(--reference-band)))}

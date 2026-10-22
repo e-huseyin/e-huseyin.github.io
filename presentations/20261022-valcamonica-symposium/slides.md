@@ -1,6 +1,6 @@
 <!-- .slide: id="cover" class="l-cover rays atlas acc-1" data-header="Landscape & documentation" data-talk-section="00" data-auto-animate data-auto-animate-id="cervid-intro" data-auto-animate-duration="1.15" data-transition="none"  -->
 
-<div class="cover-brandbar"><span class="brand-infinity"><img class="logo on-dark" src="assets/images/infinity-logo-white.svg" alt="INFINITY"><img class="logo on-light" src="assets/images/infinity-logo-dark.png" alt="INFINITY"></span><img class="cover-unibo" src="assets/images/logo-unibo-whitee.png" alt="Alma Mater Studiorum · Università di Bologna"><span class="cover-cervids"><img class="cervid-source" data-id="cervid-source" src="assets/images/cervids-white.png" alt="Supplied tracing of three cervids"></span></div><h1>Beyond the Tracing:<br>Digital Documentation and<br>Interactive Analysis of<br>Zoomorphic Figures at Rupe Magna</h1><p class="cover-byline">Hüseyin Erdoğan · Alma Mater Studiorum - Università di Bologna<br>XXIX Valcamonica Symposium · Capo di Ponte · 22 October 2026</p>
+<div class="cover-brandbar"><span class="brand-infinity"><img class="logo on-dark" src="assets/images/infinity-logo-white.svg" alt="INFINITY"><img class="logo on-light" src="assets/images/infinity-logo-dark.png" alt="INFINITY"></span><img class="cover-unibo" src="assets/images/logo-unibo-whitee.png" alt="Alma Mater Studiorum · Università di Bologna"><span class="cover-cervids"><img class="cervid-source" data-id="cervid-source" src="assets/images/cervids-white.png" alt="Supplied tracing of three cervids"></span></div><h1><span class="cover-title-line">Beyond the Tracing: Digital Documentation and</span> <span class="cover-title-line">Interactive Analysis of Zoomorphic Figures</span> <span class="cover-title-line">at Rupe Magna</span></h1><div class="cover-byline"><p class="cover-authors"><span class="cover-presenter">Hüseyin Erdoğan</span> · Valentina Presutti · Cristiano Putzolu · Federico Zoni</p><p class="cover-affiliation">Alma Mater Studiorum - Università di Bologna</p><p class="cover-event">XXIX Valcamonica Symposium · Capo di Ponte · 22 October 2026</p></div>
 
 <p class="cover-project">3DARCHEO · INFINITY / Horizon Europe <span data-cite="infinity-3darcheo" data-cite-label="number"><a class="reference-marker" href="#reference-1-1" aria-label="Reference 1">[1]</a></span></p>
 
@@ -9,19 +9,15 @@
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 00:00–00:40. Durata prevista: 00:40.
-
-[Pausa.]
+TEMPO: 00:00–00:45. Durata prevista: 00:45.
 
 Buon pomeriggio a tutti.
 
-Mi chiamo Hüseyin Erdoğan, dottorando all'Università di Bologna.
+Mi chiamo Hüseyin Erdoğan e sono dottorando in archeologia digitale all'Università di Bologna.
 
-Il lavoro che presento si inserisce in 3DARCHEO, uno dei casi d'uso del progetto europeo INFINITY, finanziato dal programma Horizon Europe.
+Il lavoro che vi presento oggi si inserisce in **3DARCHEO**, uno dei casi d'uso del progetto europeo INFINITY, finanziato dal programma Horizon Europe.
 
-Vorrei partire da una domanda semplice: **quando riconosciamo un animale inciso sulla roccia, su quali segni si basa la nostra lettura?**
-
-[Clic]
+Vorrei partire da una domanda semplice: **quando riconosciamo un animale inciso sulla roccia, su quali segni si basa la nostra lettura?** **[clic]**
 
 ---
 
@@ -31,7 +27,7 @@ Vorrei partire da una domanda semplice: **quando riconosciamo un animale inciso 
 
 <div class="cervid-artwork"><img class="cervid-source" data-id="cervid-source" src="assets/images/cervids-white.png" alt="Supplied tracing of three cervids"></div>
 
-<svg class="cervid-analysis" viewBox="0 0 1280 720" role="img" aria-label="Successive clicks colour the legs, head and body, then antlers of the three cervids"><title>Progressive colouring of the supplied cervid feature layers</title><defs><filter id="cervid-tint-legs" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#bca45c" /><feComposite in2="SourceAlpha" operator="in" /></filter><filter id="cervid-tint-body" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#e2cd8c" /><feComposite in2="SourceAlpha" operator="in" /></filter><filter id="cervid-tint-antlers" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#e1dc64" /><feComposite in2="SourceAlpha" operator="in" /></filter></defs><g class="cervid-trait fragment fade-in" data-fragment-index="0" data-trait="legs" style="color:#bca45c"><image class="cervid-tint" data-layer="legs" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-legs.png" filter="url(#cervid-tint-legs)" /><g class="cervid-label" transform="translate(842 190)"><text class="trait-number" x="0" y="0">01</text><text class="trait-title" x="0" y="37">Legs</text><text class="trait-detail" x="0" y="65">Visible limb outlines</text><path class="trait-rule" d="M0,83 H374" /></g></g><g class="cervid-trait fragment fade-in" data-fragment-index="1" data-trait="body" style="color:#e2cd8c"><image class="cervid-tint" data-layer="body" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-head-body.png" filter="url(#cervid-tint-body)" /><g class="cervid-label" transform="translate(842 353)"><text class="trait-number" x="0" y="0">02</text><text class="trait-title" x="0" y="37">Head and body</text><text class="trait-detail" x="0" y="65">Profile and proportions</text><path class="trait-rule" d="M0,83 H374" /></g></g><g class="cervid-trait fragment fade-in" data-fragment-index="2" data-trait="antlers" style="color:#e1dc64"><image class="cervid-tint" data-layer="antlers" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-antlers.png" filter="url(#cervid-tint-antlers)" /><g class="cervid-label" transform="translate(842 516)"><text class="trait-number" x="0" y="0">03</text><text class="trait-title" x="0" y="37">Antlers</text><text class="trait-detail" x="0" y="65">Branching outlines</text><path class="trait-rule" d="M0,83 H374" /></g></g></svg>
+<svg class="cervid-analysis" viewBox="0 0 1280 720" role="img" aria-label="Successive clicks colour the legs, tail, head and body, then antlers of the three cervids"><title>Progressive colouring of the supplied cervid feature layers: legs, tail, body and antlers</title><defs><filter id="cervid-tint-legs" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#bca45c" /><feComposite in2="SourceAlpha" operator="in" /></filter><filter id="cervid-tint-tail" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#f7cc72" /><feComposite in2="SourceAlpha" operator="in" /></filter><filter id="cervid-tint-body" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#e2cd8c" /><feComposite in2="SourceAlpha" operator="in" /></filter><filter id="cervid-tint-antlers" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood flood-color="#e1dc64" /><feComposite in2="SourceAlpha" operator="in" /></filter></defs><g class="cervid-trait fragment fade-in" data-fragment-index="0" data-trait="legs" style="color:#bca45c"><image class="cervid-tint" data-layer="legs" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-legs.png" filter="url(#cervid-tint-legs)" /><g class="cervid-label" transform="translate(842 140)"><text class="trait-number" x="0" y="0">01</text><text class="trait-title" x="0" y="37">Legs</text><text class="trait-detail" x="0" y="65">Number · position · angle</text><path class="trait-rule" d="M0,83 H374" /></g></g><g class="cervid-trait fragment fade-in" data-fragment-index="1" data-trait="tail" style="color:#f7cc72"><image class="cervid-tint" data-layer="tail" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-tail.png?v=c35afe444765" filter="url(#cervid-tint-tail)" /><g class="cervid-label" transform="translate(842 260)"><text class="trait-number" x="0" y="0">02</text><text class="trait-title" x="0" y="37">Tail</text><text class="trait-detail" x="0" y="65">Length · position · shape</text><path class="trait-rule" d="M0,83 H374" /></g></g><g class="cervid-trait fragment fade-in" data-fragment-index="2" data-trait="body" style="color:#e2cd8c"><image class="cervid-tint" data-layer="body" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-head-body.png?v=9582bae90d9c" filter="url(#cervid-tint-body)" /><g class="cervid-label" transform="translate(842 380)"><text class="trait-number" x="0" y="0">03</text><text class="trait-title" x="0" y="37">Head and body</text><text class="trait-detail" x="0" y="65">Neck · trunk · proportions</text><path class="trait-rule" d="M0,83 H374" /></g></g><g class="cervid-trait fragment fade-in" data-fragment-index="3" data-trait="antlers" style="color:#e1dc64"><image class="cervid-tint" data-layer="antlers" x="49" y="120" width="715" height="482.99869337979095" preserveAspectRatio="xMidYMid meet" href="assets/images/cervids-antlers.png" filter="url(#cervid-tint-antlers)" /><g class="cervid-label" transform="translate(842 500)"><text class="trait-number" x="0" y="0">04</text><text class="trait-title" x="0" y="37">Antlers</text><text class="trait-detail" x="0" y="65">Shape · branching · curvature</text><path class="trait-rule" d="M0,83 H374" /></g></g></svg>
 
 <p class="cervid-context">Comparative example · supplied tracing · Reading framework: <span data-cite="pessina-sigari-2023">Pessina and Sigari 2023 <a class="reference-marker" href="#reference-2-2" aria-label="Reference 2">[2]</a></span> · Rupe Magna repertoire: <span data-cite="fossati-zoomorphs-1995">Fossati 1995 <a class="reference-marker" href="#reference-2-3" aria-label="Reference 3">[3]</a></span></p>
 
@@ -40,29 +36,19 @@ Vorrei partire da una domanda semplice: **quando riconosciamo un animale inciso 
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 00:40–02:15. Durata prevista: 01:35.
+TEMPO: 00:45–02:00. Durata prevista: 01:15.
 
-Spesso incontriamo queste figure attraverso un rilievo: una documentazione che rende riconoscibili i segni e le loro relazioni. Ma il rilievo è una rappresentazione della roccia, non la roccia stessa.
+Per rispondere a questa domanda, osserviamo le **silhouette** e gli **attributi morfologici** che permettono di distinguere una specie da un'altra. **[clic]**
 
-Per riconoscere un animale osserviamo alcuni caratteri anatomici, come
+Partiamo dalle zampe: il loro numero, la posizione e l'angolazione degli arti possono suggerire il movimento, come la corsa o il salto. **[clic]**
 
-[Clic]
+Poi, la coda: la lunghezza, la posizione, l'eventuale arricciatura o la forma piumata. **[clic]**
 
-le zampe,
+Consideriamo anche le proporzioni del corpo: la lunghezza del collo, la robustezza del tronco e il rapporto tra testa e corpo. **[clic]**
 
-[Clic]
+Oppure, come in questo caso, i palchi: la loro forma, ramificazione, curvatura e posizione possono orientare il riconoscimento di un cervo.
 
-la forma del corpo e
-
-[Clic]
-
-i palchi. Sulla superficie rimangono tracce, irregolarità e segni di usura che meritano di essere osservati più da vicino.
-
-Un confronto utile viene dallo studio di Pessina e Sigari sui cervidi della Valcamonica. Gli autori discutono come alcuni caratteri anatomici, come i palchi e la forma del corpo, siano selezionati e rielaborati nelle raffigurazioni. Per questo è importante osservare i dettagli attraverso cui l'animale viene rappresentato.
-
-Alla Rupe Magna, le figure animali sono relativamente poche rispetto alla grande varietà di incisioni. Per questo, capire quali tracce permettono di riconoscerle diventa particolarmente importante.
-
-[Clic]
+Questi caratteri anatomici non sono dettagli decorativi: sono gli elementi attraverso cui una figura diventa riconoscibile come animale. **[clic]**
 
 ---
 
@@ -107,36 +93,23 @@ Alla Rupe Magna, le figure animali sono relativamente poche rispetto alla grande
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 02:15–04:25. Durata prevista: 02:10.
+TEMPO: 02:00–03:40. Durata prevista: 01:40.
 
-Oggi vi porto alla Rupe Magna, a Grosio, nell'alta Valtellina.
+Oggi vi porto alla Rupe Magna, a Grosio, nell'alta Valtellina, poco più di 65 chilometri a nord, attraversando il passo dell'Aprica. **[clic]**
 
-[Clic]
+La Rupe Magna è un grande affioramento di roccia filladica, modellato dall'azione dei ghiacciai. Misura circa 84 metri di lunghezza e 35 metri di larghezza. **[clic]**
 
-Sulla mappa vediamo anche Naquane, a Capo di Ponte, in Valcamonica. Da qui, attraversando l'Aprica, si raggiunge Grosio in circa sessantacinque chilometri di strada. La vicinanza geografica ci invita al confronto tra questi contesti di arte rupestre, mantenendo attenzione alle caratteristiche di ciascun sito.
+La documentazione degli anni 90 registra 5.454 segni. **[clic]**
 
-La Rupe Magna è un grande affioramento di roccia filladica, modellato dall'azione dei ghiacciai. Misura circa 84 metri di lunghezza e 35 di larghezza.
+Escludendo i gruppi di punti e le **tracce sparse di picchiettatura**, il conteggio scende a 2.987 figure significative. **[clic]**
 
-[Clic]
+Il grafico, sempre basato sulla documentazione degli anni Novanta, mostra un repertorio dominato da coppelle e canaletti, seguiti dalle figure antropomorfe.
 
-La documentazione pubblicata da Arcà nel 1995 registra 5.454 segni.
+Ma il dato che ci interessa oggi riguarda le figure zoomorfe, che sono soltanto 23. **[clic]**
 
-[Clic]
+Il repertorio comprende figure interpretate come capre, cinghiali, cavalli schematici, serpenti, canidi e ornitomorfi.
 
-Escludendo i gruppi di punti e le tracce sparse di picchiettatura, indicate nel catalogo come «martellina sparsa», il conteggio scende a 2.987 figure significative.
-
-[Clic]
-
-Il grafico pubblicato nel volume mostra un repertorio dominato da coppelle e canaletti, seguiti dalle figure antropomorfe.
-
-Ma il dato che ci interessa oggi è un altro: nel repertorio documentato, le figure zoomorfe sono soltanto 23. Sono una piccola parte di un insieme molto più ampio, dominato da altre tipologie di incisioni. Proprio per questo, vorrei concentrarmi su alcuni animali e chiedermi quali dettagli della superficie permettono di riconoscerli e interpretarli.
-
-[Clic]
-
-Il repertorio comprende figure interpretate come capre, cinghiali, cavalli schematici, serpenti, canidi e ornitomorfi. Le descrizioni di Fossati e Pace permettono di precisarne alcuni caratteri. Prima di passare ai quattro casi documentati, vediamo brevemente il loro quadro cronologico.
-
-[Clic]
-
+Proprio per questo, vorrei concentrarmi su alcuni animali e chiedermi quali dettagli della superficie ci permettono di riconoscerli e interpretarli, anche grazie alla documentazione digitale. **[clic]**
 
 ---
 
@@ -161,29 +134,17 @@ Il repertorio comprende figure interpretate come capre, cinghiali, cavalli schem
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 04:25–04:55. Durata prevista: 00:30.
+TEMPO: 03:40–04:05. Durata prevista: 00:25.
 
-La Rupe Magna conserva incisioni attribuite a periodi diversi. Questa tavola mette a confronto
+La Rupe Magna conserva incisioni attribuite a periodi diversi. Questa tavola mette a confronto tre contesti: **[clic]**
 
-[Clic]
+la Valtellina, **[clic]**
 
-la Valtellina,
+la Rupe Magna, **[clic]**
 
-[Clic]
+e la Valcamonica. **[clic]**
 
-la Rupe Magna
-
-[Clic]
-
-e la Valcamonica.
-
-[Clic]
-
-Ci concentreremo sulle figure animali collocate nell’età del Ferro. Vediamo ora come queste incisioni sono state documentate.
-
-[Clic]
-
-
+Ci concentreremo sulle figure animali attribuite all'età del Ferro. **[clic]**
 
 ---
 
@@ -191,7 +152,7 @@ Ci concentreremo sulle figure animali collocate nell’età del Ferro. Vediamo o
 
 <h2 class="sub">Contact tracing</h2>
 
-<div class="representation-pair"><figure class="atlas-figure"><div class="atlas-image"><img src="assets/images/rilievo-a-contatto.png" alt="Contact tracing on the rock, using transparent sheets"></div><figcaption>Method example · transparent sheets</figcaption></figure><figure class="atlas-figure"><div class="atlas-image"><img src="assets/images/RPM-rc.png" alt="Historical contact tracing of a goat, recorded at a scale of one to one"></div><figcaption>A record at 1:1 scale</figcaption></figure></div>
+<div class="contact-layout"><figure class="contact-visual"><svg class="contact-scene" viewBox="0 0 1518 1093" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Rupe Magna photograph; the first click lays transparent sheets and reveals the figures; subsequent clicks show fieldwork, the F07 tracing and the F07 photograph"><title>Contact tracing: rock, fieldwork, tracing and surface photograph</title><defs><linearGradient id="contact-plastic" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#ffffff" stop-opacity=".2" /><stop offset=".38" stop-color="#ffffff" stop-opacity=".36" /><stop offset=".53" stop-color="#ffffff" stop-opacity=".6" /><stop offset=".66" stop-color="#ffffff" stop-opacity=".25" /><stop offset="1" stop-color="#ffffff" stop-opacity=".32" /></linearGradient><mask id="contact-rock-mask" x="0" y="0" width="1518" height="1093" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" mask-type="luminance"><path d="M83 596 L144 589 L200 593 L260 599 L281 576 L311 565 L350 552 L406 550 L500 548 L580 546 L651 548 L703 546 L750 535 L791 534 L828 548 L890 550 L1000 552 L1124 554 L1244 558 L1350 565 L1400 578 L1462 603 L1518 624 L1518 830 L1390 829 L1282 832 L1160 840 L1040 858 L957 868 L920 876 L820 883 L730 884 L650 880 L551 873 L485 862 L440 844 L407 829 L392 803 L365 773 L336 741 L310 713 L286 680 L251 647 L207 623 L169 609 L117 607 Z" fill="white" /><path d="M554 775 L564 735 L577 707 L594 683 L614 675 L630 650 L654 645 L672 627 L698 633 L716 617 L741 614 L764 623 L792 612 L810 629 L834 637 L856 652 L883 679 L899 716 L916 745 L925 773 L946 804 L941 830 L959 858 L945 885 L955 915 L928 947 L916 969 L881 991 L860 1018 L798 1035 L734 1048 L672 1041 L618 1018 L585 997 L567 953 L550 921 L548 884 L532 858 L541 818 Z" fill="black" /></mask></defs><g class="contact-rock-base"><rect x="0" y="0" width="1518" height="1093" fill="var(--bg)" /><image class="contact-rock-photo" href="assets/images/rupemagna-roccia.png?v=f54fd3e0bf40" x="0" y="0" width="1518" height="1093" preserveAspectRatio="xMidYMid meet" /><g class="contact-sheet-step fragment fade-in" mask="url(#contact-rock-mask)" data-fragment-index="0"><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:120ms;--sheet-turn:-4deg"><path d="M708.83 556.54 Q747.06 555.65 785.29 555.46 Q790.36 566.57 795.42 577.68 Q757.76 577.85 720.10 578.58 Q714.47 567.56 708.83 556.54 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M708.83 556.54 Q747.06 555.65 785.29 555.46 Q790.36 566.57 795.42 577.68 Q757.76 577.85 720.10 578.58 Q714.47 567.56 708.83 556.54 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M785.29 555.46 L775.35 555.52 L787.32 559.90 Z" fill="#fff" fill-opacity=".45" /><path d="M718.15 559.68 Q752.41 566.91 785.36 575.51" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:155ms;--sheet-turn:-1deg"><path d="M786.13 555.45 Q824.36 555.27 862.59 555.77 Q867.08 566.86 871.57 577.94 Q833.91 577.52 796.25 577.68 Q791.19 566.57 786.13 555.45 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M786.13 555.45 Q824.36 555.27 862.59 555.77 Q867.08 566.86 871.57 577.94 Q833.91 577.52 796.25 577.68 Q791.19 566.57 786.13 555.45 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M862.59 555.77 L852.65 555.65 L864.39 560.20 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:190ms;--sheet-turn:2deg"><path d="M863.44 555.78 Q901.67 556.29 939.90 557.49 Q943.81 568.44 947.72 579.39 Q910.06 578.38 872.40 577.95 Q867.92 566.87 863.44 555.78 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M863.44 555.78 Q901.67 556.29 939.90 557.49 Q943.81 568.44 947.72 579.39 Q910.06 578.38 872.40 577.95 Q867.92 566.87 863.44 555.78 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M939.90 557.49 L929.96 557.19 L941.46 561.87 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:225ms;--sheet-turn:-4deg"><path d="M940.74 557.52 Q978.97 558.73 1017.20 560.64 Q1020.54 571.33 1023.88 582.02 Q986.22 580.42 948.56 579.41 Q944.65 568.46 940.74 557.52 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M940.74 557.52 Q978.97 558.73 1017.20 560.64 Q1020.54 571.33 1023.88 582.02 Q986.22 580.42 948.56 579.41 Q944.65 568.46 940.74 557.52 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1017.20 560.64 L1007.26 560.15 L1018.53 564.92 Z" fill="#fff" fill-opacity=".45" /><path d="M949.54 561.05 Q982.59 569.74 1014.16 579.50" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:260ms;--sheet-turn:-1deg"><path d="M1018.04 560.68 Q1056.27 562.59 1094.50 565.21 Q1097.26 575.54 1100.03 585.88 Q1062.37 583.67 1024.71 582.06 Q1021.37 571.37 1018.04 560.68 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M1018.04 560.68 Q1056.27 562.59 1094.50 565.21 Q1097.26 575.54 1100.03 585.88 Q1062.37 583.67 1024.71 582.06 Q1021.37 571.37 1018.04 560.68 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1094.50 565.21 L1084.56 564.54 L1095.61 569.34 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:295ms;--sheet-turn:2deg"><path d="M1095.34 565.27 Q1133.57 567.89 1171.80 571.23 Q1173.99 581.11 1176.18 590.99 Q1138.52 588.15 1100.86 585.93 Q1098.10 575.60 1095.34 565.27 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M1095.34 565.27 Q1133.57 567.89 1171.80 571.23 Q1173.99 581.11 1176.18 590.99 Q1138.52 588.15 1100.86 585.93 Q1098.10 575.60 1095.34 565.27 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1171.80 571.23 L1161.86 570.37 L1172.68 575.18 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:330ms;--sheet-turn:-4deg"><path d="M796.34 577.88 Q834.00 577.73 871.66 578.15 Q876.14 589.24 880.63 600.32 Q843.55 599.99 806.46 600.11 Q801.40 589.00 796.34 577.88 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M796.34 577.88 Q834.00 577.73 871.66 578.15 Q876.14 589.24 880.63 600.32 Q843.55 599.99 806.46 600.11 Q801.40 589.00 796.34 577.88 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M871.66 578.15 L861.86 578.05 L873.45 582.58 Z" fill="#fff" fill-opacity=".45" /><path d="M805.38 581.19 Q838.77 588.99 870.82 598.03" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:365ms;--sheet-turn:-1deg"><path d="M872.49 578.16 Q910.14 578.58 947.80 579.59 Q951.71 590.53 955.62 601.48 Q918.54 600.67 881.45 600.33 Q876.97 589.24 872.49 578.16 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M872.49 578.16 Q910.14 578.58 947.80 579.59 Q951.71 590.53 955.62 601.48 Q918.54 600.67 881.45 600.33 Q876.97 589.24 872.49 578.16 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M947.80 579.59 L938.01 579.34 L949.36 583.97 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:400ms;--sheet-turn:2deg"><path d="M948.63 579.61 Q986.28 580.62 1023.94 582.22 Q1027.28 592.91 1030.61 603.60 Q993.53 602.31 956.44 601.50 Q952.53 590.55 948.63 579.61 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M948.63 579.61 Q986.28 580.62 1023.94 582.22 Q1027.28 592.91 1030.61 603.60 Q993.53 602.31 956.44 601.50 Q952.53 590.55 948.63 579.61 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1023.94 582.22 L1014.15 581.81 L1025.27 586.50 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:435ms;--sheet-turn:-4deg"><path d="M1024.77 582.25 Q1062.42 583.86 1100.08 586.07 Q1102.84 596.40 1105.60 606.74 Q1068.52 604.93 1031.43 603.63 Q1028.10 592.94 1024.77 582.25 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M1024.77 582.25 Q1062.42 583.86 1100.08 586.07 Q1102.84 596.40 1105.60 606.74 Q1068.52 604.93 1031.43 603.63 Q1028.10 592.94 1024.77 582.25 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1100.08 586.07 L1090.29 585.50 L1101.18 590.20 Z" fill="#fff" fill-opacity=".45" /><path d="M1033.28 585.78 Q1065.47 594.53 1096.14 604.23" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:470ms;--sheet-turn:-1deg"><path d="M1100.91 586.12 Q1138.56 588.33 1176.22 591.17 Q1178.41 601.06 1180.59 610.94 Q1143.51 608.59 1106.42 606.78 Q1103.67 596.45 1100.91 586.12 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M1100.91 586.12 Q1138.56 588.33 1176.22 591.17 Q1178.41 601.06 1180.59 610.94 Q1143.51 608.59 1106.42 606.78 Q1103.67 596.45 1100.91 586.12 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1176.22 591.17 L1166.43 590.45 L1177.09 595.13 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:505ms;--sheet-turn:2deg"><path d="M881.53 600.53 Q918.62 600.87 955.70 601.68 Q959.61 612.62 963.52 623.57 Q927.01 622.96 890.50 622.71 Q886.02 611.62 881.53 600.53 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M881.53 600.53 Q918.62 600.87 955.70 601.68 Q959.61 612.62 963.52 623.57 Q927.01 622.96 890.50 622.71 Q886.02 611.62 881.53 600.53 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M955.70 601.68 L946.06 601.48 L957.26 606.06 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:540ms;--sheet-turn:-4deg"><path d="M956.51 601.70 Q993.59 602.51 1030.68 603.80 Q1034.01 614.49 1037.35 625.18 Q1000.84 624.20 964.33 623.58 Q960.42 612.64 956.51 601.70 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M956.51 601.70 Q993.59 602.51 1030.68 603.80 Q1034.01 614.49 1037.35 625.18 Q1000.84 624.20 964.33 623.58 Q960.42 612.64 956.51 601.70 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1030.68 603.80 L1021.03 603.47 L1032.01 608.08 Z" fill="#fff" fill-opacity=".45" /><path d="M965.09 605.14 Q997.22 613.46 1027.91 622.81" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:575ms;--sheet-turn:-1deg"><path d="M1031.49 603.83 Q1068.57 605.12 1105.66 606.93 Q1108.42 617.26 1111.18 627.60 Q1074.67 626.20 1038.16 625.20 Q1034.83 614.52 1031.49 603.83 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M1031.49 603.83 Q1068.57 605.12 1105.66 606.93 Q1108.42 617.26 1111.18 627.60 Q1074.67 626.20 1038.16 625.20 Q1034.83 614.52 1031.49 603.83 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1105.66 606.93 L1096.01 606.47 L1106.76 611.06 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="upper" style="--sheet-delay:610ms;--sheet-turn:2deg"><path d="M1106.47 606.97 Q1143.55 608.77 1180.63 611.12 Q1182.82 621.00 1185.01 630.89 Q1148.50 629.03 1111.99 627.63 Q1109.23 617.30 1106.47 606.97 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M1106.47 606.97 Q1143.55 608.77 1180.63 611.12 Q1182.82 621.00 1185.01 630.89 Q1148.50 629.03 1111.99 627.63 Q1109.23 617.30 1106.47 606.97 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M1180.63 611.12 L1170.99 610.52 L1181.51 615.07 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:645ms;--sheet-turn:-4deg"><path d="M383.95 609.32 Q421.26 606.10 458.58 603.49 Q466.26 613.32 473.94 623.16 Q437.19 625.27 400.45 627.92 Q392.20 618.62 383.95 609.32 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M383.95 609.32 Q421.26 606.10 458.58 603.49 Q466.26 613.32 473.94 623.16 Q437.19 625.27 400.45 627.92 Q392.20 618.62 383.95 609.32 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M458.58 603.49 L448.88 604.18 L461.65 607.42 Z" fill="#fff" fill-opacity=".45" /><path d="M393.87 611.49 Q429.23 615.83 463.57 621.72" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:680ms;--sheet-turn:-1deg"><path d="M459.40 603.43 Q496.72 600.83 534.03 598.81 Q541.14 609.10 548.24 619.39 Q511.50 621.00 474.75 623.11 Q467.08 613.27 459.40 603.43 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M459.40 603.43 Q496.72 600.83 534.03 598.81 Q541.14 609.10 548.24 619.39 Q511.50 621.00 474.75 623.11 Q467.08 613.27 459.40 603.43 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M534.03 598.81 L524.33 599.34 L536.88 602.92 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:715ms;--sheet-turn:2deg"><path d="M534.86 598.76 Q572.17 596.74 609.49 595.27 Q616.02 605.93 622.55 616.59 Q585.80 617.75 549.06 619.35 Q541.96 609.06 534.86 598.76 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M534.86 598.76 Q572.17 596.74 609.49 595.27 Q616.02 605.93 622.55 616.59 Q585.80 617.75 549.06 619.35 Q541.96 609.06 534.86 598.76 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M609.49 595.27 L599.79 595.66 L612.10 599.53 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:750ms;--sheet-turn:-4deg"><path d="M369.17 633.13 Q405.84 630.30 442.50 628.03 Q450.44 637.62 458.38 647.22 Q422.29 648.96 386.20 651.20 Q377.68 642.17 369.17 633.13 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M369.17 633.13 Q405.84 630.30 442.50 628.03 Q450.44 637.62 458.38 647.22 Q422.29 648.96 386.20 651.20 Q377.68 642.17 369.17 633.13 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M442.50 628.03 L432.97 628.63 L445.68 631.87 Z" fill="#fff" fill-opacity=".45" /><path d="M379.04 635.30 Q414.06 639.76 448.12 645.74" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:785ms;--sheet-turn:-1deg"><path d="M443.31 627.98 Q479.97 625.71 516.63 623.94 Q524.00 634.03 531.37 644.13 Q495.27 645.44 459.18 647.18 Q451.24 637.58 443.31 627.98 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M443.31 627.98 Q479.97 625.71 516.63 623.94 Q524.00 634.03 531.37 644.13 Q495.27 645.44 459.18 647.18 Q451.24 637.58 443.31 627.98 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M516.63 623.94 L507.10 624.41 L519.58 627.98 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:820ms;--sheet-turn:2deg"><path d="M517.44 623.90 Q554.10 622.14 590.77 620.83 Q597.56 631.34 604.35 641.84 Q568.26 642.79 532.16 644.10 Q524.80 634.00 517.44 623.90 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M517.44 623.90 Q554.10 622.14 590.77 620.83 Q597.56 631.34 604.35 641.84 Q568.26 642.79 532.16 644.10 Q524.80 634.00 517.44 623.90 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M590.77 620.83 L581.24 621.18 L593.48 625.03 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:855ms;--sheet-turn:-4deg"><path d="M355.60 655.95 Q391.61 653.55 427.62 651.67 Q435.82 661.02 444.03 670.36 Q408.59 671.68 373.14 673.46 Q364.37 664.70 355.60 655.95 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M355.60 655.95 Q391.61 653.55 427.62 651.67 Q435.82 661.02 444.03 670.36 Q408.59 671.68 373.14 673.46 Q364.37 664.70 355.60 655.95 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M427.62 651.67 L418.26 652.17 L430.90 655.41 Z" fill="#fff" fill-opacity=".45" /><path d="M365.41 658.11 Q400.10 662.73 433.87 668.83" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:890ms;--sheet-turn:-1deg"><path d="M428.41 651.63 Q464.42 649.76 500.43 648.33 Q508.06 658.20 515.69 668.08 Q480.25 669.02 444.81 670.33 Q436.61 660.98 428.41 651.63 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M428.41 651.63 Q464.42 649.76 500.43 648.33 Q508.06 658.20 515.69 668.08 Q480.25 669.02 444.81 670.33 Q436.61 660.98 428.41 651.63 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M500.43 648.33 L491.07 648.71 L503.48 652.28 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:925ms;--sheet-turn:2deg"><path d="M343.22 677.70 Q378.58 675.76 413.94 674.33 Q422.40 683.42 430.87 692.50 Q396.08 693.34 361.29 694.64 Q352.26 686.17 343.22 677.70 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M343.22 677.70 Q378.58 675.76 413.94 674.33 Q422.40 683.42 430.87 692.50 Q396.08 693.34 361.29 694.64 Q352.26 686.17 343.22 677.70 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M413.94 674.33 L404.74 674.72 L417.32 677.97 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:960ms;--sheet-turn:-4deg"><path d="M414.72 674.30 Q450.07 672.88 485.43 671.85 Q493.32 681.50 501.21 691.14 Q466.42 691.64 431.64 692.48 Q423.18 683.39 414.72 674.30 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M414.72 674.30 Q450.07 672.88 485.43 671.85 Q493.32 681.50 501.21 691.14 Q466.42 691.64 431.64 692.48 Q423.18 683.39 414.72 674.30 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M485.43 671.85 L476.24 672.13 L488.59 675.71 Z" fill="#fff" fill-opacity=".45" /><path d="M424.31 676.76 Q458.25 682.35 491.27 689.35" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:995ms;--sheet-turn:-1deg"><path d="M332.05 698.35 Q366.75 696.90 401.46 695.95 Q410.18 704.76 418.91 713.56 Q384.78 713.90 350.64 714.70 Q341.34 706.53 332.05 698.35 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M332.05 698.35 Q366.75 696.90 401.46 695.95 Q410.18 704.76 418.91 713.56 Q384.78 713.90 350.64 714.70 Q341.34 706.53 332.05 698.35 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M401.46 695.95 L392.43 696.21 L404.95 699.47 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:1030ms;--sheet-turn:2deg"><path d="M402.22 695.93 Q436.93 694.99 471.63 694.43 Q479.78 703.83 487.94 713.22 Q453.80 713.23 419.67 713.55 Q410.94 704.74 402.22 695.93 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M402.22 695.93 Q436.93 694.99 471.63 694.43 Q479.78 703.83 487.94 713.22 Q453.80 713.23 419.67 713.55 Q410.94 704.74 402.22 695.93 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M471.63 694.43 L462.61 694.58 L474.89 698.19 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:1065ms;--sheet-turn:-4deg"><path d="M322.07 717.88 Q356.13 716.91 390.18 716.47 Q399.17 724.99 408.16 733.51 Q374.67 733.31 341.19 733.62 Q331.63 725.75 322.07 717.88 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M322.07 717.88 Q356.13 716.91 390.18 716.47 Q399.17 724.99 408.16 733.51 Q374.67 733.31 341.19 733.62 Q331.63 725.75 322.07 717.88 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M390.18 716.47 L381.32 716.59 L393.77 719.88 Z" fill="#fff" fill-opacity=".45" /><path d="M331.73 720.07 Q365.40 725.24 398.31 731.78" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:1100ms;--sheet-turn:-1deg"><path d="M390.93 716.46 Q424.98 716.03 459.03 715.98 Q467.45 725.11 475.86 734.25 Q442.38 733.71 408.89 733.51 Q399.91 724.99 390.93 716.46 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M390.93 716.46 Q424.98 716.03 459.03 715.98 Q467.45 725.11 475.86 734.25 Q442.38 733.71 408.89 733.51 Q399.91 724.99 390.93 716.46 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M459.03 715.98 L450.18 716.00 L462.40 719.63 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:1135ms;--sheet-turn:2deg"><path d="M459.78 715.98 Q493.83 715.93 527.89 716.13 Q535.72 725.82 543.56 735.51 Q510.08 734.80 476.60 734.26 Q468.19 725.12 459.78 715.98 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M459.78 715.98 Q493.83 715.93 527.89 716.13 Q535.72 725.82 543.56 735.51 Q510.08 734.80 476.60 734.26 Q468.19 725.12 459.78 715.98 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M527.89 716.13 L519.03 716.08 L531.02 720.01 Z" fill="#fff" fill-opacity=".45" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:1170ms;--sheet-turn:-4deg"><path d="M356.28 735.87 Q389.67 735.76 423.07 736.12 Q431.96 744.76 440.84 753.39 Q408.01 752.41 375.18 751.86 Q365.73 743.86 356.28 735.87 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M356.28 735.87 Q389.67 735.76 423.07 736.12 Q431.96 744.76 440.84 753.39 Q408.01 752.41 375.18 751.86 Q365.73 743.86 356.28 735.87 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M423.07 736.12 L414.39 736.04 L426.63 739.58 Z" fill="#fff" fill-opacity=".45" /><path d="M365.77 738.27 Q398.84 744.20 431.17 751.45" fill="none" stroke="#fff" stroke-width=".9" stroke-opacity=".38" /></g><g class="contact-sheet" data-sheet-zone="left" style="--sheet-delay:1205ms;--sheet-turn:-1deg"><path d="M423.81 736.13 Q457.21 736.50 490.61 737.16 Q498.92 746.40 507.23 755.64 Q474.40 754.40 441.57 753.42 Q432.69 744.77 423.81 736.13 Z" fill="#171a14" fill-opacity=".04" stroke="#11170f" stroke-width="1.6" stroke-opacity=".1" /><path d="M423.81 736.13 Q457.21 736.50 490.61 737.16 Q498.92 746.40 507.23 755.64 Q474.40 754.40 441.57 753.42 Q432.69 744.77 423.81 736.13 Z" fill="url(#contact-plastic)" stroke="#fffdf6" stroke-width="1.8" stroke-opacity=".8" /><path d="M490.61 737.16 L481.92 736.99 L493.93 740.86 Z" fill="#fff" fill-opacity=".45" /></g></g></g><g class="contact-image-step fragment fade-in" data-fragment-index="1" data-contact-image="rupemagna-rilievo-a-contatto.png"><rect x="0" y="0" width="1518" height="1093" fill="var(--bg)" /><image href="assets/images/rupemagna-rilievo-a-contatto.png?v=e63455902e4f" x="0" y="0" width="1518" height="1093" preserveAspectRatio="xMidYMid meet" aria-label="Contact tracing in the field" /></g><g class="contact-image-step fragment fade-in" data-fragment-index="2" data-contact-image="F07-rilievo-a-contatto.png"><rect x="0" y="0" width="1518" height="1093" fill="var(--bg)" /><image href="assets/images/F07-rilievo-a-contatto.png?v=d198dce866ac" x="0" y="0" width="1518" height="1093" preserveAspectRatio="xMidYMid meet" aria-label="F07 contact tracing, full supplied image" /></g><g class="contact-image-step fragment fade-in" data-fragment-index="3" data-contact-image="F07-fotografia.jpg"><rect x="0" y="0" width="1518" height="1093" fill="var(--bg)" /><image href="assets/images/F07-fotografia.jpg?v=3848110d42ab" x="0" y="0" width="1518" height="1093" preserveAspectRatio="xMidYMid meet" aria-label="F07 surface photograph, full supplied image" /></g></svg></figure><aside class="contact-facts"><div class="contact-data fragment fade-in" data-fragment-index="0"><div class="contact-period"><p>Contact tracing</p><h3>1990–1995</h3></div><div class="contact-primary-stat"><strong data-contact-sheet-count>780</strong><span>Sheets</span></div><div class="contact-primary-stat"><strong><span data-contact-area-count>342</span> <small>m²</small></strong><span>Traced surface</span></div><div class="contact-secondary-comparison"><p class="contact-dimensions">84 × 35 m ≈ 2,940 m²</p><p class="contact-reference-label">Rectangular extent estimate</p><div class="contact-area-bar" role="img" aria-label="342 square metres, approximately 11.6 per cent of the rectangular estimate"><span class="contact-area-fill" style="width:11.632653061224%"></span></div><p class="contact-secondary-percentage"><strong>≈ 11.6%</strong><span>of the rectangular estimate</span></p></div><p class="contact-illustration-note">Sheet placement is illustrative.</p></div></aside></div>
 <p class="atlas-source">Contact-tracing method · <span data-cite="arca-documentation-1995">Arcà 1995 <a class="reference-marker" href="#reference-5-5" aria-label="Reference 5">[5]</a></span></p>
 
 <!-- IEEE references:start -->
@@ -199,15 +160,17 @@ Ci concentreremo sulle figure animali collocate nell’età del Ferro. Vediamo o
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 04:55–05:40. Durata prevista: 00:45.
+TEMPO: 04:05–05:40. Durata prevista: 01:35.
 
-Il rilievo del 1995 è stato realizzato a contatto: gli archeologi hanno riprodotto i singoli segni su fogli trasparenti appoggiati alla roccia, in scala uno a uno.
+**Ma come possiamo studiare queste figure oggi e quali strumenti ci permettono di osservarle?**
 
-Questa documentazione ci permette di riconoscere le figure e di studiarne le relazioni. Per esaminare un dettaglio, però, è importante poter tornare anche alla superficie da cui il rilievo deriva.
+Spesso incontriamo queste figure attraverso un rilievo: una documentazione che rende riconoscibili i segni e le loro relazioni. Ma il rilievo è una rappresentazione della roccia, non la roccia stessa. **[clic]**
 
-Come possiamo osservarla nuovamente, cambiando la direzione della luce?
+Il rilievo a contatto, realizzato negli anni Novanta, ha permesso di documentare la superficie incisa attraverso 780 fogli di plastica, per una superficie complessiva di 342 metri quadrati. **[clic]**
 
-[Clic]
+**Come ogni forma di documentazione, anche il rilievo a contatto ci aiuta a riconoscere le figure, ma implica delle scelte interpretative.** Quando lavoriamo sulla documentazione, anziché direttamente sulla roccia, quali dettagli possiamo ancora osservare, verificare e forse reinterpretare?
+
+**La luce radente è già uno strumento fondamentale per far emergere i dettagli della superficie.** Ma come possiamo documentare digitalmente questa possibilità di osservazione, conservando le informazioni relative alle diverse direzioni della luce? **[clic]**
 
 ---
 
@@ -217,6 +180,7 @@ Come possiamo osservarla nuovamente, cambiando la direzione della luce?
 
 <div class="dome-lab" data-rti-dome>
 <svg viewBox="0 0 780 590" role="group" aria-label="Interactive perspective model of the 48-light RTI dome"><title>RTI dome: sequential illumination of a fixed surface</title></svg>
+<figure class="dome-photo fragment fade-in" data-dome-photo data-fragment-index="0"><img src="assets/images/rupemagna-cupola.JPG?v=a9c6af6dd1aa" alt="Portable RTI dome and fixed camera recording the Rupe Magna surface" draggable="false"></figure>
 <div class="dome-console">
 <p class="d-kicker">Acquisition sequence</p>
 <output aria-label="Captured photographs">00 / 48</output>
@@ -224,8 +188,8 @@ Come possiamo osservarla nuovamente, cambiando la direzione della luce?
 <div><p class="d-meta"><span>Elevation / azimuth</span><b data-elevation>— / —</b></p><p class="d-meta"><span>Field time</span><b data-field-time>0:00</b></p></div>
 <div class="d-controls"><button type="button" data-play aria-pressed="false">▶ Run sequence</button><button type="button" data-step aria-label="Next LED">+1</button><button type="button" data-reset aria-label="Reset sequence">↺</button></div>
 <label>Playback <select data-speed aria-label="Sequence playback speed"><option value="500">Demo · 6×</option><option value="3000">Field · 1×</option></select></label>
-<label>Orbit view <input data-orbit type="range" min="-180" max="180" value="0" aria-label="Rotate the diagram horizontally"></label>
-<label>Elevation view <input data-tilt type="range" min="12" max="78" value="28" aria-label="Tilt the diagram viewpoint vertically"></label>
+<label>Orbit view <input data-orbit type="range" min="-180" max="180" value="-27" aria-label="Rotate the diagram horizontally"></label>
+<label>Elevation view <input data-tilt type="range" min="12" max="78" value="46" aria-label="Tilt the diagram viewpoint vertically"></label>
 <button type="button" class="d-surface-view" data-surface-view>↗ Inspect surface</button>
 <p class="d-hint">Drag to orbit · scroll to zoom<br>Double-click to reset zoom<br>Source tracing · illustrative incision depth</p>
 </div>
@@ -237,23 +201,17 @@ Come possiamo osservarla nuovamente, cambiando la direzione della luce?
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 05:40–07:30. Durata prevista: 01:50.
+TEMPO: 05:40–07:05. Durata prevista: 01:25.
 
-La tecnica si chiama Reflectance Transformation Imaging, o RTI. La macchina fotografica rimane ferma, mentre ad ogni scatto cambia la direzione della luce sulla superficie. Le immagini vengono elaborate per ottenere un documento interattivo, nel quale possiamo modificare l'illuminazione ed esaminare i dettagli della superficie.
+La Reflectance Transformation Imaging, o RTI, riprende proprio questo principio: in un certo senso, è una versione digitale dell'osservazione attraverso la luce radente.
 
-[Avvia «Run sequence» in «Demo · 6×».]
+La RTI si basa sull'acquisizione di diverse fotografie della stessa superficie, mantenendo ferma la macchina fotografica e cambiando la direzione della luce a ogni scatto. [Demo]
 
-Per la campagna ho costruito una cupola portatile di quarantasei centimetri di diametro, con quarantotto LED. La piccola sfera riflettente permette di ricostruire le direzioni di illuminazione.
+In questa animazione vedete una figura caprina incisa nella roccia. La profondità è illustrativa: serve a spiegare il sistema, non è una misura dell'incisione reale.
 
-In questa animazione la capra è mostrata come un'incisione nella roccia. La profondità è illustrativa: serve a spiegare il sistema, non è una misura dell'incisione reale.
+Le immagini vengono poi elaborate per ottenere un **modello interattivo**, nel quale possiamo manipolare virtualmente la direzione della luce ed esaminare i dettagli della superficie.
 
-Come osserva Fossati, anche alla Rupe Magna la leggibilità delle figure dipende dalle condizioni di luce. Già nella documentazione del 1995, descritta da Arcà, si utilizzava la luce radente.
-
-Con la RTI portiamo questa pratica di osservazione nell'ambiente digitale: possiamo variare la direzione della luce sulla superficie registrata ed esaminare i segni in modo interattivo.
-
-Vediamo ora su quali casi ho applicato questa documentazione.
-
-[Clic]
+Come osservava già Fossati, la leggibilità delle figure dipende dalle condizioni di illuminazione. La RTI permette di documentarle digitalmente e, insieme al rilievo a contatto, offre nuove possibilità di osservazione e condivisione. **[clic]**
 
 ---
 
@@ -270,31 +228,19 @@ Vediamo ora su quali casi ho applicato questa documentazione.
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 07:30–09:20. Durata prevista: 01:50.
+TEMPO: 07:05–07:55. Durata prevista: 00:50.
 
-Nel settembre 2025 ho svolto una campagna di documentazione delle incisioni rupestri della Rupe Magna. Il lavoro ha portato alla realizzazione di modelli interattivi relativi a undici casi, comprendenti diverse tipologie di incisioni.
+Nel settembre 2025 ho svolto una campagna di documentazione delle incisioni rupestri della Rupe Magna. Il lavoro ha portato alla realizzazione di modelli interattivi relativi a undici casi.
 
-Per questa presentazione ho scelto di concentrarmi sui quattro casi che includono figure zoomorfe:
+Per questa presentazione ho scelto di concentrarmi sui quattro casi che includono figure zoomorfe: **[clic]**
 
-[Clic]
+il cinghiale del settore L, **[clic]**
 
-il cinghiale del settore L,
-
-[Clic]
-
-i due caprini del settore Q e
-
-[Clic]
+i due caprini del settore Q e **[clic]**
 
 il cavaliere del settore S.
 
-Non si tratta quindi di una selezione rappresentativa dell'intero repertorio animale della Rupe Magna, ma di un approfondimento di quattro casi documentati nell'ambito di una campagna più ampia.
-
-A partire da questi casi, vorrei mostrare come la documentazione digitale possa aiutarci a esaminare più da vicino i dettagli delle figure e a riflettere sugli elementi su cui si basano le interpretazioni archeologiche.
-
-Cominciamo dal cinghiale del settore L.
-
-[Clic]
+Questi quattro casi costituiscono un approfondimento all'interno di una campagna di documentazione più ampia. **[clic]**
 
 ---
 
@@ -323,50 +269,25 @@ Cominciamo dal cinghiale del settore L.
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 09:20–11:24. Durata prevista: 02:04.
+TEMPO: 07:55–09:50. Durata prevista: 01:55. Di cui parlato e passaggi: 01:30; esplorazione RTI: 00:25.
 
-Cominciamo dal settore L. Questa è la superficie su cui si trova la figura.
+Cominciamo dal settore L. Questa è la superficie su cui si trova la figura **[clic]**
 
-[Clic]
+del cinghiale. **[clic]**
 
-Qui evidenziamo il cinghiale.
+Vicino al cinghiale troviamo una prima figura armata, **[clic]**
 
-[Clic]
-
-Vicino al cinghiale troviamo una prima figura armata,
-
-[Clic]
-
-e una seconda.
-
-[Clic]
+e una seconda. **[clic]**
 
 Compare anche un motivo a rastrello.
 
-L’accostamento dei rastrelli alle figure animali ha suggerito un possibile richiamo alla sfera dell’agricoltura e dell’allevamento, in particolare alla raccolta del fieno.
+L’accostamento dei rastrelli alle figure animali ha suggerito un possibile richiamo alla sfera dell’agricoltura e dell’allevamento, in particolare alla raccolta del fieno. **[clic]**
 
-Passiamo ora ai dettagli che sostengono l’identificazione del cinghiale.
+Passiamo al modello RTI, dove possiamo variare la luce ed esaminare la figura da vicino.
 
-[Clic]
+La lettura come cinghiale si basa soprattutto sul muso affilato e sulla coda diritta e abbassata. Questi caratteri possono aiutare a distinguerlo dal maiale domestico, descritto con un muso meno appuntito e una coda corta e arricciata. [Avvicina il muso e varia la luce.]
 
-Osserviamo ora più da vicino il cinghiale del settore L, identificato nel mio progetto con il codice F06. Qui possiamo esplorare direttamente il modello RTI della superficie.
-
-La lettura come cinghiale si basa soprattutto sul muso affilato e sulla coda diritta e abbassata. Questi caratteri sostengono la distinzione rispetto al maiale domestico, descritto con un muso meno appuntito e una coda corta e arricciata.
-
-[Avvicina il muso e varia la luce.]
-
-Con il documento RTI possiamo osservare più da vicino il muso e la coda, mantenendo la stessa inquadratura e variando la direzione della luce.
-
-[Osserva la coda sotto luci diverse.]
-
-L’attenzione si concentra sui segni che sostengono la lettura come cinghiale e sul loro rapporto con le irregolarità della superficie.
-
-Il mio lavoro affianca al rilievo storico una registrazione della superficie che rimane esplorabile anche dopo la campagna sul campo.
-
-[Premi Esc per tornare ai comandi della presentazione.]
-
-[Clic]
-
+Concentriamoci quindi sul muso e sulla coda, per verificare come questi dettagli emergono al variare della luce e come si rapportano alle irregolarità della superficie. **[clic]**
 
 ---
 
@@ -376,7 +297,7 @@ Il mio lavoro affianca al rilievo storico una registrazione della superficie che
 
 <p class="case-subtitle">F07 · Sector Q · 27 × 16.5 cm</p>
 
-<div class="case-definition"><figure class="case-full-figure"><div class="rti-image-stage" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate;"><svg viewBox="0 0 1000 1000" role="img" aria-label="F07 complete historical tracing with modern anatomical guides" style="grid-area:1/1;min-width:0;min-height:0;"><image class="case-source-image" href="assets/images/capradestra-raster.png" x="0" y="0" width="1000" height="1000" preserveAspectRatio="xMidYMid meet"><title>F07 complete historical tracing with modern anatomical guides</title></image><g class="case-anatomy fragment fade-in" data-fragment-index="0"><ellipse cx="245" cy="290" rx="126" ry="116"/><text x="385" y="240">01</text></g><g class="case-anatomy fragment fade-in" data-fragment-index="1"><ellipse cx="220" cy="510" rx="65" ry="70"/><text x="305" y="535">02</text></g><g class="case-anatomy fragment fade-in" data-fragment-index="2"><ellipse cx="665" cy="615" rx="99" ry="93"/><text x="785" y="650">03</text></g></svg><div class="rti-overlay fragment fade-in" data-rti-overlay="RTI28" data-fragment-index="3" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg,#282828);overflow:hidden;"><iframe data-rti-frame data-rti-src="https://e-huseyin.github.io/rupemagnaviewer/datasets/F07/RTI-28/ptm/index.html" title="Interactive RTI28 model of the first goat in sector Q" loading="eager" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:100%;border:0;margin:0;max-width:none;max-height:none;"></iframe></div></div></figure><div class="case-traits"><div class="case-trait fragment fade-up" data-fragment-index="0"><span>01</span><h3>Scimitar-shaped horns</h3><p>Not reaching the back</p></div><div class="case-trait fragment fade-up" data-fragment-index="1"><span>02</span><h3>Chin feature</h3><p>Beard or glands</p></div><div class="case-trait fragment fade-up" data-fragment-index="2"><span>03</span><h3>Hind-leg detail</h3><p>Sex indication described</p></div></div></div>
+<div class="case-definition"><figure class="case-full-figure"><div class="rti-image-stage" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate;"><svg viewBox="0 0 1444 1040" role="img" aria-label="F07 surface photograph with a registered tracing and anatomical guides" style="grid-area:1/1;min-width:0;min-height:0;"><title>First goat: surface photograph, tracing and anatomical details</title><image href="assets/images/F07-fotografia.jpg?v=3848110d42ab" x="0" y="0" width="1444" height="1040" preserveAspectRatio="xMidYMid meet"/><g class="case-tracing fragment fade-in" data-fragment-index="0"><image class="case-source-image case-source-white" href="assets/images/catalogue-f07-2.png?v=141391a5fa13" x="0" y="0" width="1444" height="1040" preserveAspectRatio="xMidYMid meet"/></g><g class="case-anatomy fragment fade-in" data-fragment-index="1" style="stroke-width:3"><ellipse cx="355" cy="225" rx="160" ry="160"/><text x="535" y="145" style="font-size:30px">01</text></g><g class="case-anatomy fragment fade-in" data-fragment-index="2" style="stroke-width:3"><ellipse cx="330" cy="531" rx="52" ry="66"/><text x="235" y="590" style="font-size:30px">02</text></g><g class="case-anatomy fragment fade-in" data-fragment-index="3" style="stroke-width:3"><ellipse cx="891" cy="587" rx="53" ry="62"/><text x="970" y="590" style="font-size:30px">03</text></g></svg><div class="rti-overlay fragment fade-in" data-rti-overlay="RTI28" data-fragment-index="4" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg,#282828);overflow:hidden;"><iframe data-rti-frame data-rti-src="https://e-huseyin.github.io/rupemagnaviewer/datasets/F07/RTI-28/ptm/index.html" title="Interactive RTI28 model of the first goat in sector Q" loading="eager" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:100%;border:0;margin:0;max-width:none;max-height:none;"></iframe></div></div></figure><div class="case-traits"><div class="case-trait fragment fade-up" data-fragment-index="1"><span>01</span><h3>Scimitar-shaped horns</h3><p>Not reaching the back</p></div><div class="case-trait fragment fade-up" data-fragment-index="2"><span>02</span><h3>Chin feature</h3><p>Beard or glands</p></div><div class="case-trait fragment fade-up" data-fragment-index="3"><span>03</span><h3>Hind-leg detail</h3><p>Sex indication described</p></div></div></div>
 <p class="atlas-source">Published reading · complete tracing · <span data-cite="fossati-zoomorphs-1995 erdogan-2025">Fossati 1995 <a class="reference-marker" href="#reference-9-3" aria-label="Reference 3">[3]</a>; Erdoğan 2025 <a class="reference-marker" href="#reference-9-8" aria-label="Reference 8">[8]</a></span></p>
 
 <!-- IEEE references:start -->
@@ -384,36 +305,21 @@ Il mio lavoro affianca al rilievo storico una registrazione della superficie che
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 11:24–12:49. Durata prevista: 01:25.
+TEMPO: 09:50–11:20. Durata prevista: 01:30. Di cui parlato e passaggi: 01:15; esplorazione RTI: 00:15.
 
 Passiamo al settore Q e alla prima capra, F07 nel mio progetto.
 
-Nel rilievo del 1995 vengono descritti tre caratteri.
+Nel rilievo del 1995 vengono descritti tre caratteri. **[clic]**
 
-[Clic]
+Le corna a scimitarra, che non raggiungono il dorso; **[clic]**
 
-Le corna a scimitarra, che non raggiungono il dorso;
+un segno sotto il mento, interpretato come barba oppure ghiandole; **[clic]**
 
-[Clic]
+e un accenno del sesso tra le zampe posteriori. [Modalità speculare]
 
-un segno sotto il mento, interpretato come barba oppure ghiandole;
+Qui possiamo cambiare modalità di visualizzazione. Con lo Specular Enhancement, il modello mette in risalto le variazioni della superficie e rende più leggibili alcuni dettagli del rilievo inciso. In questo modo possiamo esaminare meglio le caratteristiche della figura.
 
-[Clic]
-
-e un accenno del sesso tra le zampe posteriori.
-
-Questi elementi sostengono la lettura come capra, forse selvatica, piuttosto che come camoscio o stambecco. Rimane aperta l’interpretazione del particolare sotto il mento.
-
-[Clic]
-
-[RTI-28: osserva il mento, poi le corna; varia lentamente la luce.]
-
-Nel documento interattivo torniamo su queste zone. Manteniamo fermo l’ingrandimento e cambiamo la luce, per esaminare l’andamento dei segni e il loro rapporto con la superficie.
-
-[Esc]
-
-[Clic]
-
+Questi elementi sostengono la lettura come capra, forse selvatica, piuttosto che come camoscio o stambecco. Rimane aperta l’interpretazione del particolare sotto il mento. **[clic]**
 
 ---
 
@@ -423,7 +329,7 @@ Nel documento interattivo torniamo su queste zone. Manteniamo fermo l’ingrandi
 
 <p class="case-subtitle">F08 · Sector Q · 19.5 × 16.5 cm</p>
 
-<div class="case-definition"><figure class="case-full-figure"><div class="rti-image-stage" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate;"><svg viewBox="0 0 1000 1000" role="img" aria-label="F08 complete historical tracing" style="grid-area:1/1;min-width:0;min-height:0;"><image class="case-source-image" href="assets/images/caprasinistra-raster.png" x="0" y="0" width="1000" height="1000" preserveAspectRatio="xMidYMid meet"><title>F08 complete historical tracing</title></image></svg><div class="rti-overlay fragment fade-in" data-rti-overlay="RTI33" data-fragment-index="1" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg,#282828);overflow:hidden;"><iframe data-rti-frame data-rti-src="https://e-huseyin.github.io/rupemagnaviewer/datasets/F08/RTI-33/ptm/index.html" title="Interactive RTI33 model of the second goat in sector Q" loading="eager" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:100%;border:0;margin:0;max-width:none;max-height:none;"></iframe></div></div></figure><div class="case-traits"><div class="case-trait"><span>01</span><h3>Scimitar-shaped horns</h3><p>Shared with the first goat</p></div><div class="case-trait fragment fade-up" data-fragment-index="0"><span>02</span><h3>Chin feature not recorded</h3><p>A question for surface inspection</p></div></div></div>
+<div class="case-definition"><figure class="case-full-figure"><div class="rti-image-stage" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate;"><svg viewBox="0 0 2915 2098" role="img" aria-label="F08 surface photograph and registered historical tracing" style="grid-area:1/1;min-width:0;min-height:0;"><title>Second goat: surface photograph and historical tracing</title><image href="assets/images/F08-fotografia.png?v=2bcc18d1f537" x="0" y="0" width="2915" height="2098" preserveAspectRatio="xMidYMid meet"/><g class="case-tracing fragment fade-in" data-fragment-index="0"><image class="case-source-image case-source-white" href="assets/images/catalogue-f08-2.png?v=266071e69960" x="0" y="0" width="2915" height="2098" preserveAspectRatio="xMidYMid meet"/></g></svg><div class="rti-overlay fragment fade-in" data-rti-overlay="RTI33" data-fragment-index="2" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg,#282828);overflow:hidden;"><iframe data-rti-frame data-rti-src="https://e-huseyin.github.io/rupemagnaviewer/datasets/F08/RTI-33/ptm/index.html" title="Interactive RTI33 model of the second goat in sector Q" loading="eager" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:100%;border:0;margin:0;max-width:none;max-height:none;"></iframe></div></div></figure><div class="case-traits"><div class="case-trait"><span>01</span><h3>Scimitar-shaped horns</h3><p>Shared with the first goat</p></div><div class="case-trait fragment fade-up" data-fragment-index="1"><span>02</span><h3>Chin feature not recorded</h3><p>A question for surface inspection</p></div></div></div>
 <p class="atlas-source">Published comparison · complete tracing · <span data-cite="fossati-zoomorphs-1995 marchi-tognoni-1995 erdogan-2025">Fossati 1995 <a class="reference-marker" href="#reference-10-3" aria-label="Reference 3">[3]</a>; Marchi and Tognoni 1995 <a class="reference-marker" href="#reference-10-11" aria-label="Reference 11">[11]</a>; Erdoğan 2025 <a class="reference-marker" href="#reference-10-8" aria-label="Reference 8">[8]</a></span></p>
 
 <!-- IEEE references:start -->
@@ -431,72 +337,31 @@ Nel documento interattivo torniamo su queste zone. Manteniamo fermo l’ingrandi
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 12:49–14:14. Durata prevista: 01:25.
+TEMPO: 11:20–14:05. Durata prevista: 02:45. Di cui parlato e passaggi: 02:05; esplorazione RTI: 00:40.
 
-La seconda capra, F08, è più piccola e si trova a sud della precedente. Condivide le corna a scimitarra, ma nel rilievo pubblicato non viene riconosciuto lo stesso particolare sotto il mento.
+Passiamo alla seconda figura caprina, più piccola e situata a sud della precedente. Anche questa presenta corna a scimitarra, ma nel rilievo pubblicato non viene riconosciuto lo stesso particolare sotto il mento. **[clic]**
 
-[Clic]
+Il segno non è stato inciso, si è conservato male oppure non è stato riconosciuto? Questa differenza è un punto di partenza per un nuovo esame della superficie. **[clic]**
 
-Il segno non è stato inciso, si è conservato male oppure non è stato riconosciuto? La differenza nel disegno è il punto da cui partire per l’esame.
+Vorrei mostrarvi un'altra possibilità offerta da questo approccio: esplorare la superficie con diverse condizioni di luce e mettere in evidenza dettagli che potrebbero non essere stati riconosciuti o documentati in precedenza.
 
-[Clic]
+Possiamo inoltre confrontare il modello RTI con il rilievo a contatto degli anni Novanta, sovrapponendo la documentazione storica alla superficie digitale. [Apri il vector]
 
-Per questa figura ho scartato quattro acquisizioni iniziali.
+Osservando la figura con diverse modalità di visualizzazione e condizioni di illuminazione, mi sembra di riconoscere una possibile continuità degli arti anteriori, con dettagli alle estremità che non risultano chiaramente documentati nel rilievo storico.
 
-Ho poi selezionato una nuova ripresa, RTI-33.
+Naturalmente, questa è una mia osservazione, che vorrei sottoporre anche alla vostra valutazione. [Apri l'annotazione]
 
-[RTI-33: osserva la zona sotto il mento con due o tre direzioni di luce.]
-
-Esaminiamo questa zona senza trasformare una scarsa leggibilità nella certezza che il segno non esista. Anche le condizioni della registrazione entrano nel confronto archeologico.
-
-[Esc]
-
-[Clic]
-
+La piattaforma permette anche di annotare direttamente il modello, registrando le osservazioni per poterle discutere e confrontare. Qui, per esempio, provo a tracciare le estremità degli arti anteriori, indicando la possibile presenza degli **zoccoli**, che non vediamo rappresentati nel rilievo a contatto. **[clic]**
 
 ---
 
-<!-- .slide: id="sector-q-pair" class="atlas case-skeleton acc-sun case-description" data-talk-section="10" -->
-
-<h2 class="sub">The two goats</h2>
-
-<p class="case-subtitle">Sector Q · Published observations</p>
-
-<div class="goat-comparison"><figure><svg viewBox="0 0 1000 1000" role="img" aria-label="F07 complete tracing"><image class="case-source-image" href="assets/images/capradestra-raster.png" x="0" y="0" width="1000" height="1000" preserveAspectRatio="xMidYMid meet"><title>F07 complete tracing</title></image></svg><figcaption>First goat<small>F07 · 27 × 16.5 cm</small><em>Chin feature described</em></figcaption></figure><figure><svg viewBox="0 0 1000 1000" role="img" aria-label="F08 complete tracing"><image class="case-source-image" href="assets/images/caprasinistra-raster.png" x="0" y="0" width="1000" height="1000" preserveAspectRatio="xMidYMid meet"><title>F08 complete tracing</title></image></svg><figcaption>Second goat<small>F08 · 19.5 × 16.5 cm</small><em>Chin feature not recorded</em></figcaption></figure></div>
-<div class="goat-published-context"><p>Both face west<br>Different pecking described</p><div class="fragment fade-up" data-fragment-index="0">Iron Age<small>Stylistic comparison · Camunian phase IV 2</small></div></div>
-<p class="atlas-source">Images not shown at matched metric scale · <span data-cite="fossati-zoomorphs-1995 marchi-tognoni-1995 pace-zoomorphs-2015">Fossati 1995 <a class="reference-marker" href="#reference-11-3" aria-label="Reference 3">[3]</a>; Marchi and Tognoni 1995 <a class="reference-marker" href="#reference-11-11" aria-label="Reference 11">[11]</a>; Pace 2015 <a class="reference-marker" href="#reference-11-6" aria-label="Reference 6">[6]</a></span></p>
-
-<!-- IEEE references:start -->
-<aside class="slide-references reference-columns" aria-label="References"><ol><li id="reference-11-3" data-reference-key="fossati-zoomorphs-1995"><span class="reference-number">[3]</span><span class="reference-entry">A. E. Fossati, “Le figure zoomorfe,” in Rupe Magna: La roccia incisa più grande delle Alpi. Sondrio, Italy: Consorzio per il Parco delle Incisioni Rupestri di Grosio, 1995, pp. 67–71.</span></li><li id="reference-11-6" data-reference-key="pace-zoomorphs-2015"><span class="reference-number">[6]</span><span class="reference-entry">F. Pace, “Figure zoomorfe nei petroglifi valtellinesi,” Notiziario dell’Istituto Archeologico Valtellinese, no. 13, pp. 81–105, 2015.</span></li><li id="reference-11-11" data-reference-key="marchi-tognoni-1995"><span class="reference-number">[11]</span><span class="reference-entry">E. Marchi and E. Tognoni, “Disposizione delle scene e delle figure nei settori,” in Rupe Magna: La roccia incisa più grande delle Alpi. Sondrio, Italy: Consorzio per il Parco delle Incisioni Rupestri di Grosio, 1995, pp. 29–37.</span></li></ol></aside>
-<!-- IEEE references:end -->
-
-Note:
-TEMPO: 14:14–15:19. Durata prevista: 01:05.
-
-Ora consideriamo insieme le due capre.
-
-Pace le descrive allineate e rivolte a occidente. Osserva una picchiettatura più superficiale nell’animale che apre la fila e più grossolana e profonda nel secondo, nel quale riconosce anche i pendenti, appendici cutanee ai lati del collo.
-
-Il confronto riguarda quindi anche il modo in cui le figure sono state incise.
-
-[Clic]
-
-Fossati non riconosce qui un contesto di caccia e propone, su base stilistica, un confronto con la fase camuna IV 2, nell’età del Ferro.
-
-Queste sono letture pubblicate, alle quali possiamo affiancare l’esame delle superfici appena osservate. Non abbiamo misurato con la RTI la profondità delle incisioni.
-
-[Clic]
-
-
----
-
-<!-- .slide: id="f10" class="atlas case-skeleton acc-sun case-description inline-rti" data-talk-section="11" -->
+<!-- .slide: id="f10" class="atlas case-skeleton acc-sun case-description inline-rti" data-talk-section="10" -->
 
 <h2 class="sub">Horse and rider</h2>
 
 <p class="case-subtitle">F10 · Sector S · 30 cm high × 22 cm wide</p>
 
-<div class="case-definition"><figure class="case-full-figure"><div class="rti-image-stage" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate;"><svg viewBox="0 0 1000 1000" role="img" aria-label="F10 complete graphic reference of horse and rider" style="grid-area:1/1;min-width:0;min-height:0;"><image class="case-source-image" href="assets/images/cavaliere-raster.png" x="0" y="0" width="1000" height="1000" preserveAspectRatio="xMidYMid meet"><title>F10 complete graphic reference of horse and rider</title></image></svg><div class="rti-overlay fragment fade-in" data-rti-overlay="RTI38" data-fragment-index="1" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg,#282828);overflow:hidden;"><iframe data-rti-frame data-rti-src="https://e-huseyin.github.io/rupemagnaviewer/datasets/F10/RTI-38/ptm/index.html" title="Interactive RTI38 model of the horse and rider in sector S" loading="eager" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:100%;border:0;margin:0;max-width:none;max-height:none;"></iframe></div></div></figure><div class="case-traits"><div class="case-trait"><span>01</span><h3>Horse and rider</h3><p>Human–animal relationship</p></div><div class="case-trait fragment fade-up" data-fragment-index="0"><span>02</span><h3>Rectangular shield</h3><p>Central boss</p></div></div></div>
+<div class="case-definition"><figure class="case-full-figure"><div class="rti-image-stage" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;isolation:isolate;"><svg viewBox="0 0 3530 2540" role="img" aria-label="F10 surface photograph and registered horse-and-rider tracing" style="grid-area:1/1;min-width:0;min-height:0;"><title>Horse and rider: surface photograph and historical tracing</title><image href="assets/images/F10-fotografia.png?v=ae189153ed76" x="0" y="0" width="3530" height="2540" preserveAspectRatio="xMidYMid meet"/><g class="case-tracing fragment fade-in" data-fragment-index="0"><image class="case-source-image case-source-white" href="assets/images/catalogue-f10-2.png?v=72435b63aed1" x="0" y="0" width="3530" height="2540" preserveAspectRatio="xMidYMid meet"/></g></svg><div class="rti-overlay fragment fade-in" data-rti-overlay="RTI38" data-fragment-index="2" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;z-index:2;background:var(--bg,#282828);overflow:hidden;"><iframe data-rti-frame data-rti-src="https://e-huseyin.github.io/rupemagnaviewer/datasets/F10/RTI-38/ptm/index.html" title="Interactive RTI38 model of the horse and rider in sector S" loading="eager" allow="fullscreen" allowfullscreen style="display:block;width:100%;height:100%;border:0;margin:0;max-width:none;max-height:none;"></iframe></div></div></figure><div class="case-traits"><div class="case-trait"><span>01</span><h3>Horse and rider</h3><p>Human–animal relationship</p></div><div class="case-trait fragment fade-up" data-fragment-index="1"><span>02</span><h3>Rectangular shield</h3><p>Central boss</p></div></div></div>
 <p class="atlas-source">Published reading · complete graphic reference · <span data-cite="marchi-tognoni-1995 erdogan-2025">Marchi and Tognoni 1995 <a class="reference-marker" href="#reference-12-11" aria-label="Reference 11">[11]</a>; Erdoğan 2025 <a class="reference-marker" href="#reference-12-8" aria-label="Reference 8">[8]</a></span></p>
 
 <!-- IEEE references:start -->
@@ -504,37 +369,26 @@ Queste sono letture pubblicate, alle quali possiamo affiancare l’esame delle s
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 15:19–16:44. Durata prevista: 01:25.
+TEMPO: 14:05–15:20. Durata prevista: 01:15. Di cui parlato e passaggi: 01:00; esplorazione RTI: 00:15.
 
-L’ultimo caso, F10, ci porta nel settore S: un cavallo con cavaliere.
+L’ultimo caso è un cavallo con cavaliere. [Indica cavallo, figura umana e scudo.]
 
-[Indica cavallo, figura umana e scudo.]
+La documentazione descrive uno scudo rettangolare con umbone centrale. L’identificazione dipende anche dalla posizione della figura umana e dal suo equipaggiamento. **[clic]**
 
-[Clic]
+Nel modello RTI possiamo esaminare questi elementi variando la direzione della luce, per capire meglio come si distinguono sulla superficie incisa.
 
-La documentazione descrive uno scudo rettangolare con umbone centrale. L’identificazione dipende anche dalla posizione della figura umana e dal suo equipaggiamento.
+In questo caso, quindi, non osserviamo soltanto i singoli segni, ma anche il modo in cui contribuiscono alla lettura complessiva della figura.
 
-[Clic]
-
-[RTI-38: osserva lo scudo e la relazione fra cavallo e cavaliere.]
-
-Cambiamo la luce mantenendo la stessa inquadratura. L’obiettivo è esaminare i segni su cui si basa questa lettura.
-
-[Esc]
-
-Per la cronologia, la storia dell’allevamento del cavallo offre un contesto generale. Per datare questa incisione servono invece confronti specifici: lo scudo, lo stile e le relazioni documentate sulla roccia.
-
-[Clic]
-
+Per la cronologia, lo scudo e il confronto con rappresentazioni analoghe possono offrire indicazioni, da valutare insieme alle relazioni documentate sulla roccia. **[clic]**
 
 ---
 
-<!-- .slide: id="interpretation" class="atlas case-skeleton acc-sun case-conclusion" data-talk-section="12" -->
+<!-- .slide: id="interpretation" class="atlas case-skeleton acc-sun case-conclusion" data-talk-section="11" -->
 
 <h2 class="sub">From marks to meaning</h2>
 
-<div class="interpretation-steps"><div class="interpretation-step fragment fade-up" data-fragment-index="0"><b>01</b><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M5 28s9-15 23-15 23 15 23 15-9 15-23 15S5 28 5 28Z"/><circle cx="28" cy="28" r="7"/></svg><h3>Observation</h3><p>Marks · continuity · preservation</p></div><div class="interpretation-step fragment fade-up" data-fragment-index="1"><b>02</b><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="24" cy="24" r="15"/><path d="m35 35 15 15M17 24l5 5 9-11"/></svg><h3>Identification</h3><p>Anatomy · comparative iconography</p></div><div class="interpretation-step fragment fade-up" data-fragment-index="2"><b>03</b><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="10" cy="28" r="5"/><circle cx="43" cy="12" r="5"/><circle cx="43" cy="44" r="5"/><path d="m15 26 23-12M15 30l23 12M43 17v22"/></svg><h3>Context</h3><p>Position · neighbouring figures</p></div><div class="interpretation-step fragment fade-up" data-fragment-index="3"><b>04</b><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M6 30h44M12 23v14M28 23v14M44 23v14M28 15v-5M24 14l4 4 4-4"/></svg><h3>Chronology</h3><p>Style · documented relationships</p></div></div>
-<div class="interpretation-close fragment fade-up" data-fragment-index="3"><div><h3>Keep the evidence open.</h3><p>Return to the recorded surface.</p></div><div class="interpretation-links"><a href="https://e-huseyin.github.io/rupemagnaviewer/" target="_blank" rel="noopener">Viewer ↗</a><a href="https://doi.org/10.5281/zenodo.21300390" target="_blank" rel="noopener">Research data ↗</a></div></div>
+<div class="interpretation-steps"><div class="interpretation-step fragment fade-up" data-fragment-index="0"><b>01</b><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M5 28s9-15 23-15 23 15 23 15-9 15-23 15S5 28 5 28Z"/><circle cx="28" cy="28" r="7"/></svg><h3>Observation</h3><p>Marks · continuity · preservation</p></div><div class="interpretation-step fragment fade-up" data-fragment-index="1"><b>02</b><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="24" cy="24" r="15"/><path d="m35 35 15 15M17 24l5 5 9-11"/></svg><h3>Identification</h3><p>Anatomy · comparative iconography</p></div><div class="interpretation-step fragment fade-up" data-fragment-index="2"><b>03</b><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="10" cy="28" r="5"/><circle cx="43" cy="12" r="5"/><circle cx="43" cy="44" r="5"/><path d="m15 26 23-12M15 30l23 12M43 17v22"/></svg><h3>Context</h3><p>Position · neighbouring figures</p></div><div class="interpretation-step interpretation-fair fragment fade-up" data-fragment-index="3"><b>04</b><div class="fair-words"><div class="fair-word"><span class="fair-initial">F</span><span class="fair-completion fragment fade-in" data-fragment-index="4">indable</span></div><div class="fair-word"><span class="fair-initial">A</span><span class="fair-completion fragment fade-in" data-fragment-index="5">ccessible</span></div><div class="fair-word"><span class="fair-initial">I</span><span class="fair-completion fragment fade-in" data-fragment-index="6">nteroperable</span></div><div class="fair-word"><span class="fair-initial">R</span><span class="fair-completion fragment fade-in" data-fragment-index="7">eusable</span></div></div></div></div>
+<div class="interpretation-close fragment fade-up" data-fragment-index="7"><h3>Keep the evidence open.</h3></div>
 <p class="atlas-source">Published readings · open research data · <span data-cite="fossati-zoomorphs-1995 marchi-tognoni-1995 erdogan-dataset-2026">Fossati 1995 <a class="reference-marker" href="#reference-13-3" aria-label="Reference 3">[3]</a>; Marchi and Tognoni 1995 <a class="reference-marker" href="#reference-13-11" aria-label="Reference 11">[11]</a>; Erdoğan 2026 <a class="reference-marker" href="#reference-13-12" aria-label="Reference 12">[12]</a></span></p>
 
 <!-- IEEE references:start -->
@@ -542,44 +396,33 @@ Per la cronologia, la storia dell’allevamento del cavallo offre un contesto ge
 <!-- IEEE references:end -->
 
 Note:
-TEMPO: 16:44–18:14. Durata prevista: 01:30.
+TEMPO: 15:20–16:50. Durata prevista: 01:30.
 
-I quattro casi ci riportano a quattro passaggi della lettura archeologica.
+I quattro casi ci riportano a quattro aspetti della ricerca e conoscenza archeologica. **[clic]**
 
-[Clic]
+Prima, osservare i segni: il loro andamento, la continuità e lo stato di conservazione. **[clic]**
 
-Osservare i segni: il loro andamento, la continuità e lo stato di conservazione.
+Poi, riconoscere i caratteri morfologici che sostengono un'identificazione, come il muso e la coda del cinghiale o le corna delle capre. **[clic]**
 
-[Clic]
+Considerare il contesto, le figure vicine e le relazioni che possiamo documentare. **[clic]**
 
-Riconoscere i caratteri che sostengono un’identificazione, come il muso e la coda del cinghiale oppure le corna delle capre.
+Ma il lavoro non si conclude con l'osservazione e l'interpretazione. È importante anche rendere i dati accessibili alla comunità scientifica.
 
-[Clic]
+Per questo, ho condiviso apertamente tutti i dati prodotti durante la campagna, seguendo i principi FAIR: Findable, Accessible, Interoperable e Reusable, ovvero reperibili, accessibili, interoperabili e riutilizzabili.
 
-Valutare il contesto: le altre figure e le relazioni che possiamo documentare.
-
-[Clic]
-
-Infine, proporre una cronologia attraverso confronti e relazioni sulla roccia.
-
-La RTI rende nuovamente esplorabile la superficie registrata. Le interpretazioni richiedono anche il rilievo storico, i confronti iconografici e la conoscenza del contesto.
-
-I documenti della campagna restano consultabili nel Rupe Magna Viewer e attraverso i dati condivisi. Le osservazioni che abbiamo fatto durante la presentazione possono così diventare il punto di partenza per un nuovo esame.
-
-Torno allora alla domanda iniziale: su quali segni si basa la nostra lettura? Il contributo di questo lavoro è mantenere accessibili quelle tracce, perché possano essere osservate e discusse ancora.
-
-[Clic]
-
+L'obiettivo è permettere ad altri ricercatori di trovare questi dati, accedervi, integrarli con altre risorse e riutilizzarli per nuove domande di ricerca. **[clic]**
 
 ---
 
-<!-- .slide: id="thank-you" class="l-closing rays atlas acc-3" data-header="Animals & interpretation" data-talk-section="13"  -->
+<!-- .slide: id="thank-you" class="l-closing rays atlas acc-3" data-header="Animals & interpretation" data-talk-section="12"  -->
 
 <h1>Thank you</h1><p class="closing-contact"><a href="mailto:huseyin.erdogan@unibo.it">huseyin.erdogan@unibo.it</a></p>
 
+<div class="closing-qr-cards"><a class="closing-qr-card" href="https://infinity-eccch.eu/" target="_blank" rel="noopener"><h2>INFINITY project</h2><img src="assets/images/qr-infinity-project.svg" alt="QR code: INFINITY project" draggable="false"></a><a class="closing-qr-card" href="https://e-huseyin.github.io/rupemagnaviewer/" target="_blank" rel="noopener"><h2>Rupe Magna Viewer</h2><img src="assets/images/qr-rupe-magna-viewer.svg" alt="QR code: Rupe Magna Viewer" draggable="false"></a><a class="closing-qr-card" href="https://doi.org/10.5281/zenodo.21300390" target="_blank" rel="noopener"><h2>RTI dataset</h2><img src="assets/images/qr-rti-dataset.svg" alt="QR code: RTI dataset" draggable="false"></a></div>
+
 Note:
-TEMPO: 18:14–18:19. Durata prevista: 00:05.
+TEMPO: 16:50–17:20. Durata prevista: 00:30.
+
+Torno allora alla domanda iniziale: su quali segni si basa la nostra lettura? La possibilità di tornare a osservare questi segni, condividere i dati e confrontare le interpretazioni ci permette di mantenere aperta questa domanda.
 
 Vi ringrazio per l’attenzione.
-
-[Fine.]

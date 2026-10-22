@@ -15,20 +15,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
 <link rel="stylesheet" href="css/infinity.css">
-<link rel="stylesheet" href="css/rupe.css">
-<link rel="stylesheet" href="css/atlas.css">
+<link rel="stylesheet" href="css/rupe.css?v=775ce1b73c1e">
+<link rel="stylesheet" href="css/atlas.css?v=007d64940a94">
 <link rel="stylesheet" href="css/context-map.css">
 <link rel="stylesheet" href="css/chronology.css">
 <link rel="stylesheet" href="css/boar-context.css">
 <link rel="stylesheet" href="css/presentation-layout.css">
-<link rel="stylesheet" href="css/references.css">
-<link rel="stylesheet" href="css/case-studies.css">
-<link rel="stylesheet" href="css/rti-viewer.css?v=890ab1047d16">
+<link rel="stylesheet" href="css/references.css?v=74189cb19938">
+<link rel="stylesheet" href="css/contact-tracing.css?v=876d2ad6cdee">
+<link rel="stylesheet" href="css/case-studies.css?v=f32d491d0612">
+<link rel="stylesheet" href="css/rti-viewer.css?v=32c16f3399d8">
 </head>
 <body>
 <div class="reveal">
   <div class="slides">
-    <section data-markdown="slides.md"
+    <section data-markdown="slides.md?v=5d931e520691"
              data-separator="^\r?\n---\r?\n$"
              data-separator-vertical="^\r?\n--\r?\n$"
              data-separator-notes="^Note:"
@@ -40,13 +41,14 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
-<script src="js/infinity.js"></script>
+<script src="js/infinity.js?v=51ee6d057af4"></script>
 <script src="js/cervid-transition.js"></script>
 <script src="js/context-map.js"></script>
 <script src="js/references.js"></script>
-<script src="js/rti-viewer.js?v=72d217c92b64"></script>
+<script src="js/contact-tracing.js?v=c5e0694d8e4f"></script>
+<script src="js/rti-viewer.js?v=f3c92b91b497"></script>
 <script src="js/goat-contours.js"></script>
-<script src="js/dome.js?v=249d2e66be32"></script>
+<script src="js/dome.js?v=fcc790748358"></script>
 <script>
   Reveal.initialize({
     width: 1280, height: 720, margin: 0,
@@ -59,7 +61,7 @@
     pdfSeparateFragments: false,
     autoAnimateEasing: 'cubic-bezier(.2,.7,.2,1)',
     // RevealInfinity must come after RevealMarkdown: it decorates the generated slides
-    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealInfinity, RevealDome, RevealContextMap, RevealReferences, RevealRTIViewer]
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealInfinity, RevealDome, RevealContextMap, RevealReferences, RevealRTIViewer, RevealContactTracing]
   });
 </script>
 </body>

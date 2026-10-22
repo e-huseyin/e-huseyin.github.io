@@ -86,3 +86,9 @@
 .reveal .d-led:focus:not(:focus-visible){stroke-width:1}
 /* Keyboard focus stays identifiable without framing the entire model. */
 .reveal .dome-lab:has(svg:focus-visible) .d-hint{color:var(--acc);opacity:1}
+
+/* Final native fragment: full photograph inside the existing left dome frame. */
+.reveal .dome-photo{position:absolute;left:0;top:0;width:780px;height:100%;margin:0;padding:0;background:var(--bg);z-index:2;overflow:hidden;pointer-events:none}
+.reveal .dome-photo.visible{pointer-events:auto}
+.reveal .dome-photo img{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;object-position:center;margin:0;border:0;box-shadow:none}
+.reveal .dome-lab:has(>.dome-photo.visible)>svg{opacity:0;visibility:hidden;pointer-events:none}

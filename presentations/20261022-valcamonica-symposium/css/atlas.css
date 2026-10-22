@@ -9,13 +9,16 @@
 .reveal .atlas-message{position:absolute;left:49px;right:49px;top:606px;font-size:30px;color:var(--acc)}
 .reveal .atlas .eyebrow{font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:26px}
 /* Full title in the Infinity cover yellow. */
-.reveal .atlas.l-cover h1{top:220px;left:49px;width:1182px;max-width:1182px;font-size:58px;line-height:1.14;color:var(--sun)}
+.reveal .atlas.l-cover h1{top:50%;left:49px;width:1182px;max-width:1182px;transform:translateY(-50%);text-align:left;font-size:44px;line-height:1.2;color:var(--sun)}
+.reveal .atlas.l-cover .cover-title-line{display:block;white-space:nowrap}
 .reveal .cover-deck{position:absolute;left:49px;top:412px;width:600px;font-size:23px;line-height:1.4}
 .reveal .cover-image{position:absolute;left:695px;top:170px;width:535px;height:355px}
 .reveal .cover-image figcaption{font-size:15px}
 .reveal .cover-question{position:absolute;left:49px;top:548px;font-size:31px;color:var(--sun)}
-.reveal .cover-byline{position:absolute;left:49px;top:622px;font-size:19px;line-height:1.5}
-.reveal .cover-byline span{color:var(--sun);margin-left:12px}
+.reveal .cover-byline{position:absolute;left:49px;right:49px;top:542px;font-size:19px;line-height:1.5}
+.reveal .cover-byline .cover-presenter{color:var(--sun);margin-left:0}
+.reveal .cover-authors,.reveal .cover-affiliation{font-size:19px;line-height:1.5}
+.reveal .cover-event{margin-top:16px;font-size:19px;line-height:1.5}
 /* Cover-to-analysis bridge: the original full raster is shared by both pages. */
 .reveal .cover-brandbar{position:absolute;left:39px;top:64px;height:74px;display:flex;align-items:center;gap:34px}
 .reveal .cover-brandbar .brand-infinity{position:relative;display:block;width:279px;height:66px}

@@ -8,9 +8,11 @@ window.RevealDome = (() => {
       const progress = host.querySelector('progress'), rotation = host.querySelector('[data-orbit]');
       const speed = host.querySelector('[data-speed]');
       const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-      let frame = 0, timer = null, angle = 0, tilt = 28 * Math.PI / 180;
+      let frame = 0, timer = null, angle = -27 * Math.PI / 180, tilt = 46 * Math.PI / 180;
       let drag = null, dragged = false, zoom = 1;
       const elevationControl = host.querySelector("[data-tilt]");
+      const photo = host.querySelector("[data-dome-photo]");
+      rotation.value=-27;elevationControl.value=46;
       const tiers = [15,25,35,45,55,65];
       const leds = tiers.flatMap((e,t) => Array.from({length:8},(_,a) => ({e,t,a,phi:a*Math.PI/4})));
       function el(tag, attrs, parent=svg) {
@@ -36,6 +38,9 @@ window.RevealDome = (() => {
         <filter id="dome-glow" x="-150%" y="-150%" width="400%" height="400%"><feGaussianBlur stdDeviation="4"/></filter>
         <filter id="recess-soft-edge" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".45"/></filter>
         <pattern id="dome-stone" width="53" height="37" patternUnits="userSpaceOnUse"><path d="M2 8l18 5 12-8M7 29l19-6 23 10" fill="none" stroke="#cbd1cf" opacity=".13"/><circle cx="39" cy="16" r="1" fill="#111817" opacity=".3"/></pattern>`;
+      // A permanent transparent hit surface also makes the empty spaces
+      // between the wires draggable; it stays outside the rebuilt scene.
+      el('rect',{x:0,y:0,width:780,height:590,fill:'transparent','pointer-events':'all','data-dome-hit-area':''});
       const scene=el('g',{});
       const recessDepth=2.6; // Illustrative scene units, not measured incision depth.
       function applyZoom(){
@@ -236,9 +241,6 @@ window.RevealDome = (() => {
           el('path',{d:path(pts,true),fill:'none',stroke:'#778378','stroke-width':1.4},camera);
         });
         const status=project(56,-14,337);el('circle',{cx:status[0],cy:status[1],r:1.7,fill:active?'#e1dc64':'#6eb98c'},camera);
-        const dimA=project(-260,215,0),dimB=project(260,215,0);
-        el('path',{d:path([dimA,dimB]),class:'d-dimension'},scene);
-        el('text',{x:385,y:Math.max(dimA[1],dimB[1])+28,'text-anchor':'middle',class:'d-caption'},scene).textContent='Ø 46 cm';
         const time=frame*3;
         output.textContent=`${String(frame).padStart(2,'0')} / 48`;
         host.querySelector('[data-elevation]').textContent=active?`${active.e}° / ${active.a*45}°`:'— / —';
@@ -255,22 +257,78 @@ window.RevealDome = (() => {
       rotation.addEventListener('input',()=>{angle=+rotation.value*Math.PI/180;draw();});
       elevationControl.addEventListener('input',()=>{tilt=+elevationControl.value*Math.PI/180;draw();});
       host.querySelector('[data-surface-view]').addEventListener('click',()=>{tilt=72*Math.PI/180;angle=-20*Math.PI/180;rotation.value=-20;elevationControl.value=72;draw();});
-      svg.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY,angle,tilt};dragged=false;svg.setPointerCapture(e.pointerId);});
-      svg.addEventListener('pointermove',e=>{
-        if(!drag)return;
-        const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+      // Track the gesture above SVG hit-testing and Reveal's swipe handlers.
+      // Mouse events also cover environments where pointer events are missing.
+      host.setAttribute('data-prevent-swipe','');
+      let pressedLed = null;
+      const eventFamily=e=>e.type.startsWith('mouse')?'mouse':'pointer';
+      const overModel=e=>{
+        if(reveal.getCurrentSlide()!==slide || reveal.isOverview?.())return false;
+        if(photo?.classList.contains('visible'))return false;
+        if(e.target.closest?.('button, input, select, textarea, a, [contenteditable]'))return false;
+        if(svg.contains(e.target))return true;
+        const box=svg.getBoundingClientRect();
+        return e.clientX>=box.left && e.clientX<=box.right && e.clientY>=box.top && e.clientY<=box.bottom;
+      };
+      const beginOrbit=e=>{
+        if(e.button!==0 || drag || !overModel(e))return;
+        e.preventDefault();e.stopPropagation();
+        pressedLed=e.target.closest?.('[data-led]')?.dataset.led ?? null;
+        drag={family:eventFamily(e),pointerId:e.pointerId,x:e.clientX,y:e.clientY,angle,tilt};
+        dragged=false;
+        if(drag.family==='pointer'){
+          // Capture is an optimisation; global move/up listeners are sufficient
+          // even if a browser cannot capture a pointer on an SVG element.
+          try{svg.setPointerCapture?.(e.pointerId);}catch(error){}
+        }
+      };
+      const moveOrbit=e=>{
+        if(!drag || eventFamily(e)!==drag.family || (drag.family==='pointer' && e.pointerId!==drag.pointerId))return;
+        e.preventDefault();e.stopPropagation();
+        const scale=reveal.getScale?.() || 1;
+        const dx=(e.clientX-drag.x)/scale,dy=(e.clientY-drag.y)/scale;
         if(Math.hypot(dx,dy)>4)dragged=true;
         if(!dragged)return;
         angle=drag.angle+dx*.008;tilt=Math.max(12*Math.PI/180,Math.min(78*Math.PI/180,drag.tilt-dy*.006));
-        rotation.value=((angle*180/Math.PI+180)%360+360)%360-180;elevationControl.value=tilt*180/Math.PI;draw();
+        rotation.value=((angle*180/Math.PI+180)%360+360)%360-180;
+        elevationControl.value=tilt*180/Math.PI;
+        draw();
+      };
+      const endOrbit=e=>{
+        if(!drag)return;
+        if(e && (eventFamily(e)!==drag.family || (drag.family==='pointer' && e.pointerId!==drag.pointerId)))return;
+        e?.stopPropagation();
+        const previous=drag;drag=null;
+        if(!e || e.type==='pointercancel')pressedLed=null;
+        if(previous.family==='pointer'){
+          try{if(svg.hasPointerCapture?.(previous.pointerId))svg.releasePointerCapture(previous.pointerId);}catch(error){}
+        }
+      };
+      ['pointerdown','mousedown'].forEach(type=>window.addEventListener(type,beginOrbit,{capture:true,passive:false}));
+      ['pointermove','mousemove'].forEach(type=>window.addEventListener(type,moveOrbit,{capture:true,passive:false}));
+      ['pointerup','pointercancel','mouseup'].forEach(type=>window.addEventListener(type,endOrbit,{capture:true}));
+      window.addEventListener('blur',()=>endOrbit());
+      host.addEventListener('dragstart',e=>e.preventDefault());
+      svg.addEventListener('click',e=>{
+        e.stopPropagation();
+        if(dragged){dragged=false;pressedLed=null;return;}
+        const led=e.target.closest('[data-led]')?.dataset.led ?? pressedLed;
+        pressedLed=null;
+        if(led!==null){stop();frame=+led+1;draw();}
       });
-      const endDrag=()=>{drag=null;};
-      svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);svg.addEventListener('lostpointercapture',endDrag);
-      svg.addEventListener('click',e=>{if(dragged){dragged=false;return;}const n=e.target.closest('[data-led]');if(n){stop();frame=+n.dataset.led+1;draw();}});
       svg.addEventListener('keydown',e=>{if(e.target===svg&&['+','=','-','_','0'].includes(e.key)){e.preventDefault();e.stopPropagation();setZoom(e.key==='0'?1:zoom*(e.key==='-'||e.key==='_'?1/1.2:1.2));return;}if(['Enter',' '].includes(e.key)&&e.target.hasAttribute('data-led')){e.preventDefault();stop();frame=+e.target.dataset.led+1;draw();svg.querySelector(`[data-led="${frame-1}"]`)?.focus();}});
       host.addEventListener('keydown',e=>e.stopPropagation());
-      reveal.on('slidechanged',e=>{if(e.previousSlide===slide)stop();});
-      document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+      const syncPhoto=()=>{
+        if(!photo?.classList.contains('visible'))return;
+        endOrbit();stop();
+        if(document.activeElement===svg || svg.contains(document.activeElement)){
+          svg.blur();slide.setAttribute('tabindex','-1');slide.focus({preventScroll:true});
+        }
+      };
+      reveal.on('fragmentshown',e=>{if(e.fragment===photo)syncPhoto();});
+      reveal.on('ready',syncPhoto);
+      reveal.on('slidechanged',e=>{if(e.previousSlide===slide){endOrbit();stop();}if(e.currentSlide===slide)syncPhoto();});
+      document.addEventListener('visibilitychange',()=>{if(document.hidden){endOrbit();stop();}});
       reveal.on('pdf-ready',()=>{stop();zoom=1;frame=48;draw();});
       if(reduce.matches||location.search.includes('print-pdf'))frame=48;
       draw();
