@@ -66,18 +66,57 @@ def with_fonts(svg):
     return re.sub(r'(<svg\b[^>]*>)', lambda m: m.group(1) + FONT_DEFS, svg, count=1)
 
 
+FAINT = .075                           # «20» chiaro dietro le linee: 7,5% del colore di accento
+
+
+def faint(hexcol, a=FAINT):
+    """Colore di accento mescolato al bianco: stesso aspetto della trasparenza, ma funziona anche nei PDF."""
+    r, g, b = (int(hexcol[i:i + 2], 16) for i in (1, 3, 5))
+    return '#%02X%02X%02X' % tuple(round(255 + (c - 255) * a) for c in (r, g, b))
+
+
 def paint(tpl, p):
+    tpl = tpl.replace('{{ACC_FAINT}}', faint(p['ACC']))
     for k in ('INK', 'ACC', 'NODE', 'ACC2'):
         tpl = tpl.replace('{{' + k + '}}', p[k])
     return tpl
 
 
 # ---------------------------------------------------------------- modelli
+def column(x, y, w, fill_attr):
+    """Capitello (assets/source/master-colonna.svg), largo w, angolo in alto a sinistra in (x, y).
+    Le linee prendono il colore del gruppo (fill_attr); il dettaglio bianco resta bianco."""
+    src = (SRC / 'master-colonna.svg').read_text(encoding='utf-8')
+    paths = ''.join(re.findall(r'<path\b[^>]*/>', src, flags=re.S)).replace('class="st0"', 'fill="#FFFFFF"')
+    paths = re.sub(r'\s+', ' ', paths)
+    k = w / 492
+    return f'<g transform="translate({x:.1f} {y:.1f}) scale({k:.5f})" {fill_attr}>{paths}</g>'
+
+
+# Allineamento di «20 EDIZIONE»: in alto con le maiuscole del logo, a destra sul margine
+CAP = 0.7275390625                     # altezza delle maiuscole di Inter / em
+POSTER_RIGHT = 778                     # margine destro della locandina (840 - 62)
+COL_SCALE = 1.3                        # capitello: 1,3 volte la larghezza del «20»
+
+
 def poster_tpl():
     s = tokenize((SRC / 'master-poster.svg').read_text(encoding='utf-8'))
     s = s.replace('letter-spacing="-4">ArcheoFOSS</text>', f'letter-spacing="-4">{WORD}</text>', 1)
     s = re.sub(r'(<text x="66" y="219"[^>]*)fill="\{\{INK\}\}"([^>]*>)2026</text>', rf'\1fill="{BLUE}"\g<2>2026</text>', s, count=1)
     assert WORD in s and re.search(rf'fill="{BLUE}"[^>]*>2026</text>', s), 'titolo locandina non trovato'
+    top = 158 - CAP * 82                                   # parte alta di ARCHEO.FOSS
+    y20 = top + CAP * 74
+    s, n1 = re.subn(r'<text x="682" y="212"([^>]*)>20</text>', rf'<text x="{POSTER_RIGHT}" y="{y20:.1f}" text-anchor="end"\1>20</text>', s)
+    yed = y20 + 29
+    w20 = text_width('20', 74, '700')
+    cx = POSTER_RIGHT - w20 / 2                            # centro del «20»: EDIZIONE e capitello centrati qui
+    # +1: metà della spaziatura tra le lettere (2) che il browser aggiunge anche dopo l'ultima lettera
+    s, n2 = re.subn(r'<text x="664" y="241"([^>]*)>EDIZIONE</text>',
+                    rf'<text x="{cx + 1:.1f}" y="{yed:.1f}" text-anchor="middle"\1>EDIZIONE</text>', s)
+    assert n1 == n2 == 1, ('20/EDIZIONE non trovati', n1, n2)
+    wc = w20 * COL_SCALE
+    icon = column(cx - wc / 2, yed + 16, wc, 'fill="{{ACC}}"')
+    s = s.replace('EDIZIONE</text>', 'EDIZIONE</text>' + icon, 1)
     return with_fonts(s)
 
 
@@ -155,6 +194,17 @@ def screensaver(p):
     s = s.replace('<text class="brand" x="104" y="193">ArcheoFOSS</text>', f'<text class="brand" x="104" y="193">{WORD}</text>', 1)
     s = s.replace('.year{font-size:109px;font-weight:400;letter-spacing:-3px;fill:var(--ink)}',
                   f'.year{{font-size:109px;font-weight:400;letter-spacing:-3px;fill:{BLUE}}}', 1)
+    top = 193 - CAP * 155
+    y20 = top + CAP * 140
+    s = s.replace('<text class="edition-number" x="1770" y="193" text-anchor="middle">20</text>',
+                  f'<text class="edition-number" x="1770" y="{y20:.1f}" text-anchor="middle">20</text>', 1)
+    yed = y20 + 54
+    w20 = text_width('20', 140, '600', -7)
+    wc = w20 * COL_SCALE
+    icon = column(1770 - wc / 2, yed + 22, wc, 'style="fill:var(--accent)"')
+    s = s.replace('<text class="edition-label" x="1770" y="247" text-anchor="middle">EDITION</text>',
+                  f'<text class="edition-label" x="1770" y="{yed:.1f}" text-anchor="middle">EDITION</text>' + icon, 1)
+    assert 'translate(' in s and f'y="{y20:.1f}"' in s and f'y="{yed:.1f}"' in s, 'screensaver: 20/EDITION non trovati'
     for old in ('i<11', WORD, '--node:', 'fill:var(--node)', '{u:.680,line:15}\n'):
         assert old in s, old
     return s

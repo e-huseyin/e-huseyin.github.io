@@ -34,7 +34,7 @@ Run `../.venv/bin/python tools/programme_build.py` after changing the programme;
 
 ## How the files are made
 
-`tools/palette_build.py` builds everything in `assets/palette/` from the masters in `assets/source/` (`master-poster.svg`, `master-badge-a6.svg`, `master-logo-20.svg`, `master-qr.svg`, `screensaver-master.html`). It removes node 12, sets the new logo, applies the three colour combinations and embeds the Inter font (taken from the screensaver) in every SVG. PNGs are made with Pillow (QR) and macOS `qlmanage` (logo, symbol). Run it again after changing a master:
+`tools/palette_build.py` builds everything in `assets/palette/` from the masters in `assets/source/` (`master-poster.svg`, `master-badge-a6.svg`, `master-logo-20.svg`, `master-qr.svg`, `master-colonna.svg`, `screensaver-master.html`). It removes node 12, sets the new logo, aligns «20 EDIZIONE» with the top of the logo and adds the Ionic capital (`master-colonna.svg`, in the accent colour) below it on the poster and the screensaver, applies the three colour combinations and embeds the Inter font (taken from the screensaver) in every SVG. PNGs are made with Pillow (QR) and macOS `qlmanage` (logo, symbol). Run it again after changing a master:
 
 ```
 ../.venv/bin/python tools/palette_build.py

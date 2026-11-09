@@ -225,7 +225,10 @@ def art_group():
     s = PB.tokenize((PB.SRC / 'master-poster.svg').read_text(encoding='utf-8'))
     i = s.index('<g transform="translate(20,312) scale(.87)">'); j = s.index('</g>', i) + 4
     g = s[i:j]
-    g = g.replace('font-weight="700"', f'font-family="{FAM["700"]}"').replace('opacity=".075"', 'fill-opacity=".075"')
+    g = g.replace('font-weight="700"', f'font-family="{FAM["700"]}"')
+    # «20» chiaro: colore già schiarito invece della trasparenza (il convertitore PDF ignora l'opacità dei testi)
+    g, n = re.subn(r'fill="\{\{ACC\}\}"( [^>]*?)? opacity="\.075"', r'fill="{{ACC_FAINT}}"\1', g)
+    assert n == 1, ('«20» chiaro non trovato', n)
     g = re.sub(r'<text (?![^>]*font-family)', f'<text font-family="{FAM["400"]}" ', g)
     return g
 
