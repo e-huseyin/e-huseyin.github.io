@@ -1,0 +1,103 @@
+/* ArcheoFOSS 2026 · Media kit a pagina singola. Bianco, grafite, pesca. */
+:root{
+  --paper:#FFFFFF; --ink:#252B29; --muted:#656D65; --accent:#D89277; --line:#D9DBD3;
+  --gutter:40px;          /* margine laterale, uguale per tutte le sezioni */
+  --max:1200px;           /* larghezza massima del contenuto */
+  --space:48px;           /* spazio verticale standard */
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,Arial,sans-serif}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* barra in alto */
+.bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px}
+/* combinazioni di colore (non toccano il programma) */
+:root[data-palette="grafite-bordeaux"]{--ink:#252B29;--accent:#762F3D}
+:root[data-palette="nero-mattone"]{--ink:#171717;--accent:#A33B35}
+.bar-left{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.brand .dot,.brand .year{color:#027BFF}
+.palette-pick{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.palette-pick select{font:500 14px Inter,Arial,sans-serif;padding:7px 10px;border:1px solid var(--line);border-radius:999px;
+  background:var(--paper);color:var(--ink)}
+.frame.gap{margin-top:var(--space)}
+.logo-word{max-width:760px;width:100%}
+.screen{aspect-ratio:16/9;border:1px solid var(--line);background:#fff}
+.screen iframe{width:100%;height:100%;border:0;display:block}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs a{padding:9px 16px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:15px;font-weight:500}
+.tabs a:hover{border-color:var(--ink)}
+.tabs a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* sezioni: stessa intestazione e stessi margini */
+.view{padding:var(--space) 0}
+.view[hidden]{display:none}
+h1{font-size:40px;line-height:1.1;letter-spacing:-.03em;font-weight:600;margin:0 0 8px}
+.spec{margin:0 0 var(--space);color:var(--muted);font-size:17px}
+
+/* pulsanti di download */
+.dls{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.dl{display:inline-block;padding:11px 20px;border:1px solid var(--ink);border-radius:999px;background:var(--paper);
+    color:var(--ink);text-decoration:none;font:500 15px Inter,Arial,sans-serif;cursor:pointer}
+.dl:hover{background:var(--ink);color:var(--paper)}
+.dl.small{padding:6px 12px;font-size:13px}
+.dls.top{margin:0 0 var(--space)}
+.dl.primary{background:var(--ink);color:var(--paper)}
+.dl.primary:hover{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+
+.frame{border:1px solid var(--line);padding:32px;display:flex;align-items:center;justify-content:center;background:var(--paper)}
+
+/* locandina: i sei formati in scala tra loro */
+.formats{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;overflow-x:auto;padding-bottom:8px}
+.sheet{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px}
+.sheet img{width:calc(var(--w) * .38px);height:calc(var(--h) * .38px);object-fit:fill;border:1px solid var(--line);
+           box-shadow:0 4px 14px rgba(37,43,41,.08);margin-bottom:10px}
+.sheet strong{font-size:18px}
+.sheet span{font-size:13px;color:var(--muted);white-space:nowrap}
+.sheet .dl{margin-top:10px;white-space:nowrap}
+
+/* programma: fronte e retro affiancati */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
+.two figure{margin:0}
+.two img{width:100%;height:auto;border:1px solid var(--line)}
+.two figcaption{margin-top:12px;font-weight:600}
+.two .dl{margin-top:12px}
+
+/* logo e QR */
+#logo .frame img{max-height:520px}
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--gutter)}
+.qr-card{margin:0}
+.qr-frame{width:100%;aspect-ratio:1;padding:24px}
+.qr-card figcaption{margin-top:12px;display:flex;flex-direction:column;gap:2px}
+.qr-card figcaption a{font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.qr-card .dls{margin-top:12px}
+
+/* badge */
+.badge-layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:var(--gutter);align-items:start}
+.badge-form label{display:block;font-weight:600;margin:0 0 6px}
+.badge-form input,.badge-form select{width:100%;font:16px Inter,Arial,sans-serif;padding:12px 14px;border:1px solid var(--line);
+  border-radius:6px;background:var(--paper);color:var(--ink);margin:0 0 20px}
+.size-switch{display:flex;gap:8px;margin:0 0 16px}
+.size-switch button{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);
+  color:var(--ink);font:500 14px Inter,Arial,sans-serif;cursor:pointer}
+.size-switch button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+/* anteprima grande: A6 verticale alta quasi quanto lo schermo, A7 orizzontale a tutta larghezza */
+.badge-frame svg{display:block;max-width:100%;border:1px solid var(--line);margin:0 auto;box-shadow:0 6px 24px rgba(37,43,41,.08)}
+.badge-frame svg[height="148mm"]{height:min(78vh,880px);width:auto}
+.badge-frame svg[height="74mm"]{width:100%;height:auto}
+
+.foot{padding-top:24px;padding-bottom:var(--space);border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+
+@media (max-width:800px){
+  :root{--gutter:20px;--space:32px}
+  .bar-inner{flex-direction:column;align-items:flex-start;padding-top:12px;padding-bottom:12px}
+  .tabs a{padding:7px 12px;font-size:14px}
+  h1{font-size:30px}
+  .two,.badge-layout{grid-template-columns:1fr}
+  .formats{justify-content:flex-start}
+}
