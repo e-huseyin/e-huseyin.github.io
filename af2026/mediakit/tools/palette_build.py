@@ -93,10 +93,34 @@ def column(x, y, w, fill_attr):
     return f'<g transform="translate({x:.1f} {y:.1f}) scale({k:.5f})" {fill_attr}>{paths}</g>'
 
 
-# Allineamento di «20 EDIZIONE»: in alto con le maiuscole del logo, a destra sul margine
+# Blocco «20th EDITION» davanti al capitello: in alto allineato alle maiuscole del logo, a destra sul margine
 CAP = 0.7275390625                     # altezza delle maiuscole di Inter / em
 POSTER_RIGHT = 778                     # margine destro della locandina (840 - 62)
-COL_SCALE = 1.3                        # capitello: 1,3 volte la larghezza del «20»
+COL_W = 140                            # larghezza del capitello sulla locandina (unità della locandina)
+COL_OPACITY = .5                       # capitello schiarito, così il testo davanti si legge
+FB = 'font-family="AFInter,Inter,Arial,sans-serif" font-weight="700"'
+
+
+def edition_block():
+    """Capitello al 50% + «20th» (bianco con bordo) + «EDITION» sotto, centrati sull'asse del capitello.
+    La base di EDITION coincide con il fondo del capitello. Coordinate locali: angolo in alto a sinistra = (0, 0),
+    larghezza COL_W. Colore: {{ACC}}."""
+    wc = COL_W
+    hc = wc * 333.7 / 492
+    cx = wc / 2
+    size, esize, gap = 40, 9.5, 7
+    w20 = text_width('20', size, '700', -4)
+    yed = hc - .5
+    y20 = yed - gap - CAP * esize
+    x20 = cx - w20 / 2
+    t20 = f'x="{x20:.1f}" y="{y20:.1f}" {FB} font-size="{size}" letter-spacing="-4" stroke-linejoin="round"'
+    return (f'<g opacity="{COL_OPACITY}">' + column(0, 0, wc, 'fill="{{ACC}}"') + '</g>'
+            f'<text {t20} fill="#FFFFFF" stroke="#FFFFFF" stroke-width="7">20</text>'
+            f'<text {t20} fill="#FFFFFF" stroke="{{{{ACC}}}}" stroke-width="1.7">20</text>'
+            f'<text x="{x20 + w20 + 2:.1f}" y="{y20 - size * .42:.1f}" {FB} font-size="{size * .34:.1f}" '
+            f'fill="{{{{ACC}}}}" stroke="#FFFFFF" stroke-width="5" paint-order="stroke">th</text>'
+            f'<text x="{cx + .8:.1f}" y="{yed:.1f}" text-anchor="middle" {FB} font-size="{esize}" letter-spacing="1.6" '
+            f'fill="{{{{ACC}}}}" stroke="#FFFFFF" stroke-width="5" paint-order="stroke">EDITION</text>')
 
 
 def poster_tpl():
@@ -105,23 +129,26 @@ def poster_tpl():
     s = re.sub(r'(<text x="66" y="219"[^>]*)fill="\{\{INK\}\}"([^>]*>)2026</text>', rf'\1fill="{BLUE}"\g<2>2026</text>', s, count=1)
     assert WORD in s and re.search(rf'fill="{BLUE}"[^>]*>2026</text>', s), 'titolo locandina non trovato'
     top = 158 - CAP * 82                                   # parte alta di ARCHEO.FOSS
-    y20 = top + CAP * 74
-    s, n1 = re.subn(r'<text x="682" y="212"([^>]*)>20</text>', rf'<text x="{POSTER_RIGHT}" y="{y20:.1f}" text-anchor="end"\1>20</text>', s)
-    yed = y20 + 29
-    w20 = text_width('20', 74, '700')
-    cx = POSTER_RIGHT - w20 / 2                            # centro del «20»: EDIZIONE e capitello centrati qui
-    # +1: metà della spaziatura tra le lettere (2) che il browser aggiunge anche dopo l'ultima lettera
-    s, n2 = re.subn(r'<text x="664" y="241"([^>]*)>EDIZIONE</text>',
-                    rf'<text x="{cx + 1:.1f}" y="{yed:.1f}" text-anchor="middle"\1>EDIZIONE</text>', s)
+    s, n1 = re.subn(r'<text x="682" y="212"[^>]*>20</text>', '', s)
+    s, n2 = re.subn(r'<text x="664" y="241"[^>]*>EDIZIONE</text>', '', s)
     assert n1 == n2 == 1, ('20/EDIZIONE non trovati', n1, n2)
-    wc = w20 * COL_SCALE
-    icon = column(cx - wc / 2, yed + 16, wc, 'fill="{{ACC}}"')
-    s = s.replace('EDIZIONE</text>', 'EDIZIONE</text>' + icon, 1)
+    s = s.replace('</svg>', f'<g transform="translate({POSTER_RIGHT - COL_W} {top:.1f})">{edition_block()}</g></svg>', 1)
     return with_fonts(s)
 
 
+# Numeri dei nodi (01–11): troppo piccoli sui formati piccoli (4–5 pt), quindi lì restano solo i pallini.
+NO_LABELS_POSTERS = {'a5'}             # locandine senza numeri
+LABEL_RE = r'<text x="[\d.]+" y="[\d.]+" font-size="12" fill="\{\{NODE\}\}">\d\d</text>'
+
+
+def strip_labels(svg):
+    svg, n = re.subn(LABEL_RE, '', svg)
+    assert n == 11, ('numeri dei nodi trovati', n)
+    return svg
+
+
 def badge_a6_tpl():
-    s = tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8'))
+    s = strip_labels(tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8')))
     assert '>ArcheoFOSS 2026</text>' in s
     return with_fonts(s.replace('>ArcheoFOSS 2026</text>', f'>{WORD26}</text>', 1))
 
@@ -143,8 +170,8 @@ def badge_a7_tpl(a6_tokens):
     for (cx, cy), lab in zip(nodes, labels):
         X = (20 + .87 * float(cx) - 32) * S
         Y = T + (312 + .87 * float(cy) - 451.2) * SY
-        art += (f'<circle cx="{X:.2f}" cy="{Y:.2f}" r="{5.5 * k:.2f}" fill="{{{{NODE}}}}" stroke="#FFFFFF" stroke-width="{2 * k:.2f}"/>'
-                f'<text x="{X + 10 * k:.2f}" y="{Y - 9 * k:.2f}" {F} font-size="{12 * k:.2f}" fill="{{{{NODE}}}}">{lab}</text>')
+        art += f'<circle cx="{X:.2f}" cy="{Y:.2f}" r="{5.5 * k:.2f}" fill="{{{{NODE}}}}" stroke="#FFFFFF" stroke-width="{2 * k:.2f}"/>'
+        # numeri dei nodi non disegnati: sul badge sarebbero circa 4 pt
     assert len(nodes) == len(labels) == 11, (len(nodes), len(labels))
     q = a6_tokens.index('<g transform="translate(430 1282)')
     qr = a6_tokens[q:a6_tokens.index('</g>', q) + 4].replace(
@@ -194,17 +221,14 @@ def screensaver(p):
     s = s.replace('<text class="brand" x="104" y="193">ArcheoFOSS</text>', f'<text class="brand" x="104" y="193">{WORD}</text>', 1)
     s = s.replace('.year{font-size:109px;font-weight:400;letter-spacing:-3px;fill:var(--ink)}',
                   f'.year{{font-size:109px;font-weight:400;letter-spacing:-3px;fill:{BLUE}}}', 1)
-    top = 193 - CAP * 155
-    y20 = top + CAP * 140
-    s = s.replace('<text class="edition-number" x="1770" y="193" text-anchor="middle">20</text>',
-                  f'<text class="edition-number" x="1770" y="{y20:.1f}" text-anchor="middle">20</text>', 1)
-    yed = y20 + 54
-    w20 = text_width('20', 140, '600', -7)
-    wc = w20 * COL_SCALE
-    icon = column(1770 - wc / 2, yed + 22, wc, 'style="fill:var(--accent)"')
-    s = s.replace('<text class="edition-label" x="1770" y="247" text-anchor="middle">EDITION</text>',
-                  f'<text class="edition-label" x="1770" y="{yed:.1f}" text-anchor="middle">EDITION</text>' + icon, 1)
-    assert 'translate(' in s and f'y="{y20:.1f}"' in s and f'y="{yed:.1f}"' in s, 'screensaver: 20/EDITION non trovati'
+    top = 193 - CAP * 155                                  # parte alta di ARCHEO.FOSS nello screensaver
+    k = 155 / 82                                           # stessa proporzione logo/blocco della locandina
+    right = 1920 - 104                                     # margine destro = margine sinistro del logo
+    n = s.count('<text class="edition-number"') + s.count('<text class="edition-label"')
+    s = re.sub(r'\s*<text class="edition-(?:number|label)"[^>]*>[^<]*</text>', '', s)
+    blk = edition_block().replace('{{ACC}}', p['ACC'])
+    s = s.replace('<g id="typography">', f'<g id="typography"><g transform="translate({right - COL_W * k:.1f} {top:.1f}) scale({k:.4f})">{blk}</g>', 1)
+    assert n == 2 and 'EDITION</text></g>' in s, 'screensaver: 20/EDITION non trovati'
     for old in ('i<11', WORD, '--node:', 'fill:var(--node)', '{u:.680,line:15}\n'):
         assert old in s, old
     return s
@@ -255,7 +279,8 @@ def main():
     for pid, p in PALETTES.items():
         d = OUT / pid; d.mkdir(parents=True, exist_ok=True)
         for k, (w, h) in POSTERS.items():
-            s = re.sub(r'width="[\d.]+mm" height="[\d.]+mm"', f'width="{w}mm" height="{h}mm"', paint(poster, p), count=1)
+            tpl = strip_labels(poster) if k in NO_LABELS_POSTERS else poster
+            s = re.sub(r'width="[\d.]+mm" height="[\d.]+mm"', f'width="{w}mm" height="{h}mm"', paint(tpl, p), count=1)
             (d / f'locandina-{k}.svg').write_text(s, encoding='utf-8')
         for name, tpl in (('logo', logo), ('simbolo-20', symbol), ('qr-programma', qr), ('badge-a6', a6), ('badge-a7', a7)):
             (d / f'{name}.svg').write_text(paint(tpl, p), encoding='utf-8')

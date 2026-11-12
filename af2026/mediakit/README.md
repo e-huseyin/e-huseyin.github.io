@@ -34,7 +34,7 @@ Run `../.venv/bin/python tools/programme_build.py` after changing the programme;
 
 ## How the files are made
 
-`tools/palette_build.py` builds everything in `assets/palette/` from the masters in `assets/source/` (`master-poster.svg`, `master-badge-a6.svg`, `master-logo-20.svg`, `master-qr.svg`, `master-colonna.svg`, `screensaver-master.html`). It removes node 12, sets the new logo, aligns «20 EDIZIONE» with the top of the logo and adds the Ionic capital (`master-colonna.svg`, in the accent colour) below it on the poster and the screensaver, applies the three colour combinations and embeds the Inter font (taken from the screensaver) in every SVG. PNGs are made with Pillow (QR) and macOS `qlmanage` (logo, symbol). Run it again after changing a master:
+`tools/palette_build.py` builds everything in `assets/palette/` from the masters in `assets/source/` (`master-poster.svg`, `master-badge-a6.svg`, `master-logo-20.svg`, `master-qr.svg`, `master-colonna.svg`, `screensaver-master.html`). It removes node 12, sets the new logo, places the «20th EDITION» mark on the poster and the screensaver (Ionic capital `master-colonna.svg` at 50% in the accent colour, «20th» white with an accent outline and «EDITION» in front of it, centred on the capital, EDITION on the bottom line of the capital, top aligned with the logo; settings `COL_W`, `COL_OPACITY`), removes the node numbers (01–11) on the A5 poster and on both badges, where they would be 4–5 pt (only the dots remain; list in `NO_LABELS_POSTERS`), applies the three colour combinations and embeds the Inter font (taken from the screensaver) in every SVG. PNGs are made with Pillow (QR) and macOS `qlmanage` (logo, symbol). Run it again after changing a master:
 
 ```
 ../.venv/bin/python tools/palette_build.py
