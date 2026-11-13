@@ -4,7 +4,7 @@ One page. Open `index.html` in a browser. The buttons at the top right show one 
 
 | Button | Content | Files |
 | --- | --- | --- |
-| Locandina | Poster in six sizes, A0–A5, each with its own SVG download | `palette/<combination>/locandina-a0.svg` … `-a5.svg` |
+| Locandina | Poster in six sizes, A0–A5, each with its own SVG download (English text, University of Bologna / DiSCi logo, programme QR) | `palette/<combination>/locandina-a0.svg` … `-a5.svg` |
 | Programma | Folded A3 programme: half fold, then U-fold in three (closed 99 × 210 mm). Complete programme, no abbreviations. One 2-page PDF (page 1 outside, page 2 inside) plus the two SVGs, in the chosen colours | `palette/<combination>/programma-a3-fronte-retro.pdf`, `programma-esterno.svg`, `programma-interno.svg` |
 | Logo | ARCHEO.FOSS 2026 logo and the 20th-edition symbol (20, strata, 11 nodes) | `palette/<combination>/logo.svg/.png`, `simbolo-20.svg/.png` |
 | QR Code | One card per code, link written below. To add one, copy the `<figure class="qr-card">` block in `index.html` | `palette/<combination>/qr-programma.svg/.png` |
@@ -26,6 +26,7 @@ In every combination the logo is ARCHEO.FOSS 2026 with the dot and «2026» in e
 `tools/programme_build.py` lays out the full programme from `assets/source/programme.md` (latest version, from `programmeaggiornato.md`), measuring every line on the real Inter font, and writes the two SVGs and the PDF (Inter embedded) for each colour combination.
 
 - Outside face: top row upside down = 04 flap «At a glance» (97 mm), 05 practical information with QR, 06 cover; bottom row 01–03 = 1 December with workshops (01 is 97 mm).
+- Cover (06): University of Bologna / DiSCi logo top left and the «20th EDITION» capital top right, same height (15 mm); ARCHEO.FOSS 2026 on one line, full width; subtitle; the same 9 mm gap between these three rows (`COVER_GAP`); strata with the large pale «20th». In the PDF the capital uses the colour already lightened to 50% and its texts are outlines, because the PDF converter ignores transparency and text outlines.
 - Inside face: 30 November in three columns aligned with the folds; no text on the horizontal fold.
 - Sizes: talk titles 7.5 pt, names and times 7 pt, «At a glance» 6.6 pt. Margins 7 mm, no bleed needed (nothing touches the edge).
 - Chairs listed only by surname in the source are written in full (Andrea Simeoni; Marco Cavalazzi, Tyler Duane Johnson, Cristiano Putzolu).
@@ -34,13 +35,13 @@ Run `../.venv/bin/python tools/programme_build.py` after changing the programme;
 
 ## How the files are made
 
-`tools/palette_build.py` builds everything in `assets/palette/` from the masters in `assets/source/` (`master-poster.svg`, `master-badge-a6.svg`, `master-logo-20.svg`, `master-qr.svg`, `master-colonna.svg`, `screensaver-master.html`). It removes node 12, sets the new logo, places the «20th EDITION» mark on the poster and the screensaver (Ionic capital `master-colonna.svg` at 50% in the accent colour, «20th» white with an accent outline and «EDITION» in front of it, centred on the capital, EDITION on the bottom line of the capital, top aligned with the logo; settings `COL_W`, `COL_OPACITY`), removes the node numbers (01–11) on the A5 poster and on both badges, where they would be 4–5 pt (only the dots remain; list in `NO_LABELS_POSTERS`), applies the three colour combinations and embeds the Inter font (taken from the screensaver) in every SVG. PNGs are made with Pillow (QR) and macOS `qlmanage` (logo, symbol). Run it again after changing a master:
+`tools/palette_build.py` builds everything in `assets/palette/` from the masters in `assets/source/` (`master-poster.svg`, `master-badge-a6.svg`, `master-logo-20.svg`, `master-qr.svg`, `master-colonna.svg`, `logo-unibo-disci.png`, `screensaver-master.html`). It removes node 12, sets the new logo, places the «20th EDITION» mark on the poster and the screensaver (screensaver header in one row: ARCHEO.FOSS 2026 on the left at 60% of the width `SS_TITLE`, University logo and capital on the right with the same height, subtitle below; Ionic capital `master-colonna.svg` at 50% in the accent colour, «20th» white with an accent outline and «EDITION» in front of it, centred on the capital, EDITION on the bottom line of the capital, top aligned with the logo; settings `COL_W`, `COL_OPACITY`), lays out the poster (`poster_tpl`: University of Bologna / DiSCi logo `logo-unibo-disci.png` top left and the capital top right at the same height, ARCHEO.FOSS 2026 full width below, subtitle, strata band, a reference line above the date, the date full line width, VENUE on the left and the programme QR on the right aligned to the line ends, archeofoss.org; one 10 mm margin on every side, settings `P_M`, `P_HEAD_H`, `P_QR`), extends the strata lines to the left and right edges of the sheet (same formula as the master, `strata_paths`) and adds «th» to the large pale «20» behind them (`BIG_20TH_SCALE` = 80%; the same «20th» is used on the symbol, both badges and the screensaver, ending inside the edge), removes the node numbers (01–11) on the A5 poster and on both badges, where they would be 4–5 pt (only the dots remain; list in `NO_LABELS_POSTERS`), applies the three colour combinations and embeds the Inter font (taken from the screensaver) in every SVG. PNGs are made with Pillow (QR) and macOS `qlmanage` (logo, symbol). Run it again after changing a master:
 
 ```
 ../.venv/bin/python tools/palette_build.py
 ```
 
-SVGs are RGB with no bleed: ask the print shop for a colour proof and bleed. Print at 100%.
+SVGs are RGB with no bleed: ask the print shop for a colour proof and bleed. On the poster the strata lines touch the left and right edges, so bleed (usually 3 mm) and a safety margin for the text are needed. Print at 100%.
 
 Older files (reveal.js slides, old posters, panel cards, old brochure and scripts) were moved to `../af2026mediakit-archivio-2026-11-09/`; the full previous version is in `../af2026mediakit-backup-2026-11-09/`. The site needs only `index.html`, `assets/` and, to rebuild the files, `tools/` and `assets/source/`.
 

@@ -220,30 +220,88 @@ def paragraph(x, y, text, w, weight='400', pt=8.0, fill='{{INK}}', lead=1.3):
     return out, y
 
 
-def art_group():
-    """Linee stratigrafiche, 11 nodi e «20» chiaro, dalla locandina (coordinate della locandina, larga 840)."""
+COVER_W = OUT_W[2]                         # larghezza della copertina
+COVER_GAP = 90                             # copertina: stesso spazio (9 mm) loghi -> titolo -> sottotitolo
+COVER_HEAD_H = 150                         # copertina: altezza del logo dell'università e del capitello
+
+
+def text_path(text, weight, size, x, y, ls=0.0, anchor='start'):
+    """Testo convertito in tracciato (il convertitore PDF non disegna i contorni dei testi)."""
+    from fontTools.pens.svgPathPen import SVGPathPen
+    from fontTools.pens.transformPen import TransformPen
+    f, cmap = _FONTS[weight], _CMAP[weight]
+    gs, hm, k = f.getGlyphSet(), f['hmtx'], size / f['head'].unitsPerEm
+    if anchor == 'middle':
+        x -= (width(text, weight, size) + ls * (len(text) - 1)) / 2
+    pen = SVGPathPen(gs)
+    for c in text:
+        g = cmap[ord(c)]
+        gs[g].draw(TransformPen(pen, (k, 0, 0, -k, x, y)))
+        x += hm[g][0] * k + ls
+    return pen.getCommands()
+
+
+def edition_block_pdf():
+    """Stesso blocco «20th EDITION» della locandina (PB.edition_block), ma adatto al PDF: capitello col colore già
+    schiarito al 50% invece della trasparenza, testi in tracciati, bordo bianco disegnato prima del testo."""
+    wc = PB.COL_W; hc = wc * 333.7 / 492; cx = wc / 2
+    size, esize, gap = 40, 9.5, 7
+    w20 = PB.text_width('20', size, '700', -4)
+    yed = hc - .5
+    y20 = yed - gap - PB.CAP * esize
+    x20 = cx - w20 / 2
+    d20 = text_path('20', '700', size, x20, y20, -4)
+    dth = text_path('th', '700', size * .34, x20 + w20 + 2, y20 - size * .42)
+    ded = text_path('EDITION', '700', esize, cx + .8, yed, 1.6, 'middle')
+    halo = 'fill="#FFFFFF" stroke="#FFFFFF" stroke-linejoin="round"'
+    return (PB.column(0, 0, wc, 'fill="{{ACC_HALF}}"')
+            + f'<path d="{d20}" {halo} stroke-width="7"/>'
+            + f'<path d="{d20}" fill="#FFFFFF" stroke="{{{{ACC}}}}" stroke-width="1.7" stroke-linejoin="round"/>'
+            + f'<path d="{dth}" {halo} stroke-width="5"/><path d="{dth}" fill="{{{{ACC}}}}"/>'
+            + f'<path d="{ded}" {halo} stroke-width="5"/><path d="{ded}" fill="{{{{ACC}}}}"/>')
+
+
+def art_group(end=(COVER_W - PAD) * 840 / COVER_W):
+    """Linee stratigrafiche, 11 nodi e grande «20th» chiaro, dalla locandina (coordinate della locandina, larga 840);
+    il «th» finisce al margine destro della copertina."""
     s = PB.tokenize((PB.SRC / 'master-poster.svg').read_text(encoding='utf-8'))
     i = s.index('<g transform="translate(20,312) scale(.87)">'); j = s.index('</g>', i) + 4
-    g = s[i:j]
+    g = PB.sub_20th(s[i:j], end)
     g = g.replace('font-weight="700"', f'font-family="{FAM["700"]}"')
     # «20» chiaro: colore già schiarito invece della trasparenza (il convertitore PDF ignora l'opacità dei testi)
     g, n = re.subn(r'fill="\{\{ACC\}\}"( [^>]*?)? opacity="\.075"', r'fill="{{ACC_FAINT}}"\1', g)
-    assert n == 1, ('«20» chiaro non trovato', n)
+    assert n == 2, ('«20th» chiaro non trovato', n)
+    # linee: colore già schiarito invece della trasparenza (il convertitore PDF ignora l'opacità dei tracciati)
+    g, n = re.subn(r'stroke="\{\{INK\}\}"( [^>]*?) opacity="([\d.]+)"', r'stroke="{{INK@\2}}"\1', g)
+    assert n == 20, ('linee non trovate', n)
     g = re.sub(r'<text (?![^>]*font-family)', f'<text font-family="{FAM["400"]}" ', g)
     return g
 
 
 def panel_cover(w):
-    out = logo_line(PAD, 300, 26, two_lines=True)
-    out.append(T(PAD, 520, '20th edition', '700', 9.5, '{{ACC2}}'))
-    p, _ = paragraph(PAD, 640, 'International conference on open software, hardware, processes, data and formats in archaeological research',
-                     w - 2 * PAD, '400', 9.5)
+    # testata come la locandina: università a sinistra e capitello «20th EDITION» a destra, alti uguali;
+    # sotto ARCHEO.FOSS 2026 su una riga a tutta larghezza e il sottotitolo, con spazi uguali (COVER_GAP)
+    h, G, tw = COVER_HEAD_H, COVER_GAP, w - 2 * PAD
+    logo = base64.b64encode(PB.UNIBO.read_bytes()).decode()
+    k = h / (PB.COL_W * 333.7 / 492)
+    out = [f'<image x="{PAD}" y="{PAD}" width="{h * PB.UNIBO_RATIO:.1f}" height="{h}" href="data:image/png;base64,{logo}"/>',
+           f'<g transform="translate({w - PAD - PB.COL_W * k:.1f} {PAD}) scale({k:.4f})">{edition_block_pdf()}</g>']
+    size = tw / width('ARCHEO.FOSS 2026', '700', 1)
+    yt = PAD + h + G + PB.CAP * size
+    out += logo_line(PAD, yt, size / PT)
+    p, _ = paragraph(PAD, yt + G + PB.CAP * 9.5 * PT,
+                     'International conference on open software, hardware, processes, data and formats in archaeological research',
+                     tw, '400', 9.5)
     out += p
     sc = w / 840
-    out.append(f'<g transform="translate(0 {1000 - 395 * sc:.1f}) scale({sc:.4f})">{art_group()}</g>')
-    out.append(T(PAD, 1740, '30 November – 1 December 2026', '700', 11.5))
-    out.append(T(PAD, 1810, 'Bologna', '400', 11.5))
-    out.append(T(PAD, 1930, 'Conference programme', '700', 9, '{{ACC2}}'))
+    out.append(f'<g transform="translate(0 {1000 - 395 * sc - 120:.1f}) scale({sc:.4f})">{art_group()}</g>')
+    out.append(T(PAD, 1590, '30 November – 1 December 2026', '700', 11.5))
+    # VENUE come sulla locandina
+    out.append(T(PAD, 1700, 'VENUE', '700', 6.5, '{{ACC}}', extra=' letter-spacing="3.8"'))
+    out.append(T(PAD, 1755, 'Department of History and Cultures (DiSCi)', '600', 8.5))
+    out.append(T(PAD, 1800, 'Alma Mater Studiorum – Università di Bologna', '400', 8))
+    out.append(T(PAD, 1845, 'Piazza San Giovanni in Monte 2, 40124 Bologna, Italy', '400', 8))
+    out.append(T(PAD, 1940, 'Conference programme', '700', 9, '{{ACC2}}'))
     out.append(T(PAD, 2010, 'www.archeofoss.org', '600', 8, '{{ACC}}'))
     return out
 

@@ -14,7 +14,7 @@ Cosa cambia rispetto ai master:
 Uso (dalla cartella af2026mediakit):  ../.venv/bin/python tools/palette_build.py
 Richiede: fonttools, brotli, pillow.  Per i PNG di logo e simbolo usa qlmanage (macOS).
 """
-import base64, io, json, re, shutil, subprocess, tempfile
+import base64, io, json, math, re, shutil, subprocess, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -77,6 +77,8 @@ def faint(hexcol, a=FAINT):
 
 def paint(tpl, p):
     tpl = tpl.replace('{{ACC_FAINT}}', faint(p['ACC']))
+    tpl = re.sub(r'\{\{INK@([\d.]+)\}\}', lambda m: faint(p['INK'], float(m.group(1))), tpl)   # linee schiarite nei PDF
+    tpl = tpl.replace('{{ACC_HALF}}', faint(p['ACC'], COL_OPACITY))      # capitello al 50% nei PDF
     for k in ('INK', 'ACC', 'NODE', 'ACC2'):
         tpl = tpl.replace('{{' + k + '}}', p[k])
     return tpl
@@ -123,17 +125,116 @@ def edition_block():
             f'fill="{{{{ACC}}}}" stroke="#FFFFFF" stroke-width="5" paint-order="stroke">EDITION</text>')
 
 
+# Locandina A4 (840 x 1188 unità; A4 = 0,25 mm per unità; gli altri formati sono in scala)
+P_M = 40                               # margine unico su tutti i lati: 10 mm sull'A4
+P_L, P_R = P_M, 840 - P_M              # la riga sopra la data va da P_L a P_R: è il riferimento per allineare tutto
+P_BOT = 1188 - P_M                     # base dell'ultima riga
+P_HEAD_H = 110                         # altezza del logo dell'università e del capitello in cima
+P_GAP = 50                             # stesso spazio: loghi -> maiuscole del titolo e base del titolo -> maiuscole del sottotitolo
+P_QR = 126                             # lato del QR compreso il suo bordo bianco (moduli visibili da 4 a 33 su 37)
+UNIBO = SRC / 'logo-unibo-disci.png'   # logo università + dipartimento (2387 x 891 px), colori originali
+UNIBO_RATIO = 2387 / 891
+POSTER_SUB = ['International conference on open software, hardware,', 'processes, data and formats in archaeological research']
+BIG_20TH_SCALE = .80                   # grande «20th» chiaro dietro le linee: 80% del vecchio «20»
+BIG_20_END = 816                       # dove finiva il vecchio «20» (x sulla locandina): «20th» finisce lì
+
+
+def fit_size(text, weight, ls_ratio, width):
+    """Corpo che fa occupare al testo esattamente `width` (spaziatura tra lettere proporzionale al corpo)."""
+    return 100 * width / text_width(text, 100, weight, -100 * ls_ratio)
+
+
+def strata_y(x, j):
+    """Formula delle 20 linee stratigrafiche (coincide con i tracciati del master, scarto < 0,1)."""
+    return (155 + j * 16 + 67 * math.sin(x / 900 * math.pi * 1.7) * math.exp(-((x - 400) / 420) ** 2)
+            + 26 * math.sin(x / 140 + j * .08))
+
+
+def strata_paths(x0=-30, x1=950, step=5):
+    """Le linee allungate oltre i bordi della locandina (il foglio le taglia esattamente al bordo)."""
+    out = []
+    for j in range(20):
+        d = ' '.join(('M' if i == 0 else 'L') + f'{x:.1f},{strata_y(x, j):.1f}' for i, x in enumerate(range(x0, x1 + 1, step)))
+        w, o = ('1.65', '0.76') if j % 5 == 0 else ('1.05', '0.48')
+        out.append(f'<path d="{d}" fill="none" stroke="{{{{INK}}}}" stroke-width="{w}" opacity="{o}"/>')
+    return ''.join(out)
+
+
+def big_20th(end=BIG_20_END):
+    """Grande «20th» chiaro (coordinate interne del gruppo dell'arte: scala .87, spostamento 20); finisce a `end`."""
+    size = 470 * BIG_20TH_SCALE
+    w20 = text_width('20', size, '700', -40)
+    sth, gap = size * .34, size * .02
+    wth = text_width('th', sth, '700')
+    x = (end - 20) / .87 - (w20 + gap + wth)
+    a = 'fill="{{ACC}}" opacity=".075"'
+    return (f'<text x="{x:.1f}" y="536" font-size="{size:.1f}" font-weight="700" {a} letter-spacing="-40">20</text>'
+            f'<text x="{x + w20 + gap:.1f}" y="{536 - size * .42:.1f}" font-size="{sth:.1f}" font-weight="700" {a}>th</text>')
+
+
+OLD_20 = re.compile(r'<text x="342" y="536" font-size="470" font-weight="700" fill="\{\{ACC\}\}" opacity="\.075" letter-spacing="-40">20</text>')
+BADGE_20_END = 990 / 1.36010363 + 32  # sui badge il «th» finisce 60 unità (6 mm) prima del bordo destro
+SYMBOL_20_END = 806                    # simbolo: il «th» finisce 10 unità prima del bordo
+
+
+def sub_20th(svg, end=BIG_20_END):
+    """Sostituisce il grande «20» chiaro del master con «20th»."""
+    svg, n = OLD_20.subn(lambda m: big_20th(end), svg)
+    assert n == 1, ('grande 20 non trovato', n)
+    return svg
+
+
 def poster_tpl():
-    s = tokenize((SRC / 'master-poster.svg').read_text(encoding='utf-8'))
-    s = s.replace('letter-spacing="-4">ArcheoFOSS</text>', f'letter-spacing="-4">{WORD}</text>', 1)
-    s = re.sub(r'(<text x="66" y="219"[^>]*)fill="\{\{INK\}\}"([^>]*>)2026</text>', rf'\1fill="{BLUE}"\g<2>2026</text>', s, count=1)
-    assert WORD in s and re.search(rf'fill="{BLUE}"[^>]*>2026</text>', s), 'titolo locandina non trovato'
-    top = 158 - CAP * 82                                   # parte alta di ARCHEO.FOSS
-    s, n1 = re.subn(r'<text x="682" y="212"[^>]*>20</text>', '', s)
-    s, n2 = re.subn(r'<text x="664" y="241"[^>]*>EDIZIONE</text>', '', s)
-    assert n1 == n2 == 1, ('20/EDIZIONE non trovati', n1, n2)
-    s = s.replace('</svg>', f'<g transform="translate({POSTER_RIGHT - COL_W} {top:.1f})">{edition_block()}</g></svg>', 1)
-    return with_fonts(s)
+    """Locandina, testata 3: in cima università (sinistra) e capitello «20th EDITION» (destra); sotto ARCHEO.FOSS 2026
+    a tutta larghezza; sottotitolo; linee ondulate al vivo con 11 pallini e grande «20th»; riga di riferimento;
+    data a tutta riga; VENUE a sinistra e QR del programma a destra; archeofoss.org in basso."""
+    F4 = 'font-family="Inter,Arial,sans-serif" font-weight="400"'
+    F6 = 'font-family="Inter,Arial,sans-serif" font-weight="600"'
+    F7 = 'font-family="Inter,Arial,sans-serif" font-weight="700"'
+    L, R, M, BOT, W = P_L, P_R, P_M, P_BOT, P_R - P_L
+    # arte del master: linee allungate fino ai bordi + grande «20th»
+    master = tokenize((SRC / 'master-poster.svg').read_text(encoding='utf-8'))
+    i = master.index('<g transform="translate(20,312) scale(.87)">'); j = master.index('</g>', i) + 4
+    art, n3 = re.subn(r'<path d="M15\.0,[^"]+" fill="none" stroke="\{\{INK\}\}" stroke-width="[\d.]+" opacity="[\d.]+"/>', '', master[i:j])
+    assert n3 == 20, ('linee non trovate', n3)
+    art = art.replace('<g transform="translate(20,312) scale(.87)">', '<g transform="translate(20,312) scale(.87)">' + strata_paths(), 1)
+    art = sub_20th(art)
+    # testata
+    H = P_HEAD_H
+    k = H / (COL_W * 333.7 / 492)
+    logo = base64.b64encode(UNIBO.read_bytes()).decode()
+    s_t = fit_size('ARCHEO.FOSS 2026', '700', 1 / 20.5, W)
+    y_t = M + H + P_GAP + CAP * s_t                        # base del titolo
+    head = [
+        f'<image x="{L}" y="{M}" width="{H * UNIBO_RATIO:.1f}" height="{H}" href="data:image/png;base64,{logo}"/>',
+        f'<g transform="translate({R - COL_W * k:.1f} {M}) scale({k:.4f})">{edition_block()}</g>',
+        f'<text x="{L}" y="{y_t:.1f}" {F7} font-size="{s_t:.2f}" letter-spacing="{-s_t / 20.5:.2f}" fill="{{{{INK}}}}">'
+        f'{WORD}<tspan fill="{BLUE}"> 2026</tspan></text>',
+        *[f'<text x="{L}" y="{y_t + P_GAP + CAP * 21 + 28 * n:.1f}" {F4} font-size="21" fill="{{{{INK}}}}">{t}</text>'
+          for n, t in enumerate(POSTER_SUB)],
+    ]
+    # parte bassa: tutto allineato alla riga sopra la data
+    ds = fit_size('30 November – 1 December 2026', '700', 1 / 44, W)
+    y_date = BOT - 278 + 12 + CAP * ds          # la data resta dov'è
+    rule = round(y_date - CAP * ds - P_GAP, 1)  # riga → data = P_GAP, come in testata
+    qr = (SRC / 'master-qr.svg').read_text(encoding='utf-8').replace('#252B29', '{{INK}}')
+    qr_inner = qr[qr.index('>') + 1:qr.rindex('</svg>')]
+    foot = [
+        f'<path d="M{L},{rule}H{R}" stroke="{{{{INK}}}}" stroke-width="1.2"/>',
+        f'<text x="{L}" y="{y_date:.1f}" {F7} font-size="{ds:.2f}" letter-spacing="{-ds / 44:.2f}" fill="{{{{INK}}}}">30 November – 1 December 2026</text>',
+        f'<text x="{L}" y="{BOT - 158}" {F7} font-size="12" letter-spacing="2" fill="{{{{ACC}}}}">VENUE</text>',
+        f'<text x="{L}" y="{BOT - 128}" {F6} font-size="19" fill="{{{{INK}}}}">Department of History and Cultures (DiSCi)</text>',
+        f'<text x="{L}" y="{BOT - 102}" {F4} font-size="17" fill="{{{{INK}}}}">Alma Mater Studiorum – Università di Bologna</text>',
+        f'<text x="{L}" y="{BOT - 78}" {F4} font-size="17" fill="{{{{INK}}}}">Piazza San Giovanni in Monte 2, 40124 Bologna, Italy</text>',
+        f'<text x="{L}" y="{BOT}" {F7} font-size="24" fill="{{{{ACC}}}}">archeofoss.org</text>',
+        f'<text x="{R + 2}" y="{BOT - 158}" text-anchor="end" {F7} font-size="12" letter-spacing="2" fill="{{{{ACC}}}}">PROGRAMME</text>',
+        f'<g transform="translate({R - P_QR * 33 / 37:.1f} {BOT - 150}) scale({P_QR / 37:.4f})">{qr_inner}</g>',
+        f'<text x="{R}" y="{BOT}" text-anchor="end" {F4} font-size="13" fill="{{{{INK}}}}">archeofoss.org/2026/programme</text>',
+    ]
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 840 1188" role="img" '
+           'aria-label="ArcheoFOSS 2026 poster"><rect width="840" height="1188" fill="#FFFFFF"/>'
+           + ''.join(head) + f'<g font-family="Inter,Arial,sans-serif">{art}</g>' + ''.join(foot) + '</svg>')
+    return with_fonts(svg)
 
 
 # Numeri dei nodi (01–11): troppo piccoli sui formati piccoli (4–5 pt), quindi lì restano solo i pallini.
@@ -148,7 +249,7 @@ def strip_labels(svg):
 
 
 def badge_a6_tpl():
-    s = strip_labels(tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8')))
+    s = sub_20th(strip_labels(tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8'))), BADGE_20_END)
     assert '>ArcheoFOSS 2026</text>' in s
     return with_fonts(s.replace('>ArcheoFOSS 2026</text>', f'>{WORD26}</text>', 1))
 
@@ -156,6 +257,7 @@ def badge_a6_tpl():
 def badge_a7_tpl(a6_tokens):
     F = 'font-family="Inter,Arial,sans-serif"'
     art = a6_tokens[a6_tokens.index('<g transform="translate(0 345)'):a6_tokens.index('<text id="badge-name"')]
+    art = sub_20th(art, BADGE_20_END)
     # Fascia a tutta larghezza, schiacciata in verticale (KY) per stare tra intestazione (y<122) e nome (y>578).
     # Cerchi ed etichette dei nodi vengono tolti dal gruppo e ridisegnati senza deformazione.
     S, T, KY = 1.36010363, 196, 1.06
@@ -203,11 +305,15 @@ def logo_tpl():
 
 
 def symbol_tpl():
-    return with_fonts(tokenize((SRC / 'master-logo-20.svg').read_text(encoding='utf-8')))
+    return with_fonts(sub_20th(tokenize((SRC / 'master-logo-20.svg').read_text(encoding='utf-8')), SYMBOL_20_END))
 
 
 def qr_tpl():
     return (SRC / 'master-qr.svg').read_text(encoding='utf-8').replace('#252B29', '{{INK}}')
+
+
+SS_TITLE = .60                         # screensaver: titolo al 60% della larghezza tra i margini
+SS_SUB = 34                            # screensaver: corpo del sottotitolo (px)
 
 
 def screensaver(p):
@@ -218,17 +324,35 @@ def screensaver(p):
     s = s.replace('.node-label{fill:var(--accent)', '.node-label{fill:var(--node)', 1)
     s = s.replace(',\n  {u:.889,line:11},{u:.680,line:15},{u:.901,line:18}', ',\n  {u:.889,line:11},{u:.680,line:15}', 1)
     s = s.replace('for(let i=0;i<12;i++){', 'for(let i=0;i<11;i++){', 1)
-    s = s.replace('<text class="brand" x="104" y="193">ArcheoFOSS</text>', f'<text class="brand" x="104" y="193">{WORD}</text>', 1)
-    s = s.replace('.year{font-size:109px;font-weight:400;letter-spacing:-3px;fill:var(--ink)}',
-                  f'.year{{font-size:109px;font-weight:400;letter-spacing:-3px;fill:{BLUE}}}', 1)
-    top = 193 - CAP * 155                                  # parte alta di ARCHEO.FOSS nello screensaver
-    k = 155 / 82                                           # stessa proporzione logo/blocco della locandina
-    right = 1920 - 104                                     # margine destro = margine sinistro del logo
-    n = s.count('<text class="edition-number"') + s.count('<text class="edition-label"')
-    s = re.sub(r'\s*<text class="edition-(?:number|label)"[^>]*>[^<]*</text>', '', s)
+    # una riga: ARCHEO.FOSS 2026 a sinistra; a destra università e capitello alti uguali (il capitello sul margine);
+    # maiuscole del titolo centrate sull'altezza dei loghi; sotto il sottotitolo
+    L, R, top, H, G, GL = 104, 1920 - 104, 90, 120, 50, 48
+    st = fit_size('ARCHEO.FOSS 2026', '700', 1 / 20.5, R - L) * SS_TITLE
+    yt = top + (H + CAP * st) / 2
+    ys = top + H + G + CAP * SS_SUB
+    k = H / (COL_W * 333.7 / 492)
+    cw, uw = COL_W * k, H * UNIBO_RATIO
+    logo = base64.b64encode(UNIBO.read_bytes()).decode()
     blk = edition_block().replace('{{ACC}}', p['ACC'])
-    s = s.replace('<g id="typography">', f'<g id="typography"><g transform="translate({right - COL_W * k:.1f} {top:.1f}) scale({k:.4f})">{blk}</g>', 1)
-    assert n == 2 and 'EDITION</text></g>' in s, 'screensaver: 20/EDITION non trovati'
+    typo = (f'<g id="typography">'
+            f'<text x="{L}" y="{yt:.1f}" font-size="{st:.1f}" font-weight="700" letter-spacing="{-st / 20.5:.2f}" fill="var(--ink)">'
+            f'{WORD}<tspan fill="{BLUE}"> 2026</tspan></text>'
+            f'<image x="{R - cw - GL - uw:.1f}" y="{top}" width="{uw:.1f}" height="{H}" href="data:image/png;base64,{logo}"/>'
+            f'<g transform="translate({R - cw:.1f} {top}) scale({k:.4f})">{blk}</g>'
+            + ''.join(f'<text class="subtitle" x="{L}" y="{ys + SS_SUB * 1.35 * n:.1f}" style="font-size:{SS_SUB}px">{t}</text>'
+                      for n, t in enumerate(POSTER_SUB)) + '</g>')
+    assert L + text_width('ARCHEO.FOSS 2026', st, '700', -st / 20.5) < R - cw - GL - uw - 60, 'screensaver: titolo e loghi si toccano'
+    i = s.index('<g id="typography">'); j = s.index('</g>', s.index('class="edition-label"')) + 4
+    s = s[:i] + typo + s[j:]
+    # grande «20th» chiaro al posto del «20», all'80%, finisce al margine destro
+    size, ls = 650 * BIG_20TH_SCALE, -48 * BIG_20TH_SCALE
+    w20 = text_width('20', size, '700', ls)
+    sth, gap = size * .34, size * .02
+    x = R - (w20 + gap + text_width('th', sth, '700'))
+    wm = (f'<text class="watermark" x="{x:.1f}" y="1050" style="font-size:{size:.0f}px;font-weight:700;letter-spacing:{ls:.1f}px" aria-hidden="true">20</text>'
+          f'<text class="watermark" x="{x + w20 + gap:.1f}" y="{1050 - size * .42:.1f}" style="font-size:{sth:.0f}px;font-weight:700;letter-spacing:0" aria-hidden="true">th</text>')
+    s, n = re.subn(r'<text class="watermark" x="1088" y="1050" aria-hidden="true">20</text>', wm, s)
+    assert n == 1 and 'EDITION</text></g>' in s and 'class="brand"' not in s, 'screensaver: testata o 20 non trovati'
     for old in ('i<11', WORD, '--node:', 'fill:var(--node)', '{u:.680,line:15}\n'):
         assert old in s, old
     return s
