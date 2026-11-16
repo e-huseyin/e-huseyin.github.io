@@ -162,8 +162,8 @@ def draw_units(placed):
 
 # ---------------------------------------------------------------- cornici
 PAD = 70                                   # margine interno di ogni pannello
-OUT_W = [970, 1000, 1000]                  # esterno: 04/01 più stretti (aletta)
-IN_W = [1000, 1000, 970]                   # interno: specchio dell'esterno
+OUT_W = [970, 1000, 1000]                  # esterno, colonne da sinistra: la prima (97 mm) è l'aletta
+IN_W = [970, 1000, 1000]                   # interno prima del giro di 180°: girato diventa 1000-1000-970, specchio dell'esterno
 HEAD_IN = 400                              # spazio per l'intestazione del lato interno
 FOLD = 2100
 
@@ -220,9 +220,10 @@ def paragraph(x, y, text, w, weight='400', pt=8.0, fill='{{INK}}', lead=1.3):
     return out, y
 
 
-COVER_W = OUT_W[2]                         # larghezza della copertina
-COVER_GAP = 90                             # copertina: stesso spazio (9 mm) loghi -> titolo -> sottotitolo
-COVER_HEAD_H = 150                         # copertina: altezza del logo dell'università e del capitello
+COVER_W = OUT_W[0]                         # larghezza della copertina (colonna di sinistra, facciata 3)
+COVER_GAP = 90                             # copertina: spazio (9 mm) loghi -> titolo
+COVER_GAP2 = 140                           # copertina: spazio (14 mm) titolo -> sottotitolo
+COVER_HEAD_H = 185                         # copertina: altezza del logo dell'università e del capitello
 
 
 def text_path(text, weight, size, x, y, ls=0.0, anchor='start'):
@@ -289,7 +290,7 @@ def panel_cover(w):
     size = tw / width('ARCHEO.FOSS 2026', '700', 1)
     yt = PAD + h + G + PB.CAP * size
     out += logo_line(PAD, yt, size / PT)
-    p, _ = paragraph(PAD, yt + G + PB.CAP * 9.5 * PT,
+    p, _ = paragraph(PAD, yt + COVER_GAP2 + PB.CAP * 9.5 * PT,
                      'International conference on open software, hardware, processes, data and formats in archaeological research',
                      tw, '400', 9.5)
     out += p
@@ -313,24 +314,62 @@ def label_text(out, y, label, text, w, pt=8.0):
     return y + 70
 
 
+ROOMS = ['Aula Prodi', 'Aula Specola', 'Aula Morandi', 'Aula Capitani', 'Aula Gambi']
+HOSTED_BY = ['DArchLab,', 'Digital Archaeology Laboratory,', 'Dipartimento di Storia Culture Civiltà,',
+             'Alma Mater Studiorum – Università di Bologna']
+ORGANISING = ['Department of History and Cultures, Alma Mater Studiorum University of Bologna', None,
+              '• Cristiano Putzolu', '• Marco Cavalazzi', '• Paolo Forlin', '• Andrea Fiorini', None,
+    '• Federico Fallavollita (Department of Architecture, Alma Mater Studiorum University of Bologna)',
+    '• Tyler D. Johnson (University of Michigan)',
+    '• Giacomo Landeschi (Lund University)',
+    '• Michael Loy (Department of Classics and Ancient History, Durham University)',
+    '• Sofia Pescarin (Institute of Heritage Science of the National Research Council of Italy)',
+    '• Silvio Peroni (Department of Classical Philology and Italian Studies, Alma Mater Studiorum University of Bologna)',
+    '• Valentina Presutti (Department of Modern Languages, Literatures, and Cultures, Alma Mater Studiorum University of Bologna)',
+    '• Roberto Taglioretti (LabDig 3A Academy)',
+]                                          # un solo comitato; None = riga vuota
 def panel_back(w):
-    out, y = [], 260
-    out.append(T(PAD, y - 90, 'Practical information', '700', 12)); y += 40
-    y = label_text(out, y, 'Venue', 'Dipartimento di Storia Culture Civiltà, Alma Mater Studiorum Università di Bologna, '
-                   'Piazza San Giovanni in Monte 2, 40124 Bologna, Italy', w)
-    y = label_text(out, y, 'Rooms', 'Aula Prodi, Aula Specola, Aula Morandi, Aula Capitani, Aula Gambi', w)
-    y = label_text(out, y, 'Hosted by', 'DArchLab – Digital Archaeology Laboratory, Dipartimento di Storia Culture Civiltà, '
-                   'Alma Mater Studiorum Università di Bologna', w)
-    y = label_text(out, y, 'With the contribution of', 'Dipartimento di Storia Culture Civiltà, Alma Mater Studiorum Università di Bologna', w)
-    y = label_text(out, y, 'Contact', 'darchlab@unibo.it', w)
+    """Facciata 2, simmetrica: tutto centrato, blocchi con spazi uguali; QR in basso al centro."""
+    cx, tw = w / 2, w - 2 * PAD
+    L = lambda pt: pt * PT * 1.32                       # interlinea
+    blocks = []                                          # ogni blocco: lista di (testo, peso, pt, colore)
+
+    def lines(text, weight, pt, fill='{{INK}}'):
+        return [(t, weight, pt, fill) for t in wrap(text, weight, pt * PT, tw)]
+    lab = lambda t: [(t, '700', 7.5, '{{ACC2}}')]
+    blocks.append([('Practical information', '700', 12, '{{INK}}')])
+    blocks.append(lab('Rooms') + [(r, '400', 7.5, '{{INK}}') for r in ROOMS])
+    blocks.append(lab('Hosted by') + [(h.rstrip(','), '400', 7.5, '{{INK}}') for h in HOSTED_BY])
+    org = [x for x in ORGANISING if x]
+    dept, inner, outer = org[0], org[1:5], org[5:]
+    b = lab('Organising Committee ARCHEOFOSS 2026') + lines(dept, '400', 6.8, GREY2)
+    b += [('', '400', 3, '{{INK}}')] + [(n.lstrip('• '), '600', 7.5, '{{INK}}') for n in inner] + [('', '400', 5, '{{INK}}')]
+    for m in outer:
+        name, aff = re.match(r'• (.*?) \((.*)\)$', m).groups()
+        b += [(name, '600', 7.5, '{{INK}}')] + lines(aff, '400', 6.5, GREY2) + [('', '400', 1.6, '{{INK}}')]
+    blocks.append(b)
+    # QR in basso, al centro
+    q = 280
     qr = (PB.SRC / 'master-qr.svg').read_text(encoding='utf-8').replace('#252B29', '{{INK}}')
-    inner = qr[qr.index('>') + 1:qr.rindex('</svg>')]
-    q = 380
-    out.append(f'<g transform="translate({PAD} {2100 - 120 - q}) scale({q / 37:.4f})">{inner}</g>')
-    out.append(T(PAD + q + 40, 2100 - 120 - q + 150, 'Full programme online', '700', 8))
-    p, _ = paragraph(PAD + q + 40, 2100 - 120 - q + 210, 'www.archeofoss.org/2026/programme', w - 2 * PAD - q - 40, '400', 8)
-    out += p
+    inner_qr = qr[qr.index('>') + 1:qr.rindex('</svg>')]
+    y_link = 2100 - PAD - 10
+    yq = y_link - 95 - (q - q * 4 / 37)
+    top, bottom = PAD + 12 * PT * PB.CAP, yq + q * 4 / 37      # spazio per i blocchi di testo
+    hs = [sum(L(pt) for *_, pt, _ in bl) for bl in blocks]
+    gap = (bottom - top - sum(hs) + L(blocks[0][0][2]) * 0) / len(blocks)
+    out, y = [], top
+    for i, bl in enumerate(blocks):
+        for t, wt, pt, fill in bl:
+            if t:
+                out.append(T(cx, y, t, wt, pt, fill, anchor='middle'))
+            y += L(pt)
+        y += gap - (L(bl[-1][2]) if False else 0)
+    assert gap > 30, ('facciata 2 troppo piena', gap)
+    out.append(f'<g transform="translate({cx - q / 2:.1f} {yq:.1f}) scale({q / 37:.4f})">{inner_qr}</g>')
+    out.append(T(cx, y_link - 40, 'Full programme online', '700', 8, anchor='middle'))
+    out.append(T(cx, y_link, 'www.archeofoss.org/2026/programme', '400', 8, anchor='middle'))
     return out
+
 
 
 def glance(days):
@@ -390,13 +429,15 @@ def inside_face(p1):
     p, _ = paragraph(fr['x'], y, 'The programme of 1 December 2026 and the workshops are on the three panels of the other side.',
                      fr['w'], '400', 7, GREY2)
     body += p
-    return svg_doc(body, 'ArcheoFOSS 2026 programme, inside')
+    # interno girato di 180°: stampando fronte-retro sul lato lungo, dietro la facciata 4 c'è la 7
+    return svg_doc([f'<g transform="rotate(180 {W / 2} {H / 2})">', *body, '</g>'], 'ArcheoFOSS 2026 programme, inside')
 
 
 def outside_face(p2, days):
     body = draw_units(p2)
     x = 0
-    for w, maker in zip(OUT_W, (lambda w: panel_glance(w, days), panel_back, panel_cover)):
+    # riga alta capovolta, da sinistra: 3 copertina, 2 informazioni pratiche, 1 «At a glance»; riga bassa 4-5-6 = 1 dicembre
+    for w, maker in zip(OUT_W, (panel_cover, panel_back, lambda w: panel_glance(w, days))):
         # pannello capovolto: (lx, ly) -> (x + w - lx, 2100 - ly)
         body.append(f'<g transform="translate({x + w} {FOLD}) rotate(180)">' + ''.join(maker(w)) + '</g>')
         x += w

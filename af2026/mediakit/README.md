@@ -6,7 +6,7 @@ One page. Open `index.html` in a browser. The buttons at the top right show one 
 | --- | --- | --- |
 | Locandina | Poster in six sizes, A0–A5, each with its own SVG download (English text, University of Bologna / DiSCi logo, programme QR) | `palette/<combination>/locandina-a0.svg` … `-a5.svg` |
 | Programma | Folded A3 programme: half fold, then U-fold in three (closed 99 × 210 mm). Complete programme, no abbreviations. One 2-page PDF (page 1 outside, page 2 inside) plus the two SVGs, in the chosen colours | `palette/<combination>/programma-a3-fronte-retro.pdf`, `programma-esterno.svg`, `programma-interno.svg` |
-| Logo | ARCHEO.FOSS 2026 logo and the 20th-edition symbol (20, strata, 11 nodes) | `palette/<combination>/logo.svg/.png`, `simbolo-20.svg/.png` |
+| Logo | ARCHEO.FOSS 2026 logo, the 20th-edition symbol (20th, strata, 11 nodes) and the «20th EDITION» capital (the same as on the poster) | `palette/<combination>/logo.svg/.png`, `simbolo-20.svg/.png`, `capitello-20th.svg/.png` |
 | QR Code | One card per code, link written below. To add one, copy the `<figure class="qr-card">` block in `index.html` | `palette/<combination>/qr-programma.svg/.png` |
 | Badge | A6 portrait (105 × 148 mm) or A7 landscape (105 × 74 mm): type name, affiliation and role, download the SVG | `badge-templates.js`, `palette/<combination>/badge-a6.svg`, `badge-a7.svg` |
 | Screensaver | Animated cover for projection, single HTML file, works offline | `palette/<combination>/screensaver.html` |

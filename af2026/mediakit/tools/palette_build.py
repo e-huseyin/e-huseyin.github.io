@@ -304,6 +304,14 @@ def logo_tpl():
         f'fill="{{{{INK}}}}">{WORD26}</text></svg>')
 
 
+def capital_tpl():
+    """Capitello «20th EDITION» da solo (lo stesso della locandina), con 10 unità di margine."""
+    m, hc = 10, COL_W * 333.7 / 492
+    W, H = COL_W + 2 * m, hc + 2 * m
+    return with_fonts(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * 4:.0f}" height="{H * 4:.0f}" viewBox="0 0 {W:.1f} {H:.1f}" '
+                      f'role="img" aria-label="ArcheoFOSS 2026, 20th edition"><g transform="translate({m} {m})">{edition_block()}</g></svg>')
+
+
 def symbol_tpl():
     return with_fonts(sub_20th(tokenize((SRC / 'master-logo-20.svg').read_text(encoding='utf-8')), SYMBOL_20_END))
 
@@ -396,7 +404,7 @@ def svg_png(svg_path, png_path, px=2400):
 
 # ---------------------------------------------------------------- costruzione
 def main():
-    poster, logo, symbol, qr = poster_tpl(), logo_tpl(), symbol_tpl(), qr_tpl()
+    poster, logo, symbol, qr, capital = poster_tpl(), logo_tpl(), symbol_tpl(), qr_tpl(), capital_tpl()
     a6_tokens = tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8'))
     a6, a7 = badge_a6_tpl(), badge_a7_tpl(a6_tokens)
     # non svuota la cartella: i file del programma (tools/programme_build.py) restano
@@ -406,11 +414,11 @@ def main():
             tpl = strip_labels(poster) if k in NO_LABELS_POSTERS else poster
             s = re.sub(r'width="[\d.]+mm" height="[\d.]+mm"', f'width="{w}mm" height="{h}mm"', paint(tpl, p), count=1)
             (d / f'locandina-{k}.svg').write_text(s, encoding='utf-8')
-        for name, tpl in (('logo', logo), ('simbolo-20', symbol), ('qr-programma', qr), ('badge-a6', a6), ('badge-a7', a7)):
+        for name, tpl in (('logo', logo), ('simbolo-20', symbol), ('capitello-20th', capital), ('qr-programma', qr), ('badge-a6', a6), ('badge-a7', a7)):
             (d / f'{name}.svg').write_text(paint(tpl, p), encoding='utf-8')
         (d / 'screensaver.html').write_text(screensaver(p), encoding='utf-8')
         qr_png(paint(qr, p), d / 'qr-programma.png')
-        for name in ('logo', 'simbolo-20'):
+        for name in ('logo', 'simbolo-20', 'capitello-20th'):
             svg_png(d / f'{name}.svg', d / f'{name}.png')
     js = ('window.AF26_PALETTES=' + json.dumps({k: {x: v[x] for x in ('name', 'INK', 'ACC', 'NODE', 'ACC2')} for k, v in PALETTES.items()}, ensure_ascii=False) + ';\n'
           'window.AF26_BADGE={a6:' + json.dumps(a6) + ',a7:' + json.dumps(a7) + '};\n')

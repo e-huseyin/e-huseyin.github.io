@@ -27,6 +27,7 @@ a{color:inherit}
   background:var(--paper);color:var(--ink)}
 .frame.gap{margin-top:var(--space)}
 .logo-word{max-width:760px;width:100%}
+.logo-capital{width:100%;max-width:340px}
 .screen{aspect-ratio:16/9;border:1px solid var(--line);background:#fff}
 .screen iframe{width:100%;height:100%;border:0;display:block}
 .tabs{display:flex;flex-wrap:wrap;gap:8px}
