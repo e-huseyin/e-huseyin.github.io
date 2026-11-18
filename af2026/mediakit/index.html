@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" data-palette="grafite-bordeaux">
+<html lang="it" data-palette="nero-mattone">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -15,13 +15,6 @@
   <div class="wrap bar-inner">
     <div class="bar-left">
       <a class="brand" href="#locandina">ARCHEO<span class="dot">.</span>FOSS <span class="year">2026</span></a>
-      <label class="palette-pick"><span>Colori</span>
-        <select id="palette">
-          <option value="grafite-bordeaux">Grafite · Bordeaux · Blu</option>
-          <option value="grafite-pesca">Grafite · Pesca</option>
-          <option value="nero-mattone">Nero · Rosso mattone · Blu</option>
-        </select>
-      </label>
     </div>
     <nav aria-label="Materiali" class="tabs">
       <a data-view="locandina" href="#locandina">Locandina</a>
@@ -30,6 +23,7 @@
       <a data-view="qr" href="#qr">QR Code</a>
       <a data-view="badge" href="#badge">Badge</a>
       <a data-view="screensaver" href="#screensaver">Screensaver</a>
+      <a data-view="teams" href="#teams">Teams</a>
     </nav>
   </div>
 </header>
@@ -40,12 +34,12 @@
   <h1>Locandina</h1>
   <p class="spec">Sei formati, da A0 ad A5.</p>
   <div class="formats">
-    <div class="sheet" style="--w:841;--h:1189"><img alt="Locandina A0" data-asset="locandina-a0.svg"/><strong>A0</strong><span>841 × 1189 mm</span><a class="dl small" data-asset="locandina-a0.svg" download="">Scarica SVG</a></div>
-    <div class="sheet" style="--w:594;--h:841"><img alt="Locandina A1" data-asset="locandina-a1.svg"/><strong>A1</strong><span>594 × 841 mm</span><a class="dl small" data-asset="locandina-a1.svg" download="">Scarica SVG</a></div>
-    <div class="sheet" style="--w:420;--h:594"><img alt="Locandina A2" data-asset="locandina-a2.svg"/><strong>A2</strong><span>420 × 594 mm</span><a class="dl small" data-asset="locandina-a2.svg" download="">Scarica SVG</a></div>
-    <div class="sheet" style="--w:297;--h:420"><img alt="Locandina A3" data-asset="locandina-a3.svg"/><strong>A3</strong><span>297 × 420 mm</span><a class="dl small" data-asset="locandina-a3.svg" download="">Scarica SVG</a></div>
-    <div class="sheet" style="--w:210;--h:297"><img alt="Locandina A4" data-asset="locandina-a4.svg"/><strong>A4</strong><span>210 × 297 mm</span><a class="dl small" data-asset="locandina-a4.svg" download="">Scarica SVG</a></div>
-    <div class="sheet" style="--w:148;--h:210"><img alt="Locandina A5" data-asset="locandina-a5.svg"/><strong>A5</strong><span>148 × 210 mm</span><a class="dl small" data-asset="locandina-a5.svg" download="">Scarica SVG</a></div>
+    <div class="sheet" style="--w:841;--h:1189"><img alt="Locandina A0" data-asset="locandina-a0.svg"/><strong>A0</strong><span>841 × 1189 mm</span><a class="dl small" data-asset="locandina-a0.svg" download="">Scarica SVG</a><a class="dl small" data-asset="locandina-a0.pdf" download="">Scarica PDF</a></div>
+    <div class="sheet" style="--w:594;--h:841"><img alt="Locandina A1" data-asset="locandina-a1.svg"/><strong>A1</strong><span>594 × 841 mm</span><a class="dl small" data-asset="locandina-a1.svg" download="">Scarica SVG</a><a class="dl small" data-asset="locandina-a1.pdf" download="">Scarica PDF</a></div>
+    <div class="sheet" style="--w:420;--h:594"><img alt="Locandina A2" data-asset="locandina-a2.svg"/><strong>A2</strong><span>420 × 594 mm</span><a class="dl small" data-asset="locandina-a2.svg" download="">Scarica SVG</a><a class="dl small" data-asset="locandina-a2.pdf" download="">Scarica PDF</a></div>
+    <div class="sheet" style="--w:297;--h:420"><img alt="Locandina A3" data-asset="locandina-a3.svg"/><strong>A3</strong><span>297 × 420 mm</span><a class="dl small" data-asset="locandina-a3.svg" download="">Scarica SVG</a><a class="dl small" data-asset="locandina-a3.pdf" download="">Scarica PDF</a></div>
+    <div class="sheet" style="--w:210;--h:297"><img alt="Locandina A4" data-asset="locandina-a4.svg"/><strong>A4</strong><span>210 × 297 mm</span><a class="dl small" data-asset="locandina-a4.svg" download="">Scarica SVG</a><a class="dl small" data-asset="locandina-a4.pdf" download="">Scarica PDF</a></div>
+    <div class="sheet" style="--w:148;--h:210"><img alt="Locandina A5" data-asset="locandina-a5.svg"/><strong>A5</strong><span>148 × 210 mm</span><a class="dl small" data-asset="locandina-a5.svg" download="">Scarica SVG</a><a class="dl small" data-asset="locandina-a5.pdf" download="">Scarica PDF</a></div>
   </div>
 </section>
 
@@ -71,21 +65,26 @@
 
 <section class="view" hidden id="logo">
   <h1>Logo</h1>
-  <p class="spec">Logo ARCHEO.FOSS2026, simbolo della 20ª edizione e capitello «20th EDITION».</p>
-  <div class="frame"><img alt="Logo ARCHEO.FOSS 2026" class="logo-word" data-asset="logo.svg"/></div>
+  <p class="spec">Logo ARCHEO.FOSS2026, logo con l’Università di Bologna, simbolo della 20ª edizione e capitello «20th EDITION».</p>
+  <div class="frame"><img alt="Logo ARCHEO.FOSS 2026" class="logo-word" data-asset="logo-archeofoss.svg"/></div>
   <div class="dls">
-    <a class="dl" data-asset="logo.svg" download="">Logo SVG</a>
-    <a class="dl" data-asset="logo.png" download="">Logo PNG</a>
+    <a class="dl" data-asset="logo-archeofoss.svg" download="">Logo SVG</a>
+    <a class="dl" data-asset="logo-archeofoss.png" download="">Logo PNG</a>
   </div>
-  <div class="frame gap"><img alt="Simbolo: 20, linee stratigrafiche e 11 nodi" data-asset="simbolo-20.svg"/></div>
+  <div class="frame gap"><img alt="Università di Bologna e ARCHEO.FOSS 2026" class="logo-word" data-asset="logo-archeofoss-unibo.svg"/></div>
   <div class="dls">
-    <a class="dl" data-asset="simbolo-20.svg" download="">Simbolo SVG</a>
-    <a class="dl" data-asset="simbolo-20.png" download="">Simbolo PNG</a>
+    <a class="dl" data-asset="logo-archeofoss-unibo.svg" download="">Logo con UniBo SVG</a>
+    <a class="dl" data-asset="logo-archeofoss-unibo.png" download="">Logo con UniBo PNG</a>
   </div>
-  <div class="frame gap"><img alt="Capitello ionico con 20th EDITION" class="logo-capital" data-asset="capitello-20th.svg"/></div>
+  <div class="frame gap"><img alt="Simbolo: 20, linee stratigrafiche e 11 nodi" data-asset="logo-simbolo-20.svg"/></div>
   <div class="dls">
-    <a class="dl" data-asset="capitello-20th.svg" download="">Capitello SVG</a>
-    <a class="dl" data-asset="capitello-20th.png" download="">Capitello PNG</a>
+    <a class="dl" data-asset="logo-simbolo-20.svg" download="">Simbolo SVG</a>
+    <a class="dl" data-asset="logo-simbolo-20.png" download="">Simbolo PNG</a>
+  </div>
+  <div class="frame gap"><img alt="Capitello ionico con 20th EDITION" class="logo-capital" data-asset="logo-capitello-20th.svg"/></div>
+  <div class="dls">
+    <a class="dl" data-asset="logo-capitello-20th.svg" download="">Capitello SVG</a>
+    <a class="dl" data-asset="logo-capitello-20th.png" download="">Capitello PNG</a>
   </div>
 </section>
 
@@ -95,11 +94,19 @@
   <div class="qr-grid">
     <!-- Per aggiungere un QR: copia questo blocco <figure> e cambia immagine, link e file. -->
     <figure class="qr-card">
-      <div class="frame qr-frame"><img alt="QR code del programma ArcheoFOSS 2026" data-asset="qr-programma.svg"/></div>
+      <div class="frame qr-frame"><img alt="QR code del programma ArcheoFOSS 2026" data-asset="QR-programme.svg"/></div>
       <figcaption><strong>Programma</strong><a href="https://www.archeofoss.org/2026/programme" target="_blank">https://www.archeofoss.org/2026/programme</a></figcaption>
       <div class="dls">
-        <a class="dl small" data-asset="qr-programma.svg" download="">SVG</a>
-        <a class="dl small" data-asset="qr-programma.png" download="">PNG</a>
+        <a class="dl small" data-asset="QR-programme.svg" download="">SVG</a>
+        <a class="dl small" data-asset="QR-programme.png" download="">PNG</a>
+      </div>
+    </figure>
+    <figure class="qr-card">
+      <div class="frame qr-frame"><img alt="QR code dell'evento Microsoft Teams ArcheoFOSS 2026" data-asset="QR-teams.svg"/></div>
+      <figcaption><strong>Teams</strong><a class="qr-link-long" href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Mzk4ZjAwNWUtYmQ2My00ODg3LWExMmQtNjY4NTU2NTcwZjE5%40thread.v2/0?context=%7b%22Tid%22%3a%22e99647dc-1b08-454a-bf8c-699181b389ab%22%2c%22Oid%22%3a%22e5c7dc15-92c6-40d6-b8ab-80fc4e6c59ce%22%7d" target="_blank">https://teams.microsoft.com/l/meetup-join/19%3ameeting_Mzk4ZjAwNWUtYmQ2My00ODg3LWExMmQtNjY4NTU2NTcwZjE5%40thread.v2/0?context=%7b%22Tid%22%3a%22e99647dc-1b08-454a-bf8c-699181b389ab%22%2c%22Oid%22%3a%22e5c7dc15-92c6-40d6-b8ab-80fc4e6c59ce%22%7d</a></figcaption>
+      <div class="dls">
+        <a class="dl small" data-asset="QR-teams.svg" download="">SVG</a>
+        <a class="dl small" data-asset="QR-teams.png" download="">PNG</a>
       </div>
     </figure>
   </div>
@@ -107,7 +114,7 @@
 
 <section class="view" hidden id="badge">
   <h1>Badge</h1>
-  <p class="spec">Scegli il formato, scrivi i dati e scarica l’SVG.</p>
+  <p class="spec">Badge A7 orizzontale (105 × 74 mm): scegli il modello, scrivi i dati e scarica l’SVG.</p>
   <div class="badge-layout">
     <form class="badge-form" onsubmit="return false">
       <label for="badge-name-input">Nome e cognome</label>
@@ -122,9 +129,11 @@
       </div>
     </form>
     <div class="badge-side">
-      <div aria-label="Formato del badge" class="size-switch" role="group">
-        <button aria-pressed="true" data-size="a6" type="button">A6 verticale · 105 × 148 mm</button>
-        <button aria-pressed="false" data-size="a7" type="button">A7 orizzontale · 105 × 74 mm</button>
+      <div aria-label="Modello del badge" class="size-switch" role="group">
+        <button aria-pressed="true" data-size="A7-01" type="button">A7-01</button>
+        <button aria-pressed="false" data-size="A7-02" type="button">A7-02</button>
+        <button aria-pressed="false" data-size="A7-03" type="button">A7-03</button>
+        <button aria-pressed="false" data-size="A7-04" type="button">A7-04</button>
       </div>
       <div aria-label="Anteprima del badge" class="badge-frame" id="badge-preview"></div>
     </div>
@@ -135,11 +144,29 @@
   <h1>Screensaver</h1>
   <p class="spec">Copertina animata per proiettore. Un solo file HTML, funziona anche senza internet.</p>
   <div class="dls top">
-    <a class="dl primary" data-asset="screensaver.html" download="">Scarica HTML</a>
-    <a class="dl" data-asset="screensaver.html" target="_blank">Apri a schermo intero</a>
+    <a class="dl primary" data-asset="Screensaver.html" download="">Scarica HTML</a>
+    <a class="dl" data-asset="Screensaver.html" target="_blank">Apri a schermo intero</a>
   </div>
-  <div class="screen"><iframe data-asset="screensaver.html" loading="lazy" title="Anteprima screensaver"></iframe></div>
+  <div class="screen"><iframe data-asset="Screensaver.html" loading="lazy" title="Anteprima screensaver"></iframe></div>
 </section>
+
+<section class="view" hidden id="teams">
+  <h1>Teams</h1>
+  <p class="spec">Immagini per l’evento Microsoft Teams: banner 1840 × 460 px e logo 800 × 800 px.</p>
+  <h2 class="sub">Banner · 1840 × 460 px</h2>
+  <div class="frame"><img alt="Banner Teams ArcheoFOSS 2026" class="teams-banner" data-asset="teams-banner.png"/></div>
+  <div class="dls">
+    <a class="dl" data-asset="teams-banner.png" download="">Banner PNG</a>
+    <a class="dl" data-asset="teams-banner.svg" download="">Banner SVG</a>
+  </div>
+  <h2 class="sub gap">Logo · 800 × 800 px</h2>
+  <div class="frame"><img alt="Logo Teams ArcheoFOSS 2026" class="teams-logo" data-asset="teams-logo.png"/></div>
+  <div class="dls">
+    <a class="dl" data-asset="teams-logo.png" download="">Logo PNG</a>
+    <a class="dl" data-asset="teams-logo.svg" download="">Logo SVG</a>
+  </div>
+</section>
+
 
 </main>
 

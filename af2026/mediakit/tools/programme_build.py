@@ -1,10 +1,10 @@
 """Programma pieghevole A3: due SVG (esterno, interno) e un PDF fronte/retro per ogni combinazione di colore.
 
-Piegatura: A3 verticale piegato a metà in orizzontale, poi a U in tre (chiuso 99 x 210 mm).
-- Lato esterno: riga alta capovolta = 04 aletta (97 mm), 05 retro, 06 copertina;
-                riga bassa = 01 (97 mm), 02, 03 -> si vedono aprendo la U.
-- Lato interno: foglio intero, tre colonne allineate alle pieghe (la stretta è dietro 01, a destra).
-Contenuti: 30 novembre sul lato interno, 1 dicembre sui pannelli 01-03. Testo completo, senza abbreviazioni.
+Piegatura: A3 verticale piegato a metà in orizzontale, poi a U in tre (chiuso 99 x 210 mm). Fronte-retro sul lato lungo.
+- Lato esterno: riga alta capovolta = 3 copertina (97 mm), 2 aule, comitato e QR, 1 calendario dei due giorni;
+                riga bassa = 4 (97 mm), 5, 6: 1 dicembre -> si vedono aprendo la U.
+- Lato interno: girato di 180° (dietro la 4 c'è la 7), 30 novembre in sei mezze colonne allineate alle pieghe.
+Testo completo, senza abbreviazioni.
 
 Unità: 0,1 mm (foglio 2970 x 4200). Testo misurato sul font Inter vero, quindi a capo identici in browser e PDF.
 Uso (da af2026mediakit):  ../.venv/bin/python tools/programme_build.py
@@ -22,7 +22,7 @@ OUT = PB.OUT
 PT = 3.5278                                            # 1 pt in unità (0,1 mm)
 W, H = 2970, 4200
 FAM = {'400': 'Inter', '600': 'Inter-SemiBold', '700': 'Inter-Bold'}
-GREY, GREY2, RULE = '#555D59', '#656D65', '#C9CFC9'
+GREY, GREY2, RULE = '#3A403D', '#3A403D', '#C9CFC9'
 
 # ---------------------------------------------------------------- font e misure
 from fontTools.ttLib import TTFont                     # noqa: E402
@@ -33,6 +33,7 @@ _CMAP = {w: f.getBestCmap() for w, f in _FONTS.items()}
 def width(text, weight, size):
     f, cmap = _FONTS[weight], _CMAP[weight]
     hm, upm = f['hmtx'], f['head'].unitsPerEm
+    text = text.replace('ğ', 'g').replace('Ğ', 'G')
     return sum(hm[cmap.get(ord(c), cmap[ord('?')])][0] for c in text) * size / upm
 
 
@@ -53,29 +54,60 @@ FONT_CSS = ''.join(f"@font-face{{font-family:'{FAM[w]}';src:url(data:font/woff2;
                    for w, b in sorted(PB.FONTS.items()))
 
 
+GB = 'ğ'
+
+
 def T(x, y, text, weight='400', pt=7.5, fill='{{INK}}', anchor='start', extra=''):
     a = '' if anchor == 'start' else f' text-anchor="{anchor}"'
-    return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{FAM[weight]}" font-size="{pt * PT:.2f}" '
-            f'fill="{fill}"{a}{extra}>{escape(text)}</text>')
+    out = (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{FAM[weight]}" font-size="{pt * PT:.2f}" '
+           f'fill="{fill}"{a}{extra}>{escape(text.replace(GB, "g"))}</text>')
+    if 'ğ' in text:                       # il font ridotto non ha la ğ: g + breve disegnata
+        s_ = pt * PT
+        x0 = x - (width(text, weight, s_) if anchor == 'end' else width(text, weight, s_) / 2 if anchor == 'middle' else 0)
+        sw = {'400': .075, '600': .09, '700': .1}[weight] * s_
+        for i, c in enumerate(text):
+            if c == 'ğ':
+                cx = x0 + width(text[:i], weight, s_) + width('g', weight, s_) / 2
+                out += (f'<path d="M{cx - .15 * s_:.1f},{y - .78 * s_:.1f}Q{cx:.1f},{y - .56 * s_:.1f} {cx + .15 * s_:.1f},{y - .78 * s_:.1f}" '
+                        f'fill="none" stroke="{fill}" stroke-width="{sw:.2f}" stroke-linecap="round"/>')
+    return out
 
 
 # ---------------------------------------------------------------- stili del programma (pt)
 S = {
-    'day':     ('700', 13.0, '{{INK}}'),
-    'room':    ('700', 9.0, '{{ACC2}}'),
-    'session': ('700', 7.8, '{{INK}}'),
-    'chairs':  ('400', 7.0, GREY),
-    'time':    ('600', 7.0, '{{ACC2}}'),
-    'title':   ('600', 7.5, '{{INK}}'),
-    'names':   ('400', 7.0, GREY),
-    'break':   ('400', 7.0, GREY2),
-    'note':    ('400', 7.0, GREY2),
+    'day':     ('700', 12.0, '{{INK}}'),
+    'room':    ('700', 9.0, '#FFFFFF'),          # nella scatola colorata
+    'session': ('700', 8.2, '{{INK}}'),
+    'chairs':  ('400', 7.3, GREY),          # disegnato inclinato (ITALIC)
+    'time':    ('600', 7.3, '{{ACC2}}'),
+    'title':   ('600', 7.8, '{{INK}}'),
+    'names':   ('400', 7.3, GREY),
+    'break':   ('400', 7.3, GREY2),
+    'pause':   ('700', 7.4, '{{INK}}'),          # coffee / lunch break: riga in una scatola
+    'note':    ('400', 7.1, GREY2),
+    'gap':     ('400', 0, '{{INK}}'),            # spazio vuoto (altezza in 'gap_h')
 }
 LEAD = 1.20
-GUTTER = 175          # colonna degli orari
+GUTTER = 150          # colonna degli orari (ricalcolata in base al corpo: set_gutter)
+GAP_H = {'after_session': 6, 'after_chairs': 10}     # spazio dopo il titolo del panel e dopo i chair
+ROOM_BOX = 1.45       # altezza della scatola dell'aula (x interlinea)
+PAUSE_BOX = 1.4       # altezza della scatola delle pause
+BEFORE = {'room': 50, 'session': 36, 'item': 20}     # spazio prima di aula, panel, intervento
+ITALIC = {'chairs'}
 
 
-def lh(style):
+def set_gutter():
+    global GUTTER
+    GUTTER = round(width('00:00–00:00', S['time'][0], S['time'][1] * PT) + 26)
+
+
+def lh(style, text=''):
+    if style == 'gap':
+        return GAP_H[text]
+    if style == 'room':
+        return S[style][1] * PT * LEAD * ROOM_BOX
+    if style == 'pause':
+        return S[style][1] * PT * LEAD * PAUSE_BOX
     return S[style][1] * PT * LEAD
 
 
@@ -91,22 +123,24 @@ class Unit:
 
     @property
     def height(self):
-        return sum(lh(r[0]) for r in self.rows)
+        return sum(lh(r[0], r[1]) for r in self.rows)
 
 
 def units_for_day(day, w):
     us = []
     u = Unit(0); u.add('day', day['date'], w); us.append(u)
     for room in day['rooms']:
-        pending = Unit(62); pending.rows.append(('room', room['name'], 0, None))
+        pending = Unit(BEFORE['room']); pending.rows.append(('room', room['name'], 0, None)); pending.rows.append(('gap', 'after_chairs', 0, None))
         for b in room['blocks']:
-            u = pending or Unit(22)
+            u = pending or Unit(BEFORE['item'])
             pending = None
             if b['kind'] == 'session':
-                u.before = max(u.before, 34)
+                u.before = max(u.before, BEFORE['session'])
                 u.add('session', b['title'], w)
                 if b.get('chairs'):
+                    u.rows.append(('gap', 'after_session', 0, None))
                     u.add('chairs', 'Chair and introduction by ' + b['chairs'], w)
+                u.rows.append(('gap', 'after_chairs', 0, None))
                 pending = u          # resta unito all'intervento seguente
                 continue
             if b['kind'] == 'item':
@@ -118,9 +152,9 @@ def units_for_day(day, w):
                 if b.get('discussants'):
                     u.add('names', 'Discussants: ' + b['discussants'], w, GUTTER)
             elif b['kind'] == 'break':
-                u.add('break', b['text'], w, GUTTER, b['time'])
+                u.add('pause' if 'break' in b['text'].lower() else 'break', b['text'], w, GUTTER, b['time'])
             else:
-                u.add('note', b['text'], w, GUTTER)
+                u.add('note', b['text'], w)
             us.append(u)
         if pending:
             us.append(pending)
@@ -148,11 +182,29 @@ def draw_units(placed):
         x0 = fr['x']
         for u, y in rows:
             for style, text, indent, gutter in u.rows:
+                h = lh(style, text)
+                if style == 'gap':
+                    y += h; continue
                 wt, pt, fill = S[style]
-                y += lh(style)
-                base = y - lh(style) * .22
-                if style == 'room':
-                    out.append(f'<line x1="{x0}" y1="{base - lh(style) * .95:.1f}" x2="{x0 + fr["w"]}" y2="{base - lh(style) * .95:.1f}" stroke="{RULE}" stroke-width="3"/>')
+                if style == 'room':                       # aula: scatola piena nel colore di accento
+                    out.append(f'<rect x="{x0}" y="{y:.1f}" width="{fr["w"]}" height="{h:.1f}" rx="10" fill="{{{{ACC2_BOX}}}}"/>')
+                    out.append(T(x0 + 28, y + h / 2 + pt * PT * .36, text, wt, pt, fill))
+                    if text in FLOOR_OF:
+                        out.append(T(x0 + fr['w'] - 28, y + h / 2 + pt * PT * .36, FLOOR_OF[text], '600', pt * .78, fill, anchor='end'))
+                    y += h; continue
+                if style == 'pause':                      # coffee / lunch break: tutta la riga in una scatola chiara
+                    out.append(f'<rect x="{x0 - 16}" y="{y + h * .08:.1f}" width="{fr["w"] + 32}" height="{h * .84:.1f}" rx="8" fill="{{{{ACC_FAINT2}}}}"/>')
+                    base = y + h / 2 + pt * PT * .36
+                    gw, gp, gf = S['time']
+                    out.append(T(x0, base, gutter, gw, gp, gf))
+                    out.append(T(x0 + indent, base, text, wt, pt, fill))
+                    y += h; continue
+                y += h
+                base = y - h * .22
+                if style in ITALIC:                       # corsivo simulato: inclinazione di 10°
+                    t = T(0, 0, text, wt, pt, fill)
+                    out.append(f'<g transform="translate({x0 + indent} {base:.1f}) skewX(-10)">{t}</g>')
+                    continue
                 if gutter:
                     gw, gp, gf = S['time']
                     out.append(T(x0, base, gutter, gw, gp, gf))
@@ -164,14 +216,15 @@ def draw_units(placed):
 PAD = 70                                   # margine interno di ogni pannello
 OUT_W = [970, 1000, 1000]                  # esterno, colonne da sinistra: la prima (97 mm) è l'aletta
 IN_W = [970, 1000, 1000]                   # interno prima del giro di 180°: girato diventa 1000-1000-970, specchio dell'esterno
-HEAD_IN = 400                              # spazio per l'intestazione del lato interno
+HEAD_IN = 310                              # spazio per l'intestazione del lato interno
 FOLD = 2100
 
 
 def inside_frames():
     fr, x = [], 0
+    top = HEAD_IN + 60
     for w in IN_W:
-        for y0, y1 in ((HEAD_IN, FOLD - 45), (FOLD + 60, H - 90)):
+        for y0, y1 in ((top, FOLD - 45), (FOLD + 60, H - 90)):
             fr.append({'x': x + PAD, 'w': w - 2 * PAD, 'y0': y0, 'y1': y1})
         x += w
     return fr
@@ -185,7 +238,24 @@ def outside_low_frames():
     return fr
 
 
+WORKSHOP_NOTE = 'To register for a workshop, email covher.workshop@gmail.com with the workshop title and your full name.'
+_parse = parse
+
+
+def parse():
+    """Come programme_parse.parse, ma la nota d'iscrizione ripetuta sotto ogni workshop compare una volta sola, alla fine."""
+    days = _parse()
+    for d in days:
+        notes = [(r, b) for r in d['rooms'] for b in r['blocks'] if b['kind'] == 'note']
+        if len(notes) > 1 and len({b['text'] for _, b in notes}) == 1:
+            for r, b in notes[:-1]:
+                r['blocks'].remove(b)
+            notes[-1][1]['text'] = WORKSHOP_NOTE
+    return days
+
+
 def layout():
+    set_gutter()
     days = parse()
     fi, fo = inside_frames(), outside_low_frames()
     tw = min(f['w'] for f in fi + fo)
@@ -307,14 +377,10 @@ def panel_cover(w):
     return out
 
 
-def label_text(out, y, label, text, w, pt=8.0):
-    out.append(T(PAD, y, label, '700', pt, '{{ACC2}}'))
-    p, y = paragraph(PAD, y + pt * PT * 1.35, text, w - 2 * PAD, '400', pt)
-    out += p
-    return y + 70
-
-
 ROOMS = ['Aula Prodi', 'Aula Specola', 'Aula Morandi', 'Aula Capitani', 'Aula Gambi']
+FLOORS = [('Ground floor', ['Aula Prodi', 'Aula Capitani']), ('First floor', ['Aula Gambi', 'Aula Morandi']),
+          ('Second floor', ['Aula Specola'])]
+FLOOR_OF = {r: f for f, rs in FLOORS for r in rs}
 HOSTED_BY = ['DArchLab,', 'Digital Archaeology Laboratory,', 'Dipartimento di Storia Culture Civiltà,',
              'Alma Mater Studiorum – Università di Bologna']
 ORGANISING = ['Department of History and Cultures, Alma Mater Studiorum University of Bologna', None,
@@ -328,46 +394,77 @@ ORGANISING = ['Department of History and Cultures, Alma Mater Studiorum Universi
     '• Valentina Presutti (Department of Modern Languages, Literatures, and Cultures, Alma Mater Studiorum University of Bologna)',
     '• Roberto Taglioretti (LabDig 3A Academy)',
 ]                                          # un solo comitato; None = riga vuota
+BACK_K = 1.03                              # facciata 2: fattore sui corpi
+
+
 def panel_back(w):
-    """Facciata 2, simmetrica: tutto centrato, blocchi con spazi uguali; QR in basso al centro."""
+    """Facciata 2, simmetrica e centrata: Rooms (scatole uguali, 3 + 2), Organising Committee, QR con il link,
+    in fondo «Hosted by». I blocchi in alto hanno spazi uguali."""
+    K = BACK_K
     cx, tw = w / 2, w - 2 * PAD
-    L = lambda pt: pt * PT * 1.32                       # interlinea
-    blocks = []                                          # ogni blocco: lista di (testo, peso, pt, colore)
+    L = lambda pt: pt * PT * 1.32
+    blocks = []
 
     def lines(text, weight, pt, fill='{{INK}}'):
         return [(t, weight, pt, fill) for t in wrap(text, weight, pt * PT, tw)]
-    lab = lambda t: [(t, '700', 7.5, '{{ACC2}}')]
-    blocks.append([('Practical information', '700', 12, '{{INK}}')])
-    blocks.append(lab('Rooms') + [(r, '400', 7.5, '{{INK}}') for r in ROOMS])
-    blocks.append(lab('Hosted by') + [(h.rstrip(','), '400', 7.5, '{{INK}}') for h in HOSTED_BY])
+    lab = lambda t: [(t, '700', 7.8 * K, '{{ACC2}}')]
+    # aule: scatole uguali, 3 sopra e 2 sotto, centrate
+    rp = 7.6 * K
+    names = [r for r in ROOMS]
+    pw = max(width(n, '700', rp * PT) for n in names) + 70
+    ph, gx, gy = rp * PT * 1.65, 22, 14
+    fl_pt = 6.6 * K
+    row_h = fl_pt * PT * 1.25 + ph + gy
+    blocks.append(lab('Rooms') + [('ROOMS', '', 0, row_h * len(FLOORS) + 18 - gy)])
     org = [x for x in ORGANISING if x]
     dept, inner, outer = org[0], org[1:5], org[5:]
-    b = lab('Organising Committee ARCHEOFOSS 2026') + lines(dept, '400', 6.8, GREY2)
-    b += [('', '400', 3, '{{INK}}')] + [(n.lstrip('• '), '600', 7.5, '{{INK}}') for n in inner] + [('', '400', 5, '{{INK}}')]
+    b = lab('Organising Committee') + lines(dept, '400', 7.0 * K, GREY2)
+    b += [('', '400', 3, '{{INK}}')] + [(n.lstrip('• '), '600', 7.8 * K, '{{INK}}') for n in inner] + [('', '400', 5, '{{INK}}')]
     for m in outer:
         name, aff = re.match(r'• (.*?) \((.*)\)$', m).groups()
-        b += [(name, '600', 7.5, '{{INK}}')] + lines(aff, '400', 6.5, GREY2) + [('', '400', 1.6, '{{INK}}')]
+        b += [(name, '600', 7.8 * K, '{{INK}}')] + lines(aff, '400', 6.8 * K, GREY2) + [('', '400', 1.6, '{{INK}}')]
     blocks.append(b)
-    # QR in basso, al centro
     q = 280
     qr = (PB.SRC / 'master-qr.svg').read_text(encoding='utf-8').replace('#252B29', '{{INK}}')
     inner_qr = qr[qr.index('>') + 1:qr.rindex('</svg>')]
-    y_link = 2100 - PAD - 10
+    # in fondo: «Hosted by»; sopra il QR con il link
+    hosted = lab('Hosted by') + [(h.rstrip(','), '400', 7.8 * K, '{{INK}}') for h in HOSTED_BY]
+    hh = sum(L(it[2]) for it in hosted)
+    y_host = 2100 - PAD - hh + L(hosted[0][2]) - 5          # base della prima riga di «Hosted by»
+    y_link = y_host - L(hosted[0][2]) - 55
     yq = y_link - 95 - (q - q * 4 / 37)
-    top, bottom = PAD + 12 * PT * PB.CAP, yq + q * 4 / 37      # spazio per i blocchi di testo
-    hs = [sum(L(pt) for *_, pt, _ in bl) for bl in blocks]
-    gap = (bottom - top - sum(hs) + L(blocks[0][0][2]) * 0) / len(blocks)
+    top, bottom = PAD + 7.8 * K * PT * PB.CAP, yq + q * 4 / 37
+    H = lambda it: it[3] if it[0] == 'ROOMS' else L(it[2])
+    hs = [sum(H(it) for it in bl) for bl in blocks]
+    gap = (bottom - top - sum(hs)) / (len(blocks) - 1 + .6)
     out, y = [], top
-    for i, bl in enumerate(blocks):
-        for t, wt, pt, fill in bl:
+    for bl in blocks:
+        for it in bl:
+            t, wt, pt, fill = it
+            if t == 'ROOMS':
+                yy = y - L(7.8 * K) * .55 + 14
+                for floor, row in FLOORS:
+                    out.append(T(cx, yy + fl_pt * PT * .9, floor.upper(), '700', fl_pt, GREY2, anchor='middle', extra=' letter-spacing="3"'))
+                    yy += fl_pt * PT * 1.25
+                    x0 = cx - (len(row) * pw + (len(row) - 1) * gx) / 2
+                    for i, n in enumerate(row):
+                        x = x0 + i * (pw + gx)
+                        out.append(f'<rect x="{x:.1f}" y="{yy:.1f}" width="{pw:.1f}" height="{ph:.1f}" rx="{ph / 2:.1f}" fill="{{{{ACC2_BOX}}}}"/>')
+                        out.append(T(x + pw / 2, yy + ph / 2 + rp * PT * .36, n, '700', rp, '#FFFFFF', anchor='middle'))
+                    yy += ph + gy
+                y += fill
+                continue
             if t:
                 out.append(T(cx, y, t, wt, pt, fill, anchor='middle'))
             y += L(pt)
-        y += gap - (L(bl[-1][2]) if False else 0)
+        y += gap
     assert gap > 30, ('facciata 2 troppo piena', gap)
     out.append(f'<g transform="translate({cx - q / 2:.1f} {yq:.1f}) scale({q / 37:.4f})">{inner_qr}</g>')
     out.append(T(cx, y_link - 40, 'Full programme online', '700', 8, anchor='middle'))
     out.append(T(cx, y_link, 'www.archeofoss.org/2026/programme', '400', 8, anchor='middle'))
+    yy = y_host
+    for t, wt, pt, fill in hosted:
+        out.append(T(cx, yy, t, wt, pt, fill, anchor='middle')); yy += L(pt)
     return out
 
 
@@ -397,18 +494,104 @@ def glance(days):
     return res
 
 
+# ---------------------------------------------------------------- facciata 1: calendario dei due giorni
+WEEKDAY = {'30 November 2026': 'Monday', '1 December 2026': 'Tuesday'}
+KEY = ('Keynote lecture', 'Welcome addresses', 'Opening remarks')     # momenti di tutto il convegno: riempiti
+PT2 = 7.2                                  # corpo del calendario
+PADT, PADB = 12, 12                           # margine sopra e sotto il testo nei blocchi
+BG = 3                                     # metà dello spazio tra due blocchi
+DAYGAP = 50                                # spazio tra i due giorni
+PRODI_W = 1.5                              # la corsia di Aula Prodi è 1,5 volte le altre
+BASE = .1                                 # altezza minima per minuto (le altezze seguono il testo, non la durata)
+
+
+def short(title):
+    t = title.replace('Panel: ', '')
+    return t.split(':')[0].strip() if ':' in t else t
+
+
 def panel_glance(w, days):
-    out, y = [], 170
-    out.append(T(PAD, y, 'At a glance', '700', 12)); y += 110
-    for date, rows in glance(days):
-        out.append(T(PAD, y, date, '700', 9, '{{ACC2}}')); y += 75
+    """Facciata 1: calendario dei due giorni. Corsie per aula (aule in scatole colorate), panel come riquadri
+    con il solo contorno, keynote / welcome / opening riempite con il colore trasparente (ACC2_KEY)."""
+    """B2: calendario moderno, senza titolo. Data in stile calendario; corsie con l'aula in scatola;
+    sessioni come blocchi tenui con barra laterale; keynote e saluti come blocchi pieni."""
+    out, y = [], PAD + 10
+    pt = PT2; lead = pt * PT * 1.18
+    tm = lambda s: int(s[:2]) * 60 + int(s[3:5])
+    GAP = 14
+    for (date, rows), day in zip(glance(days), days):
+        rooms = [r['name'] for r in day['rooms']]
+        span = {}
+        for _, times, room, _t in rows:
+            a, b = tm(times[:5]), tm(times[6:])
+            s0, s1 = span.get(room, (a, b)); span[room] = (min(s0, a), max(s1, b))
+        lanes = []
+        for room in rooms:
+            if room not in span:
+                continue
+            for ln in lanes:
+                if all(span[r][1] <= span[room][0] or span[room][1] <= span[r][0] for r in ln):
+                    ln.append(room); break
+            else:
+                lanes.append([room])
+        nl = len(lanes)
+        wts = [PRODI_W if i == 0 else 1 for i in range(nl)]
+        free = w - 2 * PAD - GAP * (nl - 1)
+        LW = [free * k / sum(wts) for k in wts]
+        LX = [PAD + sum(LW[:i]) + GAP * i for i in range(nl)]
+        lane_of = {r: i for i, ln in enumerate(lanes) for r in ln}
+        # data in stile calendario: numero grande + giorno, mese e anno
+        num, rest = date.split(' ', 1)
+        big = 19
+        out.append(T(PAD, y + PB.CAP * big * PT, num, '700', big, '{{ACC2}}'))
+        xr = PAD + width(num, '700', big * PT) + 22
+        out.append(T(xr, y + PB.CAP * 6.8 * PT, WEEKDAY[date].upper(), '700', 6.8, '{{ACC2}}', extra=' letter-spacing="4"'))
+        out.append(T(xr, y + PB.CAP * big * PT, rest, '600', 9, '{{INK}}'))
+        y += PB.CAP * big * PT + 34
+        # intestazione delle corsie
+        hb = 7 * PT * 1.55
+        for i, ln in enumerate(lanes):
+            x, lw = LX[i], LW[i]
+            label = ' · '.join(r.replace('Aula ', '') for r in ln)
+            lp = min(7.2, 7.2 * (lw - 24) / width(label, '700', 7.2 * PT))
+            out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{lw:.1f}" height="{hb:.1f}" rx="{hb / 2:.1f}" fill="{{{{ACC2_BOX}}}}"/>')
+            out.append(T(x + lw / 2, y + hb / 2 + lp * PT * .36, label, '700', lp, '#FFFFFF', anchor='middle'))
+        y += hb + 14
+        blocks = []
         for _, times, room, title in rows:
-            # orario nella colonna a sinistra, sala e titolo a destra
-            out.append(T(PAD, y, times, '600', 6.6, '{{ACC2}}'))
-            p, y = paragraph(PAD + GUTTER, y, f'{room} · {title}', w - 2 * PAD - GUTTER, '400', 6.6, '{{INK}}', 1.2)
-            out += p; y += 14
-        y += 40
-    assert y < 2060, f'«At a glance» troppo lungo: {y}'
+            a, b = tm(times[:5]), tm(times[6:])
+            lw = LW[lane_of[room]]
+            lines = [l.replace('- ', '-') for l in wrap(short(title).replace('-', '- '), '400', pt * PT, lw - 46)]   # a capo anche dopo il trattino
+            tw = width(times, '400', pt * .92 * PT)
+            inline = width(lines[0], '400', pt * PT) + tw + 30 <= lw - 46     # orario sulla stessa riga, a destra
+            n = len(lines) + (0 if inline else 1)
+            need = PADT + .9 * pt * PT + (n - 1) * lead + .3 * pt * PT + PADB + 2 * BG
+            blocks.append([a, b, lane_of[room], times, lines, need, short(title), inline])
+        cuts = sorted({b[0] for b in blocks} | {b[1] for b in blocks})
+        Y = {cuts[0]: y}
+        for i, c in enumerate(cuts[1:], 1):
+            Y[c] = Y[cuts[i - 1]] + (c - cuts[i - 1]) * BASE
+            for a_, b_, _l, _t, _ls, need, _s, _i in blocks:
+                if b_ == c:
+                    Y[c] = max(Y[c], Y[a_] + need)
+        for a, b, l, times, lines, need, title, inline in blocks:
+            x, lw = LX[l], LW[l]
+            y0, y1 = Y[a] + BG, Y[b] - BG
+            key = title in KEY
+            tcol, icol = '{{ACC2}}', '{{INK}}'
+            if key:      # keynote, welcome, opening: riempite con il colore più trasparente
+                out.append(f'<rect x="{x:.1f}" y="{y0:.1f}" width="{lw:.1f}" height="{y1 - y0:.1f}" rx="12" fill="{{{{ACC2_KEY}}}}"/>')
+            else:        # panel: solo il contorno
+                out.append(f'<rect x="{x + 1.5:.1f}" y="{y0 + 1.5:.1f}" width="{lw - 3:.1f}" height="{y1 - y0 - 3:.1f}" rx="11" fill="none" stroke="{{{{ACC2_BOX}}}}" stroke-width="3"/>')
+            ty = y0 + PADT + pt * PT * .9
+            if inline:
+                out.append(T(x + lw - 18, ty, times, '400', pt * .92, tcol, anchor='end'))
+            else:
+                out.append(T(x + 26, ty, times, '400', pt * .92, tcol)); ty += lead
+            for ln in lines:
+                out.append(T(x + 26, ty, ln, '400', pt, icol)); ty += lead
+        y = Y[cuts[-1]] + DAYGAP
+    assert y - DAYGAP <= 2100 - PAD, f'calendario della facciata 1 troppo lungo: {round(y - DAYGAP)}'
     return out
 
 
@@ -421,7 +604,6 @@ def svg_doc(body, label):
 
 def inside_face(p1):
     body = logo_line(PAD, 230, 22)
-    body.append(T(PAD, 330, 'Conference programme · 30 November – 1 December 2026 · Bologna', '400', 10))
     body += draw_units(p1)
     fr, rows = p1[-1]
     u, yy = rows[-1]

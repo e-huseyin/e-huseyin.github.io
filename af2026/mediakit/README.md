@@ -1,34 +1,38 @@
 # ArcheoFOSS 2026 — Media kit
 
-One page. Open `index.html` in a browser. The buttons at the top right show one section at a time; the **Colori** menu at the top left changes the colour combination of the page and of every downloadable file.
+One page. Open `index.html` in a browser. The buttons at the top right show one section at a time. The kit has one colour combination, Nero · Rosso mattone · Blu; downloaded files keep their exact names (e.g. `logo-archeofoss.png`).
 
 | Button | Content | Files |
 | --- | --- | --- |
-| Locandina | Poster in six sizes, A0–A5, each with its own SVG download (English text, University of Bologna / DiSCi logo, programme QR) | `palette/<combination>/locandina-a0.svg` … `-a5.svg` |
-| Programma | Folded A3 programme: half fold, then U-fold in three (closed 99 × 210 mm). Complete programme, no abbreviations. One 2-page PDF (page 1 outside, page 2 inside) plus the two SVGs, in the chosen colours | `palette/<combination>/programma-a3-fronte-retro.pdf`, `programma-esterno.svg`, `programma-interno.svg` |
-| Logo | ARCHEO.FOSS 2026 logo, the 20th-edition symbol (20th, strata, 11 nodes) and the «20th EDITION» capital (the same as on the poster) | `palette/<combination>/logo.svg/.png`, `simbolo-20.svg/.png`, `capitello-20th.svg/.png` |
-| QR Code | One card per code, link written below. To add one, copy the `<figure class="qr-card">` block in `index.html` | `palette/<combination>/qr-programma.svg/.png` |
-| Badge | A6 portrait (105 × 148 mm) or A7 landscape (105 × 74 mm): type name, affiliation and role, download the SVG | `badge-templates.js`, `palette/<combination>/badge-a6.svg`, `badge-a7.svg` |
-| Screensaver | Animated cover for projection, single HTML file, works offline | `palette/<combination>/screensaver.html` |
+| Locandina | Poster in six sizes, A0–A5, each with its own SVG and PDF download (English text, University of Bologna / DiSCi logo, programme QR) | `palette/nero-mattone/locandina-a0.svg` … `-a5.svg`, `locandina-a0.pdf` … `-a5.pdf` |
+| Programma | Folded A3 programme: half fold, then U-fold in three (closed 99 × 210 mm). Complete programme, no abbreviations. One 2-page PDF (page 1 outside, page 2 inside) plus the two SVGs, in the chosen colours | `palette/nero-mattone/programma-a3-fronte-retro.pdf`, `programma-esterno.svg`, `programma-interno.svg` |
+| Logo | ARCHEO.FOSS 2026 logo, the University of Bologna + ARCHEO.FOSS 2026 logo (seal as high-resolution PNG `logo-unibo-sigillo.png`, as tall as the capitals; text as vector outlines), the 20th-edition symbol (20th, strata, 11 nodes) and the «20th EDITION» capital (the same as on the poster) | `palette/nero-mattone/logo-archeofoss.svg/.png`, `logo-archeofoss-unibo.svg/.png`, `logo-simbolo-20.svg/.png`, `logo-capitello-20th.svg/.png` |
+| QR Code | One card per code, link written below. To add one, copy the `<figure class="qr-card">` block in `index.html` | `palette/nero-mattone/QR-programme.svg/.png`, `QR-teams.svg/.png` (Teams event link; master `assets/source/master-qr-teams.svg` made with `tools/qr_make.py "<link>" <file>`, no external library) |
+| Badge | A7 landscape (105 × 74 mm) in four models: A7-01, A7-02, A7-03 (UniBo / DiSCi logo, ARCHEO.FOSS 2026 and the capital at the top, light strata, the name in the centre in graphite, rosso mattone or blue with the affiliation below, the role just above a rosso mattone band at the bottom) and A7-04 (name, affiliation, role, QR). Type the data and download the SVG; the A6 badge was removed | `badge-templates.js`, `palette/nero-mattone/badge-A7-01.svg` … `badge-A7-04.svg` |
+| Screensaver | Animated cover for projection, single HTML file, works offline | `palette/nero-mattone/Screensaver.html` |
+| Teams | Microsoft Teams event images: banner 1840 × 460 px (left, with 36 px margins: University of Bologna / DiSCi logo and the «20th EDITION» capital in one row, then title, subtitle and date; right: poster strata with the large «20th») and logo 800 × 800 px (ARCHEO. / FOSS / 2026 on three lines with 60 px margins, smaller strata lower down); PNG at the exact pixel size (twice Teams' 920 × 230 and more than twice 280 × 280; drawn 4× larger and reduced, lossless, sRGB profile embedded), plus SVG | `palette/nero-mattone/teams-banner.png/.svg`, `teams-logo.png/.svg` |
 
-## Colour combinations
+## Colours
 
 | Combination | Text / lines | Accent | Nodes | Background |
 | --- | --- | --- | --- | --- |
-| Grafite · Pesca (`grafite-pesca`) | #252B29 | #D89277 | #D89277 | #FFFFFF |
-| Grafite · Bordeaux · Blu (`grafite-bordeaux`) — **default** | #252B29 | #762F3D | #027BFF | #FFFFFF |
 | Nero · Rosso mattone · Blu (`nero-mattone`) | #171717 | #A33B35 | #027BFF | #FFFFFF |
 
-In every combination the logo is ARCHEO.FOSS 2026 with the dot and «2026» in electric blue #027BFF. Secondary greys (#656D65, #555D59) do not change.
+The logo is ARCHEO.FOSS 2026 with the dot and «2026» in electric blue #027BFF. The two other combinations (Grafite · Bordeaux, Grafite · Pesca) were removed on 2026-11-18; their colours can be added back in `PALETTES` (`tools/palette_build.py`).
 
 ## Programme (folded A3)
 
 `tools/programme_build.py` lays out the full programme from `assets/source/programme.md` (latest version, from `programmeaggiornato.md`), measuring every line on the real Inter font, and writes the two SVGs and the PDF (Inter embedded) for each colour combination.
 
-- Outside face: top row upside down = 04 flap «At a glance» (97 mm), 05 practical information with QR, 06 cover; bottom row 01–03 = 1 December with workshops (01 is 97 mm).
-- Cover (06): University of Bologna / DiSCi logo top left and the «20th EDITION» capital top right, same height (15 mm); ARCHEO.FOSS 2026 on one line, full width; subtitle; the same 9 mm gap between these three rows (`COVER_GAP`); strata with the large pale «20th». In the PDF the capital uses the colour already lightened to 50% and its texts are outlines, because the PDF converter ignores transparency and text outlines.
-- Inside face: 30 November in three columns aligned with the folds; no text on the horizontal fold.
-- Sizes: talk titles 7.5 pt, names and times 7 pt, «At a glance» 6.6 pt. Margins 7 mm, no bleed needed (nothing touches the edge).
+Panels are numbered as on the sheet: outside top row 3-2-1, bottom row 4-5-6; inside 7-12. Print double-sided, flipping on the **long edge**.
+
+- Outside face, top row (upside down, so it reads upright after the half fold): 3 cover (left, 97 mm), 2 rooms, committee and QR, 1 overview of the two days. Bottom row 4-5-6: 1 December with the workshops (4 is 97 mm).
+- Inside face: rotated 180°, so panel 7 is behind panel 4. 30 November in six half-columns aligned with the folds; no text on the horizontal fold.
+- Panel 3 (cover): University of Bologna / DiSCi logo and the «20th EDITION» capital, same height (18.5 mm); ARCHEO.FOSS 2026 on one line; subtitle (9 mm and 14 mm gaps, `COVER_GAP`, `COVER_GAP2`); strata with the large pale «20th»; date; VENUE block as on the poster. In the PDF the capital uses the colour already lightened to 50% and its texts are outlines.
+- Panel 2: centred, no title; Rooms as equal boxes grouped by floor (Ground floor: Prodi, Capitani; First floor: Gambi, Morandi; Second floor: Specola; `FLOORS`), Organising Committee (names in semibold, affiliation below in grey), QR with «Full programme online» and the link, «Hosted by» at the bottom (`BACK_K` scales the text).
+- Panel 1: calendar of the two days, one lane per room (rooms in coloured boxes; rooms that never overlap share a lane); panels as outlined boxes, keynotes, welcome and opening filled with a light tint; text in regular weight. Blocks are as tall as their text, not as their duration; sessions at the same time sit side by side.
+- Programme (30 Nov and 1 Dec): each room in a box in the combination's colour (72%) with its floor on the right, coffee and lunch breaks in a light box across the row, chairs in italic (slanted: the embedded Inter has no italic), extra space after panel titles and chairs, dark grey text. Sizes: talk titles 7.8 pt, names, chairs and times 7.3 pt, panel titles 8.2 pt, calendar 7.2 pt. The repeated workshop registration note appears once. Margins 7 mm, no bleed needed.
+- Names: the embedded Inter has no «ğ»: it is drawn as «g» plus a breve (Hüseyin Erdoğan).
 - Chairs listed only by surname in the source are written in full (Andrea Simeoni; Marco Cavalazzi, Tyler Duane Johnson, Cristiano Putzolu).
 
 Run `../.venv/bin/python tools/programme_build.py` after changing the programme; `--misura` only prints how full each column is.
@@ -40,6 +44,14 @@ Run `../.venv/bin/python tools/programme_build.py` after changing the programme;
 ```
 ../.venv/bin/python tools/palette_build.py
 ```
+
+Poster PDFs (vector, Inter embedded, exact page size) are made from the same template by `tools/poster_pdf.py`; run it after `palette_build.py`:
+
+```
+../.venv/bin/python tools/poster_pdf.py
+```
+
+The PDF converter ignores transparency, letter spacing and text outlines, so for the PDF the capital uses the colour already lightened, the strata and the pale «20th» use lightened colours instead of opacity, and spaced texts are placed letter by letter.
 
 SVGs are RGB with no bleed: ask the print shop for a colour proof and bleed. On the poster the strata lines touch the left and right edges, so bleed (usually 3 mm) and a safety margin for the text are needed. Print at 100%.
 

@@ -110,7 +110,7 @@ Discussion
 ---
 
 **Panel: From Fragmented Data to Interoperable Knowledge: Semantic Technologies, Ontologies and Linked Open Data in Archaeology**  
-Chair and introduction by Fabrizio **Ducati**, Celian Emile Roger **Ringwald**, Huseyin **Erdoğan**
+Chair and introduction by Fabrizio **Ducati**, Celian Emile Roger **Ringwald**, Hüseyin **Erdoğan**
 
 - **13:30** - 13:35 
 Panel presentation
@@ -125,7 +125,7 @@ Florian **Thiery**, Anne-Karoline **Distel**, Louise **Tharandt**
 Marco **Montanari**  
 [*R: The repository is the database: OntoRAG, ontology-governed retrieval over archaeological narrative sources*](abstracts/Abstract_011_R_The_repository_is_the_database_OntoRAG_ontology-governed_retrieval_ove.pdf)
 - **14:20** - 14:35  
-Celian **Ringwald**, Huseyin **Erdogan**, Valentina **Presutti**, Cristiano **Putzolu**  
+Celian **Ringwald**, Hüseyin **Erdoğan**, Valentina **Presutti**, Cristiano **Putzolu**  
 [*X-DigCheck: Co-Evolving Application Profiles and Knowledge Graphs, Demonstrated on the RTI Documentation of Rupe Magna*](abstracts/Abstract_013_X-DigCheck_Co-Evolving_Application_Profiles_and_Knowledge_Graphs_Demonst.pdf)
 - **14:35** - 14:50  
 Alessandra **Caravale**, Antonio **D’Eredità**, Giacomo **Mancuso**, Paola **Moscati**, Nicolò **Paraciani**  
@@ -464,7 +464,7 @@ Chair and introduction by **Cavalazzi**, **Johnson**, **Putzolu**
 Panel presentation
 
 - **16:20** - 16:35  
-Cristiano **Putzolu**, Valentina **Presutti**, Roberto **Taglioretti**, Luana **Bulla**, Jorge **Calvelo Alvarez**, Huseyin **Erdogan**, Matteo **Orsi**, Celian **Ringwald**, Andrea **Schimmenti**, Gloria **Valbusa**  
+Cristiano **Putzolu**, Valentina **Presutti**, Roberto **Taglioretti**, Luana **Bulla**, Jorge **Calvelo Alvarez**, Hüseyin **Erdoğan**, Matteo **Orsi**, Celian **Ringwald**, Andrea **Schimmenti**, Gloria **Valbusa**  
 [*From Point Clouds to Knowledge Graphs: Connecting Archaeological Evidence and Interpretation through FLOSS*](abstracts/Abstract_053_From_Point_Clouds_to_Knowledge_Graphs_Connecting_Archaeological_Evidence.pdf)
 - **16:35** - 16:50  
 Daniel **Reed**  

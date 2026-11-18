@@ -22,47 +22,57 @@ const roleInput = document.getElementById('badge-role-input');
 const affInput = document.getElementById('badge-affiliation-input');
 const blank = document.getElementById('badge-blank');
 const sizeButtons = [...document.querySelectorAll('.size-switch button')];
-// A6 verticale (testi centrati) e A7 orizzontale (testi a sinistra, QR a destra). Modelli: tools/palette_build.py
-const SIZES = {
-  a6: {label: 'A6', x: '525', nameMax: 910, nameSizes: [70, 55, 43, 34, 28],
-       wrap: 36, maxLines: 4, affMax: 900, affSize: [29, 29, 24, 21], affY: [1032, 1013, 996, 993]},
-  a7: {label: 'A7', x: '56', nameMax: 760, nameSizes: [56, 46, 38, 30, 26],
-       wrap: 50, maxLines: 2, affMax: 760, affSize: [26, 24], affY: [666, 660]},
-};
-let size = 'a6';
+// Badge A7 orizzontale: A7-01..03 con la fascia in basso, A7-04 con il QR. Modelli: tools/palette_build.py
+const A7 = {x: '56', nameMax: 760, nameSizes: [56, 46, 38, 30, 26],
+       wrap: 50, maxLines: 2, affMax: 760, affSize: [26, 24], affY: [666, 660]};
+// A7-01..03: nome, affiliazione e tipologia centrati (modelli con la fascia rosso mattone in basso)
+const MODEL = {x: '525', nameMax: 920, nameSizes: [72, 58, 46, 36, 30],
+       wrap: 52, maxLines: 2, affMax: 920, affSize: [30, 26], affY: [452, 445]};
+const SIZES = {'A7-01': {label: 'A7-01', ...MODEL},
+               'A7-02': {label: 'A7-02', ...MODEL}, 'A7-03': {label: 'A7-03', ...MODEL}, 'A7-04': {label: 'A7-04', ...A7}};
+let size = 'A7-01';
 sizeButtons.forEach(b => b.addEventListener('click', () => {
   size = b.dataset.size;
   sizeButtons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   updateBlank(); draw();
 }));
 
-// ---- Combinazioni di colore: cambiano pagina e file scaricabili (non il programma)
+// ---- Una sola combinazione di colore: Nero · Rosso mattone · Blu. I file scaricati hanno il loro nome esatto.
 const PALETTES = window.AF26_PALETTES;
-const select = document.getElementById('palette');
-let palette = 'grafite-bordeaux';  // predefinita
-try { const saved = localStorage.getItem('af26-palette'); if (PALETTES[saved]) palette = saved; } catch (e) {}
+const palette = 'nero-mattone';
 const paint = tpl => ['INK', 'ACC', 'NODE', 'ACC2'].reduce((s, k) => s.split('{{' + k + '}}').join(PALETTES[palette][k]), tpl);
 function updateBlank(){
   blank.href = 'assets/palette/' + palette + '/badge-' + size + '.svg';
-  blank.download = 'ArcheoFOSS2026-badge-vuoto-' + SIZES[size].label + '-' + palette + '.svg';
+  blank.download = 'badge-' + size + '.svg';
 }
 function applyPalette(){
   document.documentElement.dataset.palette = palette;
-  select.value = palette;
   document.querySelectorAll('[data-asset]').forEach(n => {
     const file = 'assets/palette/' + palette + '/' + n.dataset.asset;
     if (n.tagName === 'IMG' || n.tagName === 'IFRAME') n.src = file;
     else {
       n.href = file;
-      if (n.hasAttribute('download')) n.download = 'ArcheoFOSS2026-' + n.dataset.asset.replace(/\.(\w+)$/, '-' + palette + '.$1');
+      if (n.hasAttribute('download')) n.download = n.dataset.asset;
     }
   });
   updateBlank(); draw();
 }
-select.addEventListener('change', () => {
-  palette = select.value;
-  try { localStorage.setItem('af26-palette', palette); } catch (e) {}
-  applyPalette();
+
+// ---- Download: i pulsanti scaricano il file invece di aprirlo (anche SVG, PDF, HTML)
+// Il file viene letto e salvato con il suo nome esatto. Se il browser non lo permette
+// (pagina aperta con doppio clic da file://), resta il comportamento normale del link.
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[download]');
+  if (!a || !a.href || a.href.startsWith('blob:') || a.target === '_blank' || location.protocol === 'file:') return;
+  e.preventDefault();
+  const name = a.getAttribute('download') || decodeURIComponent(a.href.split('/').pop().split('?')[0]);
+  fetch(a.href).then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); }).then(blob => {
+    const url = URL.createObjectURL(new Blob([blob], {type: 'application/octet-stream'}));
+    const t = document.createElement('a');
+    t.href = url; t.download = name; t.style.display = 'none';
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }).catch(() => { window.location.href = a.href; });
 });
 
 function buildBadge(){
@@ -83,7 +93,8 @@ function buildBadge(){
   nm.removeAttribute('textLength'); nm.removeAttribute('lengthAdjust');
   if (length * nameSize * .57 > S.nameMax){ nm.setAttribute('textLength', String(S.nameMax)); nm.setAttribute('lengthAdjust', 'spacingAndGlyphs'); }
 
-  // Affiliazione: A6 fino a quattro righe, A7 fino a due
+  if (!aff || !role) return doc.documentElement;
+  // Affiliazione: fino a due righe
   const lines = []; let cur = '';
   for (const word of affiliation.split(/\s+/).filter(Boolean)){
     const next = cur ? cur + ' ' + word : word;
@@ -112,7 +123,7 @@ function download(){
   const url = URL.createObjectURL(new Blob([src], {type: 'image/svg+xml;charset=utf-8'}));
   const safe = (nameInput.value.trim() || 'badge').normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').slice(0, 60) || 'badge';
-  const a = document.createElement('a'); a.href = url; a.download = 'ArcheoFOSS2026-badge-' + SIZES[size].label + '-' + safe + '-' + palette + '.svg';
+  const a = document.createElement('a'); a.href = url; a.download = 'badge-' + size + '-' + safe + '.svg';
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1500);
 }

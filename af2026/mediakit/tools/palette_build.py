@@ -1,8 +1,8 @@
 """Crea tutte le stampe (tranne il programma) nelle tre combinazioni di colore.
 
 Sorgenti (non modificare a mano i file generati):  assets/source/master-*.svg, assets/source/screensaver-master.html
-Uscita:  assets/palette/<combinazione>/  ->  locandina-a0…a5.svg, logo.svg/.png, simbolo-20.svg/.png,
-         qr-programma.svg/.png, badge-a6.svg, badge-a7.svg, screensaver.html
+Uscita:  assets/palette/<combinazione>/  ->  locandina-a0…a5.svg, logo-archeofoss.svg/.png, logo-archeofoss-unibo.svg/.png,
+         logo-simbolo-20.svg/.png, logo-capitello-20th.svg/.png, QR-programme.svg/.png, badge-a6.svg, badge-a7.svg, Screensaver.html
          assets/badge-templates.js  ->  modelli A6/A7 con segnaposto colore, usati dalla pagina
 
 Cosa cambia rispetto ai master:
@@ -23,9 +23,7 @@ SRC = A / 'source'
 OUT = A / 'palette'
 BLUE = '#027BFF'
 
-PALETTES = {
-    'grafite-pesca':    {'name': 'Grafite · Pesca',            'INK': '#252B29', 'ACC': '#D89277', 'NODE': '#D89277', 'ACC2': '#AC4B35'},
-    'grafite-bordeaux': {'name': 'Grafite · Bordeaux · Blu',   'INK': '#252B29', 'ACC': '#762F3D', 'NODE': BLUE,      'ACC2': '#762F3D'},
+PALETTES = {                      # una sola combinazione (Grafite · Bordeaux e Grafite · Pesca tolte il 2026-11-18)
     'nero-mattone':     {'name': 'Nero · Rosso mattone · Blu', 'INK': '#171717', 'ACC': '#A33B35', 'NODE': BLUE,      'ACC2': '#A33B35'},
 }
 POSTERS = {'a0': (841, 1189), 'a1': (594, 841), 'a2': (420, 594), 'a3': (297, 420), 'a4': (210, 297), 'a5': (148, 210)}
@@ -77,6 +75,10 @@ def faint(hexcol, a=FAINT):
 
 def paint(tpl, p):
     tpl = tpl.replace('{{ACC_FAINT}}', faint(p['ACC']))
+    tpl = tpl.replace('{{ACC_FAINT2}}', faint(p['ACC'], .14))       # programma: scatole delle pause
+    tpl = tpl.replace('{{ACC2_BOX}}', faint(p['ACC2'], .72))        # programma: scatole delle aule
+    tpl = tpl.replace('{{ACC2_KEY}}', faint(p['ACC2'], .30))        # programma: keynote nel calendario
+    tpl = tpl.replace('{{NODE_BG}}', faint(p['ACC'], .16))          # badge A7-01..03: pallini e numeri di sfondo
     tpl = re.sub(r'\{\{INK@([\d.]+)\}\}', lambda m: faint(p['INK'], float(m.group(1))), tpl)   # linee schiarite nei PDF
     tpl = tpl.replace('{{ACC_HALF}}', faint(p['ACC'], COL_OPACITY))      # capitello al 50% nei PDF
     for k in ('INK', 'ACC', 'NODE', 'ACC2'):
@@ -248,12 +250,6 @@ def strip_labels(svg):
     return svg
 
 
-def badge_a6_tpl():
-    s = sub_20th(strip_labels(tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8'))), BADGE_20_END)
-    assert '>ArcheoFOSS 2026</text>' in s
-    return with_fonts(s.replace('>ArcheoFOSS 2026</text>', f'>{WORD26}</text>', 1))
-
-
 def badge_a7_tpl(a6_tokens):
     F = 'font-family="Inter,Arial,sans-serif"'
     art = a6_tokens[a6_tokens.index('<g transform="translate(0 345)'):a6_tokens.index('<text id="badge-name"')]
@@ -293,6 +289,37 @@ def badge_a7_tpl(a6_tokens):
     return with_fonts(svg)
 
 
+BADGE_MODELS = {'A7-01': '{{INK}}', 'A7-02': '{{ACC}}', 'A7-03': BLUE}     # colore del nome nei modelli A7-01..03
+
+
+def badge_a7_model_tpl(name_fill):
+    """Badge A7 orizzontale (105 x 74 mm) a modello: in alto UniBo / DiSCi, ARCHEO.FOSS 2026 al centro e il capitello
+    «20th EDITION», alti uguali; linee della locandina tenui con i pallini e il grande «20» chiaro; il nome al centro
+    (id badge-name, colore name_fill), sotto l'affiliazione (badge-affiliation) e vicino alla fascia la tipologia
+    (badge-role); in basso una fascia rosso mattone a tutta larghezza."""
+    W, H, M, LH = 1050, 740, 44, 96
+    uw = LH * UNIBO_RATIO
+    kc = LH / (COL_W * 333.7 / 492)
+    cw = COL_W * kc
+    uni = base64.b64encode(UNIBO.read_bytes()).decode()
+    ws = 60
+    y_w = M + LH / 2 + CAP * ws / 2
+    k = W / 840
+    art = poster_art(labels=True, big=True, end=(W - M) / k)          # il «th» finisce dentro il margine
+    art = art.replace('opacity="0.76"', 'opacity="0.22"').replace('opacity="0.48"', 'opacity="0.13"')
+    art = re.sub(r'fill="\{\{NODE\}\}"', 'fill="{{NODE_BG}}"', art)         # pallini e numeri tenui, come le linee
+    F7 = _FTEXT.format(700)
+    body = (f'<g font-family="Inter,Arial,sans-serif" transform="translate(0 {170 - k * ART_TOP:.1f}) scale({k:.4f})">{art}</g>'
+            + f'<image x="{M}" y="{M}" width="{uw:.1f}" height="{LH}" href="data:image/png;base64,{uni}"/>'
+            + f'<g transform="translate({W - M - cw:.1f} {M}) scale({kc:.4f})">{edition_block()}</g>'
+            + f'<text x="{W / 2}" y="{y_w:.1f}" text-anchor="middle" {F7} font-size="{ws}" letter-spacing="{-ws / 20.5:.2f}" fill="{{{{INK}}}}">{WORD}<tspan fill="{BLUE}"> 2026</tspan></text>'
+            + f'<text id="badge-name" x="{W / 2}" y="390" text-anchor="middle" {F7} font-size="72" fill="{name_fill}">YOUR NAME</text>'
+            + f'<text id="badge-affiliation" x="{W / 2}" y="452" text-anchor="middle" {_FTEXT.format(400)} font-size="30" fill="#555D59">YOUR AFFILIATION</text>'
+            + f'<text id="badge-role" x="{W / 2}" y="{H - 42 - 30}" text-anchor="middle" {F7} font-size="28" letter-spacing="1.2" fill="{{{{ACC2}}}}">PARTICIPANT</text>'
+            + f'<rect x="0" y="{H - 42}" width="{W}" height="42" fill="{{{{ACC}}}}"/>')
+    return framed(W, H, body, 'ArcheoFOSS 2026 A7 badge, customizable name').replace('width="1050" height="740"', 'width="105mm" height="74mm"', 1)
+
+
 def logo_tpl():
     """Logo: ARCHEO.FOSS2026 su una riga, misurato sul font."""
     size, ls = 120, -4
@@ -302,6 +329,49 @@ def logo_tpl():
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="ARCHEO.FOSS 2026">'
         f'<text x="20" y="128" font-family="Inter,Arial,sans-serif" font-size="{size}" font-weight="700" letter-spacing="{ls}" '
         f'fill="{{{{INK}}}}">{WORD26}</text></svg>')
+
+
+UNIBO_SEAL = SRC / 'logo-unibo-sigillo.png'      # sigillo + «Alma Mater Studiorum Università di Bologna» (2355 x 1742 px)
+
+
+def text_outline(text, size, x, y, ls=0.0, weight='700'):
+    """Testo convertito in tracciato (forme del font Inter incluso), per loghi che non dipendono dai font installati."""
+    from fontTools.ttLib import TTFont
+    from fontTools.pens.svgPathPen import SVGPathPen
+    from fontTools.pens.transformPen import TransformPen
+    f = TTFont(io.BytesIO(base64.b64decode(FONTS[weight])))
+    cmap, gs, hm = f.getBestCmap(), f.getGlyphSet(), f['hmtx']
+    k = size / f['head'].unitsPerEm
+    pen = SVGPathPen(gs)
+    for c in text:
+        g = cmap[ord(c)]
+        gs[g].draw(TransformPen(pen, (k, 0, 0, -k, x, y)))
+        x += hm[g][0] * k + ls
+    return pen.getCommands(), x
+
+
+def logo_unibo_tpl():
+    """Logo affiancato: Università di Bologna a sinistra, ARCHEO.FOSS 2026 a destra (tracciati vettoriali).
+    Il logo dell'università è alto quanto le maiuscole della scritta e allineato con loro in alto e in basso."""
+    from PIL import Image
+    iw, ih = Image.open(UNIBO_SEAL).size
+    cap, M = 240, 40
+    lw = cap * iw / ih
+    size = cap / CAP
+    ls = -size / 30
+    x = M + lw + round(cap * .45)
+    y = M + cap
+    paths = []
+    for t, col in (('ARCHEO', '{{INK}}'), ('.', BLUE), ('FOSS', '{{INK}}'), (' 2026', BLUE)):
+        if t.startswith(' '):
+            x += text_width(' ', size, '700') + ls; t = t[1:]
+        d, x = text_outline(t, size, x, y, ls)
+        paths.append(f'<path fill="{col}" d="{d}"/>')
+    W, H = round(x - ls + M), round(cap + 2 * M)
+    seal = base64.b64encode(UNIBO_SEAL.read_bytes()).decode()
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
+            f'aria-label="Alma Mater Studiorum Università di Bologna · ARCHEO.FOSS 2026">'
+            f'<image x="{M}" y="{M}" width="{lw:.1f}" height="{cap}" href="data:image/png;base64,{seal}"/>' + ''.join(paths) + '</svg>')
 
 
 def capital_tpl():
@@ -316,8 +386,9 @@ def symbol_tpl():
     return with_fonts(sub_20th(tokenize((SRC / 'master-logo-20.svg').read_text(encoding='utf-8')), SYMBOL_20_END))
 
 
-def qr_tpl():
-    return (SRC / 'master-qr.svg').read_text(encoding='utf-8').replace('#252B29', '{{INK}}')
+def qr_tpl(name='master-qr.svg'):
+    """QR dal master in assets/source (master-qr-teams.svg: tools/qr_make.py)."""
+    return (SRC / name).read_text(encoding='utf-8').replace('#252B29', '{{INK}}')
 
 
 SS_TITLE = .60                         # screensaver: titolo al 60% della larghezza tra i margini
@@ -366,12 +437,123 @@ def screensaver(p):
     return s
 
 
+# ---------------------------------------------------------------- Microsoft Teams: banner 1840 x 460, logo 800 x 800
+ART_TOP = 380                          # prima linea dell'arte della locandina (coordinate della locandina)
+ART_BOT = 800                          # fondo del grande «20th»
+_FTEXT = 'font-family="Inter,Arial,sans-serif" font-weight="{}"'
+
+
+def poster_art(labels=True, big=True, end=None):
+    """Arte della locandina (linee al vivo, 11 pallini, grande «20th»), coordinate della locandina larga 840."""
+    s = poster_tpl()
+    i = s.index('<g transform="translate(20,312) scale(.87)">')
+    a = s[i:s.index('</g>', i) + 4]
+    if not labels:
+        a = re.sub(LABEL_RE, '', a)
+    if not big or end:
+        a, n = re.subn(r'<text[^>]*opacity="\.075"[^>]*>20</text><text[^>]*opacity="\.075"[^>]*>th</text>',
+                       (lambda m: big_20th(end)) if big else '', a)
+        assert n == 1, ('grande 20th', n)
+    return a
+
+
+def placed_art(x, y, k, **kw):
+    return f'<g font-family="Inter,Arial,sans-serif" transform="translate({x:.1f} {y:.1f}) scale({k:.4f})">{poster_art(**kw)}</g>'
+
+
+def framed(w, h, body, label):
+    return with_fonts(f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="{label}">'
+                      f'<defs><clipPath id="page"><rect width="{w}" height="{h}"/></clipPath>'
+                      f'<linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>'
+                      f'<rect width="{w}" height="{h}" fill="#FFFFFF"/><g clip-path="url(#page)">{body}</g></svg>')
+
+
+def teams_banner_tpl():
+    """Banner Teams 1840 x 460. Sinistra (margini 36 px sopra, a sinistra e sotto): riga con il logo UniBo / DiSCi e il
+    capitello «20th EDITION» alti uguali, poi titolo, sottotitolo e data, larghi fino all'inizio delle linee e con
+    spazi uguali. Destra: le linee della locandina con i pallini e il grande «20th», che finisce dentro il bordo."""
+    W, H, MM = 1840, 460, 36
+    x_art, logo_h = 1092, 104
+    room = x_art - 40 - MM
+    st = fit_size('ARCHEO.FOSS 2026', '700', 1 / 20.5, room)
+    sub = 100 * room / text_width('International conference on open software, hardware, processes,', 100, '400')
+    ds = 100 * room / text_width('30 November – 1 December 2026 · Bologna', 100, '700') * .78
+    lead = sub * 1.3
+    fixed = logo_h + CAP * st + CAP * sub + lead + CAP * ds
+    g = (H - 2 * MM - fixed) / 3
+    y_t = MM + logo_h + g + CAP * st
+    y_s = y_t + g + CAP * sub
+    y_d = y_s + lead + g + CAP * ds
+    uw = logo_h * UNIBO_RATIO
+    kc = logo_h / (COL_W * 333.7 / 492)
+    uni = base64.b64encode(UNIBO.read_bytes()).decode()
+    k = H / (ART_BOT - ART_TOP) * 1.02
+    F4, F7 = _FTEXT.format(400), _FTEXT.format(700)
+    body = (placed_art(x_art, -4 - k * ART_TOP, k, labels=False, end=(W - 45 - x_art) / k)
+            + f'<rect x="{x_art - 20}" y="0" width="260" height="{H}" fill="url(#fade)"/>'
+            + f'<image x="{MM}" y="{MM}" width="{uw:.1f}" height="{logo_h}" href="data:image/png;base64,{uni}"/>'
+            + f'<g transform="translate({MM + uw + 44:.1f} {MM}) scale({kc:.4f})">{edition_block()}</g>'
+            + f'<text x="{MM}" y="{y_t:.1f}" {F7} font-size="{st:.1f}" letter-spacing="{-st / 20.5:.2f}" fill="{{{{INK}}}}">{WORD}<tspan fill="{BLUE}"> 2026</tspan></text>'
+            + f'<text x="{MM}" y="{y_s:.1f}" {F4} font-size="{sub:.1f}" fill="{{{{INK}}}}">International conference on open software, hardware, processes,</text>'
+            + f'<text x="{MM}" y="{y_s + lead:.1f}" {F4} font-size="{sub:.1f}" fill="{{{{INK}}}}">data and formats in archaeological research</text>'
+            + f'<text x="{MM}" y="{y_d:.1f}" {F7} font-size="{ds:.1f}" fill="{{{{ACC}}}}">30 November – 1 December 2026 · Bologna</text>')
+    return framed(W, H, body, 'ArcheoFOSS 2026 Microsoft Teams banner')
+
+
+def teams_logo_tpl(MC=60, kc=1.05, xc=-60, line_gap=2.5):
+    """Logo Teams 800 x 800: ARCHEO. / FOSS / 2026 su tre righe, grande quanto la larghezza permette (margine 60);
+    il nome è l'elemento principale: sotto, le linee della locandina più piccole (scala kc) e più in basso,
+    la prima a line_gap spazi di riga dalla scritta nel punto più vicino."""
+    L = 800
+    size = fit_size('ARCHEO.', '700', 1 / 20.5, L - 2 * MC)
+    capc, gap = CAP * size, .22 * size
+    y1 = MC + capc
+    y_end = y1 + 2 * (capc + gap)
+    w2026 = text_width('2026', size, '700', -size / 20.5)
+    wfoss = text_width('FOSS', size, '700', -size / 20.5)
+
+    def top_line(X):
+        xi = ((X - xc) / kc - 20) / .87
+        return kc * (312 + .87 * strata_y(xi, 0))
+    xs = range(0, L + 1, 4)
+    oy = max(y_end + line_gap * gap - min(top_line(X) for X in xs if X <= MC + w2026 + 10),
+             y1 + capc + 2 * gap - min(top_line(X) for X in xs if MC + w2026 + 10 < X <= MC + wfoss + 10),
+             y1 + gap - min(top_line(X) for X in xs if X > MC + wfoss + 10))
+    f = f'{_FTEXT.format(700)} font-size="{size:.1f}" letter-spacing="{-size / 20.5:.1f}"'
+    body = (placed_art(xc, oy, kc, labels=False, big=False)
+            + f'<text x="{MC}" y="{y1:.1f}" {f} fill="{{{{INK}}}}">ARCHEO<tspan fill="{BLUE}">.</tspan></text>'
+            + f'<text x="{MC}" y="{y1 + capc + gap:.1f}" {f} fill="{{{{INK}}}}">FOSS</text>'
+            + f'<text x="{MC}" y="{y_end:.1f}" {f} fill="{BLUE}">2026</text>')
+    return framed(L, L, body, 'ArcheoFOSS 2026 Microsoft Teams logo')
+
+
+def png_exact(svg_path, png_path, w, h):
+    """PNG esattamente w x h pixel (per Teams): disegnato 4 volte più grande dal motore di anteprima di macOS e ridotto
+    (bordi più puliti), senza perdita di qualità, con il profilo colore sRGB incluso."""
+    from PIL import Image
+    svg = svg_path.read_text(encoding='utf-8')
+    side = max(w, h)
+    root = re.search(r'<svg\b[^>]*>', svg).group(0)
+    new = re.sub(r'\s(width|height|viewBox)="[^"]*"', '', root).replace(
+        '<svg', f'<svg width="{side}" height="{side}" viewBox="{-(side - w) / 2} {-(side - h) / 2} {side} {side}"', 1)
+    with tempfile.TemporaryDirectory() as tmp:
+        sq = Path(tmp) / svg_path.name
+        sq.write_text(svg.replace(root, new, 1), encoding='utf-8')
+        subprocess.run(['qlmanage', '-t', '-s', str(side * 4), '-o', tmp, str(sq)], check=True, capture_output=True)
+        im = Image.open(Path(tmp) / (svg_path.name + '.png')).convert('RGB')
+    k = im.width / side
+    im = im.crop((round((side - w) / 2 * k), round((side - h) / 2 * k), round((side + w) / 2 * k), round((side + h) / 2 * k)))
+    from PIL import ImageCms
+    srgb = ImageCms.ImageCmsProfile(ImageCms.createProfile('sRGB')).tobytes()
+    im.resize((w, h), Image.LANCZOS).save(png_path, optimize=True, icc_profile=srgb, dpi=(144, 144))
+
+
 # ---------------------------------------------------------------- PNG
 def qr_png(svg, path, scale=40):
     from PIL import Image, ImageDraw
     ink = re.search(r'fill="(#[0-9A-Fa-f]{6})"', svg.split('<path', 1)[1]).group(1)
     d = re.search(r'<path d="([^"]+)"', svg).group(1)
-    n = 37
+    n = int(float(re.search(r'viewBox="0 0 ([\d.]+)', svg).group(1)))     # moduli compreso il bordo bianco
     img = Image.new('RGB', (n * scale, n * scale), 'white'); dr = ImageDraw.Draw(img)
     for x, y in re.findall(r'M(\d+) (\d+)h1v1h-1z', d):
         x, y = int(x), int(y)
@@ -405,8 +587,11 @@ def svg_png(svg_path, png_path, px=2400):
 # ---------------------------------------------------------------- costruzione
 def main():
     poster, logo, symbol, qr, capital = poster_tpl(), logo_tpl(), symbol_tpl(), qr_tpl(), capital_tpl()
+    logo_unibo = logo_unibo_tpl()
+    teams_banner, teams_logo = teams_banner_tpl(), teams_logo_tpl()
     a6_tokens = tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8'))
-    a6, a7 = badge_a6_tpl(), badge_a7_tpl(a6_tokens)
+    a7 = badge_a7_tpl(a6_tokens)                       # A7-04: arte presa dal master del vecchio badge A6
+    badges = {**{k: badge_a7_model_tpl(c) for k, c in BADGE_MODELS.items()}, 'A7-04': a7}
     # non svuota la cartella: i file del programma (tools/programme_build.py) restano
     for pid, p in PALETTES.items():
         d = OUT / pid; d.mkdir(parents=True, exist_ok=True)
@@ -414,14 +599,24 @@ def main():
             tpl = strip_labels(poster) if k in NO_LABELS_POSTERS else poster
             s = re.sub(r'width="[\d.]+mm" height="[\d.]+mm"', f'width="{w}mm" height="{h}mm"', paint(tpl, p), count=1)
             (d / f'locandina-{k}.svg').write_text(s, encoding='utf-8')
-        for name, tpl in (('logo', logo), ('simbolo-20', symbol), ('capitello-20th', capital), ('qr-programma', qr), ('badge-a6', a6), ('badge-a7', a7)):
+        for name, tpl in (('logo-archeofoss', logo), ('logo-archeofoss-unibo', logo_unibo), ('logo-simbolo-20', symbol), ('logo-capitello-20th', capital), ('QR-programme', qr), ('QR-teams', qr_tpl('master-qr-teams.svg')), ('teams-banner', teams_banner), ('teams-logo', teams_logo), *((f'badge-{k}', t) for k, t in badges.items())):
             (d / f'{name}.svg').write_text(paint(tpl, p), encoding='utf-8')
-        (d / 'screensaver.html').write_text(screensaver(p), encoding='utf-8')
-        qr_png(paint(qr, p), d / 'qr-programma.png')
-        for name in ('logo', 'simbolo-20', 'capitello-20th'):
+        (d / 'Screensaver.html').write_text(screensaver(p), encoding='utf-8')
+        for name, src in (('QR-programme', qr), ('QR-teams', qr_tpl('master-qr-teams.svg'))):   # PNG di circa 2000 px, moduli interi
+            n = int(re.search(r'viewBox="0 0 (\d+)', src).group(1))
+            qr_png(paint(src, p), d / f'{name}.png', scale=round(2000 / n))
+        for name in ('logo-archeofoss', 'logo-simbolo-20', 'logo-capitello-20th'):
             svg_png(d / f'{name}.svg', d / f'{name}.png')
+        svg_png(d / 'logo-archeofoss-unibo.svg', d / 'logo-archeofoss-unibo.png', px=4800)       # molto largo: più pixel
+        png_exact(d / 'teams-banner.svg', d / 'teams-banner.png', 1840, 460)
+        png_exact(d / 'teams-logo.svg', d / 'teams-logo.png', 800, 800)
+    # nel browser app.js sostituisce solo INK, ACC, NODE, ACC2: gli altri colori (schiariti) si calcolano qui
+    base = {'{{INK}}', '{{ACC}}', '{{NODE}}', '{{ACC2}}'}
+    pal = next(iter(PALETTES.values()))
+    badge_js = {k: re.sub(r'\{\{[A-Z0-9_@.]+\}\}', lambda m: m.group(0) if m.group(0) in base else paint(m.group(0), pal), t)
+                for k, t in badges.items()}
     js = ('window.AF26_PALETTES=' + json.dumps({k: {x: v[x] for x in ('name', 'INK', 'ACC', 'NODE', 'ACC2')} for k, v in PALETTES.items()}, ensure_ascii=False) + ';\n'
-          'window.AF26_BADGE={a6:' + json.dumps(a6) + ',a7:' + json.dumps(a7) + '};\n')
+          'window.AF26_BADGE=' + json.dumps(badge_js) + ';\n')
     (A / 'badge-templates.js').write_text(js, encoding='utf-8')
     print('ok', [p.name for p in sorted(OUT.iterdir())], len(list(OUT.rglob('*'))), 'file')
     print('larghezza logo locandina ARCHEO.FOSS @82:', round(62 + text_width('ARCHEO.FOSS', 82, '700', -4)), '(il "20" inizia a 682)')
