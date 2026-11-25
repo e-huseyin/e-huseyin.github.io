@@ -85,11 +85,7 @@ h1{font-size:40px;line-height:1.1;letter-spacing:-.03em;font-weight:600;margin:0
 .badge-form label{display:block;font-weight:600;margin:0 0 6px}
 .badge-form input,.badge-form select{width:100%;font:16px Inter,Arial,sans-serif;padding:12px 14px;border:1px solid var(--line);
   border-radius:6px;background:var(--paper);color:var(--ink);margin:0 0 20px}
-.size-switch{display:flex;gap:8px;margin:0 0 16px}
-.size-switch button{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);
-  color:var(--ink);font:500 14px Inter,Arial,sans-serif;cursor:pointer}
-.size-switch button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-/* anteprima grande: A6 verticale alta quasi quanto lo schermo, A7 orizzontale a tutta larghezza */
+/* anteprima grande: badge A7 orizzontale a tutta larghezza */
 .badge-frame svg{display:block;max-width:100%;border:1px solid var(--line);margin:0 auto;box-shadow:0 6px 24px rgba(37,43,41,.08)}
 .badge-frame svg[height="74mm"]{width:100%;height:auto}
 

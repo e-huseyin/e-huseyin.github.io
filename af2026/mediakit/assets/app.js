@@ -18,32 +18,19 @@ show();
 // ---- Badge: lo stesso SVG serve per anteprima e download
 const preview = document.getElementById('badge-preview');
 const nameInput = document.getElementById('badge-name-input');
-const roleInput = document.getElementById('badge-role-input');
 const affInput = document.getElementById('badge-affiliation-input');
 const blank = document.getElementById('badge-blank');
-const sizeButtons = [...document.querySelectorAll('.size-switch button')];
-// Badge A7 orizzontale: A7-01..03 con la fascia in basso, A7-04 con il QR. Modelli: tools/palette_build.py
-const A7 = {x: '56', nameMax: 760, nameSizes: [56, 46, 38, 30, 26],
-       wrap: 50, maxLines: 2, affMax: 760, affSize: [26, 24], affY: [666, 660]};
-// A7-01..03: nome, affiliazione e tipologia centrati (modelli con la fascia rosso mattone in basso)
-const MODEL = {x: '525', nameMax: 920, nameSizes: [72, 58, 46, 36, 30],
-       wrap: 52, maxLines: 2, affMax: 920, affSize: [30, 26], affY: [452, 445]};
-const SIZES = {'A7-01': {label: 'A7-01', ...MODEL},
-               'A7-02': {label: 'A7-02', ...MODEL}, 'A7-03': {label: 'A7-03', ...MODEL}, 'A7-04': {label: 'A7-04', ...A7}};
-let size = 'A7-01';
-sizeButtons.forEach(b => b.addEventListener('click', () => {
-  size = b.dataset.size;
-  sizeButtons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  updateBlank(); draw();
-}));
+// Un solo badge A7 orizzontale, definitivo (modello: tools/palette_build.py): nome centrato; affiliazione in maiuscolo
+// su una riga vicino alla fascia rosso mattone. Nessuna tipologia.
+const S = {nameMax: 920, nameSizes: [72, 58, 46, 36, 30], affMax: 920};
 
 // ---- Una sola combinazione di colore: Nero · Rosso mattone · Blu. I file scaricati hanno il loro nome esatto.
 const PALETTES = window.AF26_PALETTES;
 const palette = 'nero-mattone';
 const paint = tpl => ['INK', 'ACC', 'NODE', 'ACC2'].reduce((s, k) => s.split('{{' + k + '}}').join(PALETTES[palette][k]), tpl);
 function updateBlank(){
-  blank.href = 'assets/palette/' + palette + '/badge-' + size + '.svg';
-  blank.download = 'badge-' + size + '.svg';
+  blank.href = 'assets/palette/' + palette + '/badge.svg';
+  blank.download = 'badge.svg';
 }
 function applyPalette(){
   document.documentElement.dataset.palette = palette;
@@ -76,11 +63,9 @@ document.addEventListener('click', e => {
 });
 
 function buildBadge(){
-  const S = SIZES[size];
-  const doc = new DOMParser().parseFromString(paint(window.AF26_BADGE[size]), 'image/svg+xml');
+  const doc = new DOMParser().parseFromString(paint(window.AF26_BADGE.badge), 'image/svg+xml');
   const nm = doc.getElementById('badge-name');
   const aff = doc.getElementById('badge-affiliation');
-  const role = doc.getElementById('badge-role');
   const name = nameInput.value.trim() || 'YOUR NAME';
   const affiliation = affInput.value.trim() || 'YOUR AFFILIATION';
 
@@ -93,28 +78,12 @@ function buildBadge(){
   nm.removeAttribute('textLength'); nm.removeAttribute('lengthAdjust');
   if (length * nameSize * .57 > S.nameMax){ nm.setAttribute('textLength', String(S.nameMax)); nm.setAttribute('lengthAdjust', 'spacingAndGlyphs'); }
 
-  if (!aff || !role) return doc.documentElement;
-  // Affiliazione: fino a due righe
-  const lines = []; let cur = '';
-  for (const word of affiliation.split(/\s+/).filter(Boolean)){
-    const next = cur ? cur + ' ' + word : word;
-    if (cur && next.length > S.wrap){ lines.push(cur); cur = word; } else cur = next;
-  }
-  if (cur) lines.push(cur);
-  const n = S.maxLines;
-  const fin = lines.length > n ? [...lines.slice(0, n - 1), lines.slice(n - 1).join(' ')] : lines;
-  aff.textContent = '';
-  const k = Math.max(fin.length, 1) - 1;
-  const affSize = S.affSize[k];
-  aff.setAttribute('font-size', String(affSize));
-  aff.setAttribute('y', String(S.affY[k]));
-  fin.forEach((line, i) => {
-    const t = doc.createElementNS('http://www.w3.org/2000/svg', 'tspan');
-    t.setAttribute('x', S.x); if (i) t.setAttribute('dy', String(affSize + 5));
-    if ([...line].length * affSize * .57 > S.affMax){ t.setAttribute('textLength', String(S.affMax)); t.setAttribute('lengthAdjust', 'spacingAndGlyphs'); }
-    t.textContent = line; aff.appendChild(t);
-  });
-  role.textContent = roleInput.value.toUpperCase();
+  // Affiliazione in maiuscolo, una riga; se è lunga si rimpicciolisce e poi si stringe
+  const up = affiliation.toUpperCase(), len = [...up].length;
+  const fs = Math.max(18, Math.min(28, Math.floor(S.affMax / (len * .72))));
+  aff.textContent = up; aff.setAttribute('font-size', String(fs));
+  aff.removeAttribute('textLength'); aff.removeAttribute('lengthAdjust');
+  if (len * fs * .72 > S.affMax){ aff.setAttribute('textLength', String(S.affMax)); aff.setAttribute('lengthAdjust', 'spacingAndGlyphs'); }
   return doc.documentElement;
 }
 function draw(){ preview.replaceChildren(document.importNode(buildBadge(), true)); }
@@ -123,13 +92,12 @@ function download(){
   const url = URL.createObjectURL(new Blob([src], {type: 'image/svg+xml;charset=utf-8'}));
   const safe = (nameInput.value.trim() || 'badge').normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').slice(0, 60) || 'badge';
-  const a = document.createElement('a'); a.href = url; a.download = 'badge-' + size + '-' + safe + '.svg';
+  const a = document.createElement('a'); a.href = url; a.download = 'badge-' + safe + '.svg';
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 nameInput.addEventListener('input', draw);
 affInput.addEventListener('input', draw);
-roleInput.addEventListener('change', draw);
 document.getElementById('badge-download').addEventListener('click', download);
 applyPalette();
 })();

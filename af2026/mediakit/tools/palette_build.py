@@ -2,8 +2,8 @@
 
 Sorgenti (non modificare a mano i file generati):  assets/source/master-*.svg, assets/source/screensaver-master.html
 Uscita:  assets/palette/<combinazione>/  ->  locandina-a0…a5.svg, logo-archeofoss.svg/.png, logo-archeofoss-unibo.svg/.png,
-         logo-simbolo-20.svg/.png, logo-capitello-20th.svg/.png, QR-programme.svg/.png, badge-a6.svg, badge-a7.svg, Screensaver.html
-         assets/badge-templates.js  ->  modelli A6/A7 con segnaposto colore, usati dalla pagina
+         logo-simbolo-20.svg/.png, logo-capitello-20th.svg/.png, QR-programme.svg/.png, badge.svg, Screensaver.html
+         assets/badge-templates.js  ->  badge A7 con segnaposto colore, usato dalla pagina; badge.svg vuoto
 
 Cosa cambia rispetto ai master:
 - 11 nodi invece di 12 (tolto il nodo 12)
@@ -78,7 +78,7 @@ def paint(tpl, p):
     tpl = tpl.replace('{{ACC_FAINT2}}', faint(p['ACC'], .14))       # programma: scatole delle pause
     tpl = tpl.replace('{{ACC2_BOX}}', faint(p['ACC2'], .72))        # programma: scatole delle aule
     tpl = tpl.replace('{{ACC2_KEY}}', faint(p['ACC2'], .30))        # programma: keynote nel calendario
-    tpl = tpl.replace('{{NODE_BG}}', faint(p['ACC'], .16))          # badge A7-01..03: pallini e numeri di sfondo
+    tpl = tpl.replace('{{NODE_BG}}', faint(p['ACC'], .16))          # badge: pallini e numeri di sfondo
     tpl = re.sub(r'\{\{INK@([\d.]+)\}\}', lambda m: faint(p['INK'], float(m.group(1))), tpl)   # linee schiarite nei PDF
     tpl = tpl.replace('{{ACC_HALF}}', faint(p['ACC'], COL_OPACITY))      # capitello al 50% nei PDF
     for k in ('INK', 'ACC', 'NODE', 'ACC2'):
@@ -175,7 +175,6 @@ def big_20th(end=BIG_20_END):
 
 
 OLD_20 = re.compile(r'<text x="342" y="536" font-size="470" font-weight="700" fill="\{\{ACC\}\}" opacity="\.075" letter-spacing="-40">20</text>')
-BADGE_20_END = 990 / 1.36010363 + 32  # sui badge il «th» finisce 60 unità (6 mm) prima del bordo destro
 SYMBOL_20_END = 806                    # simbolo: il «th» finisce 10 unità prima del bordo
 
 
@@ -250,72 +249,36 @@ def strip_labels(svg):
     return svg
 
 
-def badge_a7_tpl(a6_tokens):
-    F = 'font-family="Inter,Arial,sans-serif"'
-    art = a6_tokens[a6_tokens.index('<g transform="translate(0 345)'):a6_tokens.index('<text id="badge-name"')]
-    art = sub_20th(art, BADGE_20_END)
-    # Fascia a tutta larghezza, schiacciata in verticale (KY) per stare tra intestazione (y<122) e nome (y>578).
-    # Cerchi ed etichette dei nodi vengono tolti dal gruppo e ridisegnati senza deformazione.
-    S, T, KY = 1.36010363, 196, 1.06
-    SY = KY / .87                                      # scala verticale del gruppo esterno
-    nodes = re.findall(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="5\.5"[^>]*/>', art)
-    labels = re.findall(r'<text x="[\d.]+" y="[\d.]+" font-size="12" fill="\{\{NODE\}\}">(\d\d)</text>', art)
-    art = re.sub(r'<circle [^>]*r="5\.5"[^>]*/>', '', art)
-    art = re.sub(r'<text x="[\d.]+" y="[\d.]+" font-size="12" fill="\{\{NODE\}\}">\d\d</text>', '', art)
-    art = art.replace('translate(0 345) scale(1.36010363) translate(-32 -394)',
-                      f'translate(0 {T}) scale({S} {SY:.6f}) translate(-32 -451.2)', 1)
-    k = .87 * S
-    for (cx, cy), lab in zip(nodes, labels):
-        X = (20 + .87 * float(cx) - 32) * S
-        Y = T + (312 + .87 * float(cy) - 451.2) * SY
-        art += f'<circle cx="{X:.2f}" cy="{Y:.2f}" r="{5.5 * k:.2f}" fill="{{{{NODE}}}}" stroke="#FFFFFF" stroke-width="{2 * k:.2f}"/>'
-        # numeri dei nodi non disegnati: sul badge sarebbero circa 4 pt
-    assert len(nodes) == len(labels) == 11, (len(nodes), len(labels))
-    q = a6_tokens.index('<g transform="translate(430 1282)')
-    qr = a6_tokens[q:a6_tokens.index('</g>', q) + 4].replace(
-        'translate(430 1282) scale(5.135135135)', 'translate(850 560) scale(4.054054054)', 1)
-    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="105mm" height="74mm" viewBox="0 0 1050 740" role="img" '
-           'aria-label="ArcheoFOSS 2026 A7 landscape badge, customizable name affiliation role">'
-           '<rect x="0" y="0" width="1050" height="740" fill="#FFFFFF"/>' + art +
-           f'<text x="56" y="88" {F} font-size="42" font-weight="700" fill="{{{{INK}}}}">{WORD26}</text>'
-           f'<text x="56" y="124" {F} font-size="24" font-weight="600" fill="{{{{ACC2}}}}">20th edition</text>'
-           f'<text x="994" y="56" text-anchor="end" {F} font-size="23" font-weight="600" fill="{{{{INK}}}}">30 Nov – 1 Dec 2026 · Bologna</text>'
-           f'<text x="994" y="84" text-anchor="end" {F} font-size="20" fill="#656D65">Department of History and Cultures (DiSCi)</text>'
-           f'<text x="994" y="110" text-anchor="end" {F} font-size="20" fill="#656D65">Piazza San Giovanni in Monte 2</text>'
-           f'<text id="badge-name" x="56" y="626" {F} font-size="56" font-weight="700" fill="{{{{INK}}}}">YOUR NAME</text>'
-           f'<text id="badge-affiliation" x="56" y="666" {F} font-size="26" font-weight="400" fill="#555D59">YOUR AFFILIATION</text>'
-           f'<text id="badge-role" x="56" y="720" {F} font-size="24" font-weight="700" fill="{{{{ACC2}}}}" letter-spacing="1.2">PARTICIPANT</text>'
-           + qr + '\n</svg>')
-    return with_fonts(svg)
-
-
-BADGE_MODELS = {'A7-01': '{{INK}}', 'A7-02': '{{ACC}}', 'A7-03': BLUE}     # colore del nome nei modelli A7-01..03
+BADGE_FILL = '{{ACC}}'              # badge definitivo (un solo modello dal 2026-11-25): nome rosso mattone
+BIG20_LIFT = 100                    # badge: quanto si alza il grande «20th» (unità della locandina; 100 = circa 11 mm)
 
 
 def badge_a7_model_tpl(name_fill):
-    """Badge A7 orizzontale (105 x 74 mm) a modello: in alto UniBo / DiSCi, ARCHEO.FOSS 2026 al centro e il capitello
+    """Badge A7 orizzontale (105 x 74 mm), definitivo: in alto il logo UniBo, ARCHEO.FOSS 2026 al centro e il capitello
     «20th EDITION», alti uguali; linee della locandina tenui con i pallini e il grande «20» chiaro; il nome al centro
-    (id badge-name, colore name_fill), sotto l'affiliazione (badge-affiliation) e vicino alla fascia la tipologia
-    (badge-role); in basso una fascia rosso mattone a tutta larghezza."""
+    (id badge-name, colore name_fill); vicino alla fascia l'affiliazione in maiuscolo (badge-affiliation);
+    in basso una fascia rosso mattone a tutta larghezza. Nessuna tipologia."""
     W, H, M, LH = 1050, 740, 44, 96
-    uw = LH * UNIBO_RATIO
+    uw = LH * 2355 / 1742                 # solo il logo UniBo (sigillo + nome), senza DiSCi: il titolo non lo tocca
     kc = LH / (COL_W * 333.7 / 492)
     cw = COL_W * kc
-    uni = base64.b64encode(UNIBO.read_bytes()).decode()
+    uni = base64.b64encode(UNIBO_SEAL.read_bytes()).decode()
     ws = 60
     y_w = M + LH / 2 + CAP * ws / 2
     k = W / 840
     art = poster_art(labels=True, big=True, end=(W - M) / k)          # il «th» finisce dentro il margine
     art = art.replace('opacity="0.76"', 'opacity="0.22"').replace('opacity="0.48"', 'opacity="0.13"')
     art = re.sub(r'fill="\{\{NODE\}\}"', 'fill="{{NODE_BG}}"', art)         # pallini e numeri tenui, come le linee
+    # grande «20th» chiaro alzato di BIG20_LIFT unità della locandina: non passa dietro l'affiliazione
+    art, n = re.subn(r'(<text [^>]*?y=")([\d.]+)("[^>]*opacity="\.075")', lambda m: f'{m.group(1)}{float(m.group(2)) - BIG20_LIFT:.1f}{m.group(3)}', art)
+    assert n == 2, n
     F7 = _FTEXT.format(700)
     body = (f'<g font-family="Inter,Arial,sans-serif" transform="translate(0 {170 - k * ART_TOP:.1f}) scale({k:.4f})">{art}</g>'
             + f'<image x="{M}" y="{M}" width="{uw:.1f}" height="{LH}" href="data:image/png;base64,{uni}"/>'
             + f'<g transform="translate({W - M - cw:.1f} {M}) scale({kc:.4f})">{edition_block()}</g>'
             + f'<text x="{W / 2}" y="{y_w:.1f}" text-anchor="middle" {F7} font-size="{ws}" letter-spacing="{-ws / 20.5:.2f}" fill="{{{{INK}}}}">{WORD}<tspan fill="{BLUE}"> 2026</tspan></text>'
             + f'<text id="badge-name" x="{W / 2}" y="390" text-anchor="middle" {F7} font-size="72" fill="{name_fill}">YOUR NAME</text>'
-            + f'<text id="badge-affiliation" x="{W / 2}" y="452" text-anchor="middle" {_FTEXT.format(400)} font-size="30" fill="#555D59">YOUR AFFILIATION</text>'
-            + f'<text id="badge-role" x="{W / 2}" y="{H - 42 - 30}" text-anchor="middle" {F7} font-size="28" letter-spacing="1.2" fill="{{{{ACC2}}}}">PARTICIPANT</text>'
+            + f'<text id="badge-affiliation" x="{W / 2}" y="{H - 42 - 30}" text-anchor="middle" {F7} font-size="28" letter-spacing="1.2" fill="{{{{ACC2}}}}">YOUR AFFILIATION</text>'
             + f'<rect x="0" y="{H - 42}" width="{W}" height="42" fill="{{{{ACC}}}}"/>')
     return framed(W, H, body, 'ArcheoFOSS 2026 A7 badge, customizable name').replace('width="1050" height="740"', 'width="105mm" height="74mm"', 1)
 
@@ -589,9 +552,7 @@ def main():
     poster, logo, symbol, qr, capital = poster_tpl(), logo_tpl(), symbol_tpl(), qr_tpl(), capital_tpl()
     logo_unibo = logo_unibo_tpl()
     teams_banner, teams_logo = teams_banner_tpl(), teams_logo_tpl()
-    a6_tokens = tokenize((SRC / 'master-badge-a6.svg').read_text(encoding='utf-8'))
-    a7 = badge_a7_tpl(a6_tokens)                       # A7-04: arte presa dal master del vecchio badge A6
-    badges = {**{k: badge_a7_model_tpl(c) for k, c in BADGE_MODELS.items()}, 'A7-04': a7}
+    badges = {'badge': badge_a7_model_tpl(BADGE_FILL)}     # un solo badge, file badge.svg (modelli A7-01..04 tolti il 2026-11-25)
     # non svuota la cartella: i file del programma (tools/programme_build.py) restano
     for pid, p in PALETTES.items():
         d = OUT / pid; d.mkdir(parents=True, exist_ok=True)
@@ -599,7 +560,7 @@ def main():
             tpl = strip_labels(poster) if k in NO_LABELS_POSTERS else poster
             s = re.sub(r'width="[\d.]+mm" height="[\d.]+mm"', f'width="{w}mm" height="{h}mm"', paint(tpl, p), count=1)
             (d / f'locandina-{k}.svg').write_text(s, encoding='utf-8')
-        for name, tpl in (('logo-archeofoss', logo), ('logo-archeofoss-unibo', logo_unibo), ('logo-simbolo-20', symbol), ('logo-capitello-20th', capital), ('QR-programme', qr), ('QR-teams', qr_tpl('master-qr-teams.svg')), ('teams-banner', teams_banner), ('teams-logo', teams_logo), *((f'badge-{k}', t) for k, t in badges.items())):
+        for name, tpl in (('logo-archeofoss', logo), ('logo-archeofoss-unibo', logo_unibo), ('logo-simbolo-20', symbol), ('logo-capitello-20th', capital), ('QR-programme', qr), ('QR-teams', qr_tpl('master-qr-teams.svg')), ('teams-banner', teams_banner), ('teams-logo', teams_logo), *badges.items()):
             (d / f'{name}.svg').write_text(paint(tpl, p), encoding='utf-8')
         (d / 'Screensaver.html').write_text(screensaver(p), encoding='utf-8')
         for name, src in (('QR-programme', qr), ('QR-teams', qr_tpl('master-qr-teams.svg'))):   # PNG di circa 2000 px, moduli interi
@@ -620,9 +581,6 @@ def main():
     (A / 'badge-templates.js').write_text(js, encoding='utf-8')
     print('ok', [p.name for p in sorted(OUT.iterdir())], len(list(OUT.rglob('*'))), 'file')
     print('larghezza logo locandina ARCHEO.FOSS @82:', round(62 + text_width('ARCHEO.FOSS', 82, '700', -4)), '(il "20" inizia a 682)')
-    print('larghezza titolo A7 @42:', round(56 + text_width('ARCHEO.FOSS 2026', 42, '700')), '(il blocco a destra inizia a circa',
-          round(994 - text_width('Department of History and Cultures (DiSCi)', 20, '400')), ')')
-    print('larghezza titolo A6 @70:', round(text_width('ARCHEO.FOSS 2026', 70, '700')), 'su 1050')
     print('screensaver ARCHEO.FOSS @155:', round(104 + text_width('ARCHEO.FOSS', 155, '700', -8)), '(il "20" a destra è centrato a 1770)')
 
 

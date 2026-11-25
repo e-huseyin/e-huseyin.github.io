@@ -8,7 +8,7 @@
 <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="assets/theme.css?v=onepage-5" rel="stylesheet"/>
+<link href="assets/theme.css?v=onepage-6" rel="stylesheet"/>
 </head>
 <body>
 <header class="bar">
@@ -114,27 +114,19 @@
 
 <section class="view" hidden id="badge">
   <h1>Badge</h1>
-  <p class="spec">Badge A7 orizzontale (105 × 74 mm): scegli il modello, scrivi i dati e scarica l’SVG.</p>
+  <p class="spec">Badge A7 orizzontale (105 × 74 mm): scrivi i dati e scarica l’SVG.</p>
   <div class="badge-layout">
     <form class="badge-form" onsubmit="return false">
       <label for="badge-name-input">Nome e cognome</label>
       <input autocomplete="off" id="badge-name-input" maxlength="90" placeholder="Nome Cognome" type="text"/>
       <label for="badge-affiliation-input">Affiliazione</label>
       <input autocomplete="organization" id="badge-affiliation-input" maxlength="140" placeholder="Università o ente" type="text"/>
-      <label for="badge-role-input">Tipologia</label>
-      <select id="badge-role-input"><option value="Participant">Participant</option><option value="Speaker">Speaker</option><option value="Organising committee">Organising committee</option><option value="Workshop participant">Workshop participant</option></select>
       <div class="dls">
         <button class="dl primary" id="badge-download" type="button">Scarica badge SVG</button>
         <a class="dl" download="" href="#" id="badge-blank">Badge vuoto</a>
       </div>
     </form>
     <div class="badge-side">
-      <div aria-label="Modello del badge" class="size-switch" role="group">
-        <button aria-pressed="true" data-size="A7-01" type="button">A7-01</button>
-        <button aria-pressed="false" data-size="A7-02" type="button">A7-02</button>
-        <button aria-pressed="false" data-size="A7-03" type="button">A7-03</button>
-        <button aria-pressed="false" data-size="A7-04" type="button">A7-04</button>
-      </div>
       <div aria-label="Anteprima del badge" class="badge-frame" id="badge-preview"></div>
     </div>
   </div>
@@ -172,7 +164,7 @@
 
 <footer class="wrap foot">Media kit ArcheoFOSS 2026 · Hüseyin Erdoğan</footer>
 
-<script src="assets/badge-templates.js?v=1"></script>
-<script src="assets/app.js?v=onepage-7"></script>
+<script src="assets/badge-templates.js?v=2"></script>
+<script src="assets/app.js?v=onepage-8"></script>
 </body>
 </html>
