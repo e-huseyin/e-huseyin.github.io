@@ -470,8 +470,8 @@ Cristiano **Putzolu**, Valentina **Presutti**, Roberto **Taglioretti**, Luana **
 Daniel **Reed**  
 [*First-Season Lessons from a FLOSS Pipeline for Trimming Photogrammetric Models*](abstracts/Abstract_054_First-Season_Lessons_from_a_FLOSS_Pipeline_for_Trimming_Photogrammetric.pdf)
 - **16:50** - 17:05  
-Andrea Dennis **Favullo**, Roberto **Taglioretti**, Andrea **Russo**, Matteo **Bilotta**, Marco **Cavalazzi**  
-[*Creating an International FLOSS Web Platform to Share Archaeological Data*](abstracts/Abstract_055_Creating_an_International_FLOSS_Web_Platform_to_Share_Archaeological_Dat.pdf)
+Andrea Dennis **Favullo**, Andrea **Russo**, Roberto **Taglioretti**, Matteo **Bilotta**, Marco **Cavalazzi**  
+[*Towards a FLOSS Web Platform for 3D Field Archaeology*](abstracts/Abstract_055_Creating_an_International_FLOSS_Web_Platform_to_Share_Archaeological_Dat.pdf)
 - **17:05** - 17:20  
 Marco **Montanari**, Silvia **Bernardoni**  
 [*Publishing an excavation archive without a server: GeoContext and GeoContext Storybook*](abstracts/Abstract_056_Publishing_an_excavation_archive_without_a_server_GeoContext_and_GeoCont.pdf)

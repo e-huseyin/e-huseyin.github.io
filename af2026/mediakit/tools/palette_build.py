@@ -32,6 +32,38 @@ POSTERS = {'a0': (841, 1189), 'a1': (594, 841), 'a2': (420, 594), 'a3': (297, 42
 html_master = (SRC / 'screensaver-master.html').read_text(encoding='utf-8')
 FONTS = {w: b for b, w in re.findall(
     r"@font-face\{font-family:AFInter;src:url\(data:font/woff2;base64,([^)]*)\) format\('woff2'\);font-weight:(\d+)", html_master)}
+
+
+def _add_glyphs(b64, weight):
+    """Il font dello screensaver è ridotto (230 glifi): manca ń (Kuroczyński). ń = n + acuto (acutecomb, già nel font).
+    La ğ non c'è: sul badge si scrive «Huseyin Erdogan» (tools/badge_pdf.py, NAME_PRINT)."""
+    from fontTools.ttLib import TTFont
+    from fontTools.pens.ttGlyphPen import TTGlyphPen
+    f = TTFont(io.BytesIO(base64.b64decode(b64)))
+    cmap = f.getBestCmap()
+    if ord('ń') in cmap:
+        return b64
+    glyf, hmtx = f['glyf'], f['hmtx']                    # glyf[nome] = ... aggiunge anche all'ordine dei glifi
+
+    def add(name, glyph, adv_from, uni):
+        glyf[name] = glyph; hmtx[name] = hmtx[adv_from]
+        for t in f['cmap'].tables:
+            if t.isUnicode():
+                t.cmap[uni] = name
+
+    def bounds(name):
+        g = glyf[name]; g.recalcBounds(glyf); return g.xMin, g.xMax
+
+    n0, n1 = bounds('n'); a0, a1 = bounds('acutecomb')
+    pen = TTGlyphPen(glyf)
+    pen.addComponent('n', (1, 0, 0, 1, 0, 0))
+    pen.addComponent('acutecomb', (1, 0, 0, 1, round((n0 + n1) / 2 - (a0 + a1) / 2), 0))
+    add('nacute', pen.glyph(), 'n', ord('ń'))
+    out = io.BytesIO(); f.flavor = 'woff2'; f.save(out)
+    return base64.b64encode(out.getvalue()).decode()
+
+
+FONTS = {w: _add_glyphs(b, w) for w, b in FONTS.items()}
 FONT_CSS = ''.join(f"@font-face{{font-family:Inter;src:url(data:font/woff2;base64,{b}) format('woff2');font-weight:{w}}}"
                    for w, b in sorted(FONTS.items()))
 FONT_DEFS = f'<defs><style>{FONT_CSS}</style></defs>'

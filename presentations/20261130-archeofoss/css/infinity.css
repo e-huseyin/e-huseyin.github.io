@@ -1,0 +1,354 @@
+/* ==========================================================================
+   INFINITY reveal.js theme
+   Mirrors infinity_slides_template_calibri.potx: a 1280×720 canvas, Calibri,
+   dark (#282828) and light (#FFFFFF) variants of every layout, yellow cover
+   and agenda, one accent colour per chapter (lilac, green, pink).
+   Pixel positions below are the template's shape positions at 1280×720.
+   ========================================================================== */
+
+:root {
+  --ink: #282828;
+  --paper: #ffffff;
+  --snow: #ebebeb;
+  --ph: #e8e8e8;          /* image placeholders */
+  --sun: #e1dc64;         /* cover, agenda, closing */
+  --lilac: #b48cd7;       /* chapter 01 */
+  --green: #6eb98c;       /* chapter 02 */
+  --pink: #eb6e8c;        /* chapter 03 */
+  --font: Calibri, Carlito, "Segoe UI", system-ui, sans-serif;
+  --font-light: "Calibri Light", Calibri, Carlito, "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+}
+
+html, body, .reveal-viewport { background: var(--ink); }
+.reveal { font-family: var(--font); font-size: 16px; color: var(--snow); }
+
+/* Every slide is a fixed 1280×720 canvas; layouts place their parts absolutely. */
+.reveal .slides section {
+  --fg: var(--snow);
+  --bg: var(--ink);
+  --acc: var(--lilac);
+  --dim: rgba(235, 235, 235, .32);
+  height: 720px;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: left;
+  color: var(--fg);
+  line-height: 1.3;
+}
+.reveal .slides section.light { --fg: var(--ink); --bg: var(--paper); --dim: rgba(40, 40, 40, .3); }
+.reveal .slides section.acc-2 { --acc: var(--green); }
+.reveal .slides section.acc-3 { --acc: var(--pink); }
+.reveal .slides section.acc-sun { --acc: var(--sun); }
+
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--font); font-weight: 400; text-transform: none; letter-spacing: 0;
+  line-height: 1.05; margin: 0; color: var(--acc); text-shadow: none;
+}
+.reveal p { margin: 0; line-height: 1.3; }
+.reveal ul, .reveal ol { margin: 0; }
+.reveal strong { font-weight: 700; }
+.reveal a { color: inherit; text-decoration: underline; text-decoration-color: var(--acc); text-underline-offset: .15em; }
+.reveal a:hover, .reveal a:focus-visible { color: var(--acc); outline: none; }
+.reveal code { font-family: var(--mono); font-size: .88em; font-variant-ligatures: none; }
+.reveal ::selection { background: var(--acc); color: var(--ink); }
+
+/* ───────── Chrome: "Infinity · section · page", injected by js/infinity.js ───────── */
+.reveal .chrome { position: absolute; inset: 24px 30px auto 30px; height: 16px; font: 400 12px/16px var(--font); color: var(--fg); pointer-events: none; z-index: 5; }
+.reveal .chrome span { position: absolute; top: 0; }
+.reveal .chrome .inf { left: 0; }
+.reveal .chrome .sec { left: 215px; }
+.reveal .chrome .pg { right: 0; }
+
+/* ───────── Shared building blocks ───────── */
+.reveal .abs { position: absolute; margin: 0; }
+.reveal .body { font-family: var(--font-light); font-size: 16px; line-height: 1.32; }
+.reveal .body p + p { margin-top: .9em; }
+.reveal .body ul { padding-left: 1.4em; display: grid; gap: .35em; }
+.reveal .body li::marker { color: var(--acc); }
+.reveal .lead { font-family: var(--font-light); font-size: 16px; line-height: 1.32; }
+.reveal .label { font-family: var(--font-light); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+.reveal .muted { opacity: .6; }
+.reveal .acc { color: var(--acc); }
+
+/* Subchapter title (layouts 21–33) */
+.reveal .sub { position: absolute; left: 49px; top: 88px; font-size: 48px; }
+
+/* Placeholder panel: light grey box, like the template's picture frames */
+.reveal .ph {
+  position: absolute; margin: 0; background: var(--ph); color: var(--ink); overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 16px 18px; box-sizing: border-box;
+}
+.reveal .ph > img, .reveal .ph > .fill { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; object-fit: cover; object-position: top left; max-width: none; max-height: none; }
+.reveal .ph .tag { position: relative; font-family: var(--mono); font-size: 12px; color: var(--ink); }
+.reveal .ph .tag b { display: block; font-family: var(--font); font-size: 22px; font-weight: 400; margin-bottom: 2px; }
+.reveal .ph.card { justify-content: flex-start; gap: 14px; padding: 22px 22px; }
+.reveal .ph.card h3 { color: var(--ink); font-size: 26px; }
+.reveal .ph.card .demo { font-size: 17px; line-height: 1.35; display: grid; gap: 10px; }
+
+/* ───────── Starburst rays (injected SVG, see js/infinity.js) ───────── */
+.reveal .rays-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.reveal .rays-svg path { fill: none; stroke: var(--sun); stroke-width: 1.4; stroke-linecap: round; opacity: .6; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.reveal .light .rays-svg path { opacity: .45; }
+.reveal .rays-dashed .rays-svg path { stroke-dasharray: 6 5; stroke-dashoffset: 0; opacity: .75; }
+.reveal .rays-dashed .rays-svg g { transform-origin: 1010px 380px; }
+
+/* ───────── Cover & closing (template slides 1–2, 35–36) ───────── */
+.reveal .logo { position: absolute; left: 39px; top: 64px; height: 66px; width: auto; margin: 0; }
+.reveal .funding { position: absolute; left: 39px; top: 625px; height: 56px; width: auto; margin: 0; }
+.reveal .logo.on-light, .reveal .funding.on-light { display: none; }
+.reveal .light .logo.on-dark, .reveal .light .funding.on-dark { display: none; }
+.reveal .light .logo.on-light, .reveal .light .funding.on-light { display: block; }
+.reveal .l-cover h1, .reveal .l-closing h1 { position: absolute; left: 49px; top: 250px; font-size: 80px; line-height: .98; color: var(--sun); max-width: 11ch; }
+.reveal .l-cover .meta { position: absolute; left: 49px; top: 470px; font-family: var(--font-light); font-size: 20px; color: var(--fg); }
+.reveal .l-cover .meta span { color: var(--sun); }
+.reveal .l-closing .meta { position: absolute; left: 49px; top: 360px; font-family: var(--font-light); font-size: 20px; }
+
+/* ───────── Agenda (template slides 3–4) ───────── */
+.reveal .toc { position: absolute; left: 49px; top: 100px; list-style: none; padding: 0; font-size: 48px; line-height: 52px; color: var(--sun); }
+.reveal .toc li { display: flex; }
+.reveal .toc .n { display: inline-block; width: 97px; font-family: var(--font-light); }
+.reveal .toc li.dim { opacity: .35; }
+
+/* ───────── Chapter divider (template slides 5–6, 19–20, 27–28) ───────── */
+.reveal .l-chapter .num { position: absolute; left: 49px; top: 72px; font-family: var(--font-light); font-size: 59px; line-height: 1; color: var(--acc); }
+.reveal .l-chapter h1 { position: absolute; left: 49px; top: 252px; font-size: 59px; max-width: 1000px; }
+
+/* ───────── Text + 4 pictures (template slides 7–8) ───────── */
+.reveal .l-text-media .body { position: absolute; left: 246px; top: 85px; width: 373px; }
+.reveal .l-text-media .ph-a { left: 859px; top: 20px; width: 401px; height: 446px; }
+.reveal .l-text-media .ph-b { left: 236px; top: 486px; width: 185px; height: 216px; }
+.reveal .l-text-media .ph-c { left: 443px; top: 485px; width: 393px; height: 217px; }
+.reveal .l-text-media .ph-d { left: 859px; top: 485px; width: 401px; height: 217px; }
+
+/* ───────── Panels: 3 (slides 9–10), 2 (11–12), 4 (13–14) ───────── */
+.reveal .l-panels-3 .p1 { left: 39px; top: 130px; width: 383px; height: 460px; }
+.reveal .l-panels-3 .p2 { left: 443px; top: 130px; width: 393px; height: 460px; }
+.reveal .l-panels-3 .p3 { left: 859px; top: 130px; width: 383px; height: 460px; }
+.reveal .l-panels-2 .p1 { left: 236px; top: 130px; width: 185px; height: 460px; }
+.reveal .l-panels-2 .p2 { left: 443px; top: 130px; width: 600px; height: 460px; }
+.reveal .l-panels-4 .p1 { left: 20px; top: 130px; width: 193px; height: 460px; }
+.reveal .l-panels-4 .p2 { left: 236px; top: 130px; width: 393px; height: 460px; }
+.reveal .l-panels-4 .p3 { left: 651px; top: 130px; width: 393px; height: 460px; }
+.reveal .l-panels-4 .p4 { left: 1067px; top: 130px; width: 193px; height: 460px; }
+.reveal .panel-note { position: absolute; left: 49px; top: 620px; width: 1180px; font-family: var(--font-light); font-size: 15px; color: var(--fg); opacity: .75; }
+
+/* ───────── Statement (slides 15–16) ───────── */
+.reveal .l-statement .say {
+  position: absolute; left: 140px; top: 220px; width: 1000px; height: 280px; margin: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  font-size: 48px; line-height: 1.2; color: var(--acc);
+}
+.reveal .l-statement .say small { display: block; margin-top: 18px; font-family: var(--mono); font-size: 16px; color: var(--fg); opacity: .7; }
+
+/* ───────── Text + network graph (slides 17–18) ───────── */
+.reveal .l-text-graph .body { position: absolute; left: 49px; top: 140px; width: 362px; }
+.reveal .l-text-graph .graph { position: absolute; left: 600px; top: 110px; width: 580px; height: 500px; overflow: visible; }
+
+/* ───────── Subchapter layouts (21–34) ───────── */
+.reveal .col1 { position: absolute; left: 49px; width: 362px; }
+.reveal .col2 { position: absolute; left: 453px; width: 373px; }
+.reveal .col3 { position: absolute; left: 869px; width: 381px; }
+.reveal .at-lead { top: 237px; }
+.reveal .at-list { top: 311px; }
+.reveal .at-text { top: 268px; }
+.reveal .l-sub-media .ph-r { left: 859px; top: 130px; width: 401px; height: 570px; }
+.reveal .l-sub-2media .ph-m { left: 444px; top: 130px; width: 393px; height: 570px; }
+.reveal .l-sub-2media .ph-r { left: 859px; top: 130px; width: 401px; height: 570px; }
+
+/* Shapes row (31–32) */
+.reveal .shapes { position: absolute; left: 39px; top: 163px; width: 1212px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin: 0; padding: 0; list-style: none; }
+.reveal .shapes li { display: flex; flex-direction: column; align-items: center; gap: 58px; }
+.reveal .shapes svg { width: 144px; height: 166px; overflow: visible; }
+.reveal .shapes .label { text-align: center; }
+.reveal .l-sub-shapes .at-foot { top: 485px; }
+
+/* Icon set (33–34) */
+.reveal .icons { position: absolute; left: 39px; top: 162px; display: grid; grid-template-columns: repeat(10, 76px); column-gap: 49px; row-gap: 40px; margin: 0; padding: 0; list-style: none; }
+.reveal .icons li { width: 76px; height: 76px; display: grid; place-items: center; }
+.reveal .icons .material-symbols-sharp { font-size: 76px; line-height: 1; color: var(--fg); font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48; cursor: default; outline: none; }
+.reveal .l-icons .body { position: absolute; left: 49px; top: 447px; width: 590px; font-size: 15px; }
+.reveal .l-icons .shot { position: absolute; left: 714px; top: 416px; width: 525px; height: 266px; margin: 0; }
+.reveal .l-icons .shot img { width: 100%; height: 100%; margin: 0; object-fit: contain; max-width: none; max-height: none; }
+.reveal .l-icons .ring { position: absolute; left: 133px; top: 54px; width: 56px; height: 36px; border: 2px solid #ff0000; border-radius: 50%; box-sizing: border-box; }
+
+/* ───────── Code (highlight plugin) ───────── */
+.reveal pre { position: relative; width: 100%; margin: 0; box-shadow: none; font-size: 13px; line-height: 1.5; }
+.reveal pre code { max-height: none; padding: 0; background: var(--ph); font-family: var(--mono); color: var(--ink); }
+.reveal .hljs-attr, .reveal .hljs-attribute { color: #7a3fb0; }
+.reveal .hljs-keyword, .reveal .hljs-selector-class, .reveal .hljs-selector-tag { color: #9c3a55; }
+.reveal .hljs-number, .reveal .hljs-string { color: #2f7a52; }
+.reveal .hljs-comment { color: #7a7e85; font-style: italic; }
+.reveal .hljs.has-highlights tr:not(.highlight-line) { opacity: .25; }
+.reveal .hljs-ln-numbers { display: none; }
+
+/* ───────── Layout extras ───────── */
+.reveal h1 .rise { display: inline-block; }
+.reveal .ph > img + .tag, .reveal .ph > .fill + .tag { align-self: flex-start; background: rgba(255, 255, 255, .92); padding: 6px 10px; }
+.reveal .r-stack.fill .slot { width: 100%; height: 100%; display: grid; place-items: center; background: color-mix(in srgb, var(--acc) calc(18% + var(--k, 0) * 22%), var(--ph)); }
+.reveal .r-stack.fill .slot:nth-child(2) { --k: 1; } .reveal .r-stack.fill .slot:nth-child(3) { --k: 2; }
+.reveal .r-stack.fill .slot span { font-family: var(--font-light); font-size: 160px; line-height: 1; color: var(--ink); opacity: .55; }
+.reveal .r-stack.fill img { width: 100%; height: 100%; margin: 0; object-fit: cover; object-position: top left; max-width: none; max-height: none; }
+.reveal .r-stack.swap { flex: 1; place-items: center; font-size: 64px; color: var(--ink); }
+.reveal .r-stack.swap p { font-family: var(--font-light); }
+.reveal .swap-code { font-size: 12px; color: #555; }
+.reveal .hero-wide .ph-r { left: 443px; width: 817px; }
+.reveal .ph-r.card .tag { position: absolute; left: 22px; bottom: 18px; }
+
+/* ───────── Persistent reveal.js chrome ───────── */
+.reveal .progress { color: var(--sun); height: 3px; }
+.reveal .controls { color: var(--sun); }
+.reveal .slide-number { display: none; }
+
+
+/* ==========================================================================
+   ANIMATION LIBRARY
+   Every entrance animation is keyed off `.present` (the slide on screen) and
+   uses `both`, so the resting state is the final state: print/PDF and
+   reduced-motion users simply see the finished slide.
+   ========================================================================== */
+
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: scale(.4); } 70% { transform: scale(1.08); } }
+@keyframes draw { from { stroke-dashoffset: 1; } }
+@keyframes burst { from { transform: scale(.15) rotate(-20deg); opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes drift { to { transform: rotate(360deg); } }
+@keyframes flow { to { stroke-dashoffset: -22; } }
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } }
+@keyframes kenburns { from { transform: scale(1.12) translate(2%, 2%); } to { transform: scale(1) translate(0, 0); } }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, .55); } 100% { box-shadow: 0 0 0 18px rgba(255, 0, 0, 0); } }
+@keyframes caret { 50% { opacity: 0; } }
+
+/* Stagger helper: give children style="--i:N" */
+.reveal .present .rise { animation: rise .7s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms + var(--d, 0ms)); }
+.reveal .present .fade-late { animation: fade .8s ease both; animation-delay: var(--d, 600ms); }
+.reveal .present .pop { animation: pop .55s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 45ms + var(--d, 0ms)); }
+.reveal .present .wipe { animation: wipe .9s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 120ms + var(--d, 0ms)); }
+.reveal .present .kenburns > img { animation: kenburns 9s ease-out both; }
+
+/* Cover / closing: rays draw from the centre, one after another */
+.reveal .present .rays-svg path { animation: draw 1.3s var(--ease-out) both; animation-delay: calc(var(--i) * 45ms); }
+.reveal .present.rays-dashed .rays-svg g { animation: burst 1.2s var(--ease-out) both, drift 240s linear 1.2s infinite; }
+.reveal .present.rays-dashed .rays-svg path { animation: none; }
+
+/* Line drawing: inside an SVG with class="draw", every class="d" element draws itself (give it pathLength="1") */
+.reveal .draw .d { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.reveal .present .draw .d { animation: draw 1.1s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + var(--d, 0ms)); }
+
+/* ───────── Network graph ───────── */
+.graph .e { fill: none; stroke: var(--fg); stroke-width: 1; opacity: .8; }
+.graph .n circle { fill: var(--fg); }
+.graph .n.s circle { fill: var(--bg); stroke: var(--fg); stroke-width: 1.2; }
+.graph .n { transform-box: fill-box; transform-origin: center; }
+.reveal .present .graph .n { animation: pop .5s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 60ms + 500ms); }
+.graph .hl .e { stroke: var(--acc); stroke-width: 2.6; opacity: 1; }
+.graph .hl circle { fill: var(--acc); stroke: var(--acc); }
+.graph .flow { fill: none; stroke: var(--sun); stroke-width: 3.5; stroke-dasharray: 10 12; stroke-linecap: round; stroke-linejoin: round; }
+.reveal .graph .fragment.visible .flow { animation: flow .6s linear infinite; }
+.reveal .graph .hl.fragment.visible .e { animation: draw .8s var(--ease-out) both; stroke-dasharray: 1; }
+
+/* ───────── Custom fragment styles ───────── */
+/* .focus: visible but dimmed until it is the current fragment */
+.reveal .slides section .fragment.focus { opacity: .28; visibility: inherit; transition: opacity .45s ease; }
+.reveal .slides section .fragment.focus.current-fragment { opacity: 1; }
+.reveal .slides section:has(.fragment.focus-all.visible) .fragment.focus { opacity: 1; }
+/* .zoom-in: scale up from 60% */
+.reveal .slides section .fragment.zoom-in { opacity: 0; transform: scale(.6); transition: all .55s var(--ease-out); }
+.reveal .slides section .fragment.zoom-in.visible { opacity: 1; transform: none; }
+/* .blur-in: sharpen into focus */
+.reveal .slides section .fragment.blur-in { opacity: 0; filter: blur(12px); transition: all .7s ease; }
+.reveal .slides section .fragment.blur-in.visible { opacity: 1; filter: none; }
+/* .mark: accent highlighter sweeping behind the text */
+.reveal .fragment.mark { background: linear-gradient(var(--acc), var(--acc)) no-repeat 0 88% / 0% 38%; transition: background-size .6s var(--ease-out); opacity: 1; visibility: inherit; }
+.reveal .fragment.mark.visible { background-size: 100% 38%; }
+/* Built-in "highlight-current-*" recoloured to the chapter accent */
+.reveal .slides section .fragment.hl-acc.current-fragment { color: var(--acc); }
+
+/* Panel demo helpers */
+.reveal .l-panels-3 .p1 .demo { gap: 26px; margin-top: 12px; }
+.reveal .l-panels-3 .p1 .demo .row > span { font-size: 30px; }
+.reveal .demo .row { display: flex; align-items: baseline; gap: 10px; }
+.reveal .demo code { font-size: 12px; color: #555; }
+.reveal .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; font-size: 20px; }
+.reveal .steps li { display: grid; gap: 4px; }
+.reveal .steps b { font-family: var(--font-light); font-weight: 400; font-size: 34px; line-height: 1; }
+
+/* .stagger: one fragment reveals a list whose items cascade in */
+.reveal .slides section .fragment.stagger { opacity: 1; visibility: inherit; }
+.reveal .fragment.stagger > * { opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .55s var(--ease-out); transition-delay: calc(var(--i, 0) * 110ms); }
+.reveal .fragment.stagger.visible > * { opacity: 1; transform: none; }
+
+/* Arrival animations stay out of the way while Auto-Animate is morphing */
+.reveal section[data-auto-animate="running"] .rise, .reveal section[data-auto-animate="pending"] .rise { animation: none; }
+
+/* ───────── Counters (panels-4) ───────── */
+.reveal .stat { position: absolute; left: 22px; right: 18px; bottom: 22px; color: var(--ink); }
+.reveal .stat b { display: block; font-size: 96px; line-height: .9; font-weight: 400; font-variant-numeric: tabular-nums; color: var(--ink); }
+.reveal .p1 .stat b, .reveal .p4 .stat b { font-size: 64px; }
+.reveal .stat span { font-family: var(--font-light); font-size: 17px; }
+.reveal .l-panels-4 .ph { justify-content: flex-start; }
+.reveal .l-panels-4 .ph::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--h, 40%);
+  background: var(--acc); opacity: .9; transform-origin: bottom;
+}
+.reveal .present.l-panels-4 .ph::before { animation: grow-y 1.2s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 120ms + 300ms); }
+@keyframes grow-y { from { transform: scaleY(0); } }
+.reveal .l-panels-4 .ph .stat { z-index: 1; }
+
+/* ───────── Typewriter (statement) ───────── */
+.reveal .typewriter.typing::after { content: ""; display: inline-block; width: 3px; height: .9em; margin-left: 4px; background: var(--acc); vertical-align: -.08em; animation: caret .8s steps(1) infinite; }
+
+/* ───────── Infinity orbit (offset-path demo) ───────── */
+.reveal .orbit { position: absolute; left: 50px; top: 170px; width: 300px; height: 150px; }
+.reveal .orbit svg { position: absolute; inset: 0; overflow: visible; }
+.reveal .orbit path { fill: none; stroke: var(--ink); stroke-width: 1.5; opacity: .35; }
+.reveal .orbit .dot {
+  position: absolute; left: 0; top: 0; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--acc);
+  offset-path: path("M150 75 C190 20 280 20 280 75 S190 130 150 75 C110 20 20 20 20 75 S110 130 150 75");
+  offset-rotate: 0deg;
+  animation: travel 4s linear infinite; animation-delay: calc(var(--i, 0) * -.18s);
+  opacity: calc(1 - var(--i, 0) * .16);
+  transform: scale(calc(1 - var(--i, 0) * .12));
+}
+@keyframes travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+
+/* ───────── Shapes (layout 31) ───────── */
+.shape { fill: none; stroke: var(--fg); stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+.shape g { transform-box: view-box; transform-origin: 72px 83px; }
+.reveal .present .shape.spin g { animation: spin 14s linear 1.6s infinite; }
+.reveal .present .shape.pulse g { animation: breathe 2.6s ease-in-out 1.6s infinite; }
+@keyframes breathe { 50% { transform: scale(.86); } }
+.shape .h { stroke-dasharray: 6 5; }
+.reveal .present .shape.hatch .h { animation: fade .8s ease both .9s, flow 1.4s linear 1.7s infinite; }
+.shapes li:has(.tilt) { perspective: 600px; }
+.shape.tilt { transition: transform .9s var(--ease-out); transform-style: preserve-3d; }
+.shapes li:hover .shape.tilt, .shapes li:focus-within .shape.tilt { transform: rotateY(180deg); }
+.shapes li:hover .shape, .shapes li:focus-within .shape { stroke: var(--acc); }
+
+/* ───────── Icon micro-interactions (hover / keyboard focus) ───────── */
+@keyframes bounce-down { 30% { transform: translateY(12px); } 60% { transform: translateY(-4px); } }
+@keyframes bounce-up { 30% { transform: translateY(-12px); } 60% { transform: translateY(4px); } }
+@keyframes wiggle { 20% { transform: rotate(-14deg); } 40% { transform: rotate(12deg); } 60% { transform: rotate(-8deg); } 80% { transform: rotate(4deg); } }
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes nudge { 40% { transform: translateX(12px); } }
+@keyframes bump { 40% { transform: scale(1.22); } }
+.reveal .icons .material-symbols-sharp { transition: color .2s; }
+.reveal .icons li:hover .material-symbols-sharp, .reveal .icons .material-symbols-sharp:focus-visible { color: var(--acc); }
+.reveal .icons [data-fx="down"]:is(:hover, :focus-visible) { animation: bounce-down .6s ease; }
+.reveal .icons [data-fx="up"]:is(:hover, :focus-visible) { animation: bounce-up .6s ease; }
+.reveal .icons [data-fx="wiggle"]:is(:hover, :focus-visible) { animation: wiggle .7s ease; }
+.reveal .icons [data-fx="spin"]:is(:hover, :focus-visible) { animation: spin 1.2s var(--ease-out); }
+.reveal .icons [data-fx="shake"]:is(:hover, :focus-visible) { animation: shake .45s ease; }
+.reveal .icons [data-fx="nudge"]:is(:hover, :focus-visible) { animation: nudge .5s ease; }
+.reveal .icons [data-fx="bump"]:is(:hover, :focus-visible) { animation: bump .45s ease; }
+.reveal .present .l-icons .ring, .reveal .present.l-icons .ring { animation: pulse-ring 1.6s ease-out 1.2s infinite; }
+
+/* ───────── Reduced motion & print: show the finished state ───────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal *, .reveal *::before, .reveal *::after { animation: none !important; transition-duration: .01ms !important; }
+}
+html.reveal-print .reveal *, html.print-pdf .reveal *,
+html.reveal-print .reveal *::before, html.print-pdf .reveal *::before { animation: none !important; transition: none !important; }

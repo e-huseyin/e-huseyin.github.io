@@ -30,8 +30,8 @@ def norm(s):
     return unicodedata.normalize('NFKD', s or '').encode('ascii', 'ignore').decode().lower().strip()
 
 
-# esclusi su richiesta (2026-11-25): affiliazione non ancora nota; si stampano dopo
-EXCLUDE = {'igor piotr bajena', 'evdoxia tzerpou', 'panos kaplanis', 'doukas vomvyras', 'aristeides vomvyras'}
+EXCLUDE = set()                     # nomi da non stampare (minuscolo, senza accenti: «nome cognome»)
+NAME_PRINT = {'Huseyin Erdoğan': 'Huseyin Erdogan', 'Hüseyin Erdoğan': 'Huseyin Erdogan'}     # come scrivere il nome sul badge (il Catering List resta com'è)
 
 
 def people():
@@ -46,7 +46,8 @@ def people():
         nome = ' '.join((r[ix['Nome']] or '').split())
         if not cog or r[ix['Stato']] == 'Rinuncia' or norm(f'{nome} {cog}') in EXCLUDE:
             continue
-        out.append({'name': f'{nome} {cog}'.strip(), 'aff': aff, 'key': (norm(cog), norm(nome))})
+        full = f'{nome} {cog}'.strip()
+        out.append({'name': NAME_PRINT.get(full, full), 'aff': aff, 'key': (norm(cog), norm(nome))})
     return sorted(out, key=lambda p: p['key'])
 
 
